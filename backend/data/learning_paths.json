@@ -1,0 +1,289 @@
+{
+  "hotel_helper": {
+    "steps": [
+      {"step": 1, "action": "Complete a basic hospitality service course (front-of-house, guest handling)", "weeks": 2, "approx_cost_inr": 0, "_TODO": "Verify Karnataka hospitality ITI / NSDC programme names"},
+      {"step": 2, "action": "Practise at a local dhaba or canteen as a volunteer helper for 2–4 weeks", "weeks": 3, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Apply to 3-star hotels on Apna.co or NaukriGulf with your new certificate", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "cook": {
+    "steps": [
+      {"step": 1, "action": "Attend a basic cooking and food safety class at a local skill centre", "weeks": 3, "approx_cost_inr": 500, "_TODO": "Verify Karnataka NSDC / IHM Bangalore short courses"},
+      {"step": 2, "action": "Practise preparing 10 standard dishes at home or in a community kitchen", "weeks": 2, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Get FSSAI Basic Food Handler Certificate (online, free for individuals)", "weeks": 1, "approx_cost_inr": 0, "_TODO": "Confirm FSSAI portal link"}
+    ]
+  },
+  "housekeeping": {
+    "steps": [
+      {"step": 1, "action": "Complete a 1-week housekeeping basics course (linen handling, room setup, chemicals)", "weeks": 1, "approx_cost_inr": 0, "_TODO": "Verify NSDC Housekeeping Attendant programme"},
+      {"step": 2, "action": "Practise cleaning routines at home; learn correct mop, vacuum and product use", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Register on UrbanClap/Urban Company as a cleaning professional", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "security_guard": {
+    "steps": [
+      {"step": 1, "action": "Enrol in PSARA-compliant security guard training (80-hour course)", "weeks": 2, "approx_cost_inr": 1000, "_TODO": "Find PSARA-licensed training academy in Karnataka"},
+      {"step": 2, "action": "Get a police verification certificate from your local police station", "weeks": 2, "approx_cost_inr": 200, "_TODO": ""},
+      {"step": 3, "action": "Apply to security agencies listed on the Karnataka PSARA portal", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "driver_car": {
+    "steps": [
+      {"step": 1, "action": "Obtain a Light Motor Vehicle (LMV) learner's licence at your nearest RTO", "weeks": 1, "approx_cost_inr": 400, "_TODO": "List Bengaluru RTO offices"},
+      {"step": 2, "action": "Practice driving (30+ hours on different road types) and prepare for RTO test", "weeks": 3, "approx_cost_inr": 2000, "_TODO": ""},
+      {"step": 3, "action": "Get your permanent LMV licence and register on Ola/Uber driver app", "weeks": 2, "approx_cost_inr": 200, "_TODO": ""}
+    ]
+  },
+  "two_wheeler": {
+    "steps": [
+      {"step": 1, "action": "Obtain a two-wheeler learner's licence at your nearest RTO (MCWOG category)", "weeks": 1, "approx_cost_inr": 300, "_TODO": ""},
+      {"step": 2, "action": "Practise riding safely for 3 weeks; learn traffic rules", "weeks": 3, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Get permanent licence and register on Swiggy/Zomato Delivery Partner app", "weeks": 1, "approx_cost_inr": 0, "_TODO": "Verify Swiggy partner onboarding link"}
+    ]
+  },
+  "delivery": {
+    "steps": [
+      {"step": 1, "action": "Get a two-wheeler or bicycle and ensure it is insured and road-worthy", "weeks": 1, "approx_cost_inr": 500, "_TODO": ""},
+      {"step": 2, "action": "Download the Swiggy/Zomato Delivery Partner app and complete KYC (ID + bank details)", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Complete the online orientation and pass the app knowledge test", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "electrician": {
+    "steps": [
+      {"step": 1, "action": "Complete an ITI Electrician course (2-year) or a short wireman certificate course", "weeks": 8, "approx_cost_inr": 3000, "_TODO": "List Karnataka ITI colleges with electrician trade"},
+      {"step": 2, "action": "Apprentice with a licensed electrician for 6 months (National Apprenticeship Promotion Scheme)", "weeks": 24, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Obtain a Wireman / Electrical Supervisor licence from Karnataka Electrical Inspectorate", "weeks": 4, "approx_cost_inr": 500, "_TODO": ""}
+    ]
+  },
+  "plumber": {
+    "steps": [
+      {"step": 1, "action": "Attend a basic plumbing short course (pipe fitting, fixture installation)", "weeks": 4, "approx_cost_inr": 1500, "_TODO": "Verify NSDC Plumber Level-4 QP"},
+      {"step": 2, "action": "Apprentice with a local plumbing contractor for 3 months", "weeks": 12, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Register on UrbanCompany as a plumber and get your first booking", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "tailoring": {
+    "steps": [
+      {"step": 1, "action": "Join a 3-month cutting and stitching course at a local tailoring institute", "weeks": 12, "approx_cost_inr": 2000, "_TODO": "Find Karnataka NIFT outreach / NSDC tailoring centres"},
+      {"step": 2, "action": "Practise stitching 20 garments (blouses, trousers, kurtas) at home", "weeks": 4, "approx_cost_inr": 500, "_TODO": ""},
+      {"step": 3, "action": "Get a NSDC / Skill India Stitching Certificate and apply to garment factories", "weeks": 2, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "construction_helper": {
+    "steps": [
+      {"step": 1, "action": "Register under the Building and Other Construction Workers (BOCW) scheme in Karnataka", "weeks": 1, "approx_cost_inr": 0, "_TODO": "Link to Karnataka Labour Department registration portal"},
+      {"step": 2, "action": "Attend a 10-day construction safety awareness training (scaffolding, PPE, lifting)", "weeks": 2, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Join a registered contractor via Karnataka Construction Workers portal", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "mason": {
+    "steps": [
+      {"step": 1, "action": "Attend a bricklaying and plastering short course at an ITI", "weeks": 6, "approx_cost_inr": 1500, "_TODO": ""},
+      {"step": 2, "action": "Work as a mason helper for 3 months to gain site experience", "weeks": 12, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Obtain NSDC Mason Certificate and register on construction contractor apps", "weeks": 2, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "pos_billing": {
+    "steps": [
+      {"step": 1, "action": "Complete a 1-week basic computer and POS machine operation course", "weeks": 1, "approx_cost_inr": 500, "_TODO": ""},
+      {"step": 2, "action": "Practise on a free POS simulation app on your phone", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Apply to retail shops, supermarkets and petrol stations requiring cashiers", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "retail_sales": {
+    "steps": [
+      {"step": 1, "action": "Attend a 2-day retail sales and customer service workshop", "weeks": 1, "approx_cost_inr": 200, "_TODO": ""},
+      {"step": 2, "action": "Practise sales pitches and product knowledge at home", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Apply to DMart, Reliance Smart, and local supermarkets via Apna.co", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "warehouse": {
+    "steps": [
+      {"step": 1, "action": "Complete a 1-week warehouse operations course (picking, packing, inventory basics)", "weeks": 1, "approx_cost_inr": 300, "_TODO": ""},
+      {"step": 2, "action": "Practise inventory tracking with a free app on your phone", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Apply to Amazon, Flipkart and Delhivery warehouse openings on Apna.co", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "data_entry": {
+    "steps": [
+      {"step": 1, "action": "Complete a free typing and basic computer course (MS Word, Excel) online or at a CSC centre", "weeks": 4, "approx_cost_inr": 0, "_TODO": "Link to PM e-VIDYA / DigiLocker computer literacy"},
+      {"step": 2, "action": "Practise typing to reach 30 WPM using a free typing tutor app", "weeks": 2, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Appear for a government or NSDC data entry operator assessment", "weeks": 1, "approx_cost_inr": 100, "_TODO": ""}
+    ]
+  },
+  "ac_technician": {
+    "steps": [
+      {"step": 1, "action": "Complete an AC Service and Repair diploma (Daikin, Voltas or generic refrigeration course)", "weeks": 12, "approx_cost_inr": 5000, "_TODO": "Verify Bengaluru training centre for AC technicians"},
+      {"step": 2, "action": "Apprentice with an AC service company for 3 months", "weeks": 12, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Get NSDC HVAC/RAC Technician Level-4 certificate and list on UrbanCompany", "weeks": 2, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "mobile_repair": {
+    "steps": [
+      {"step": 1, "action": "Attend a 4-week mobile hardware and software repair course", "weeks": 4, "approx_cost_inr": 2000, "_TODO": "Find PMKVY mobile repair centres in Bengaluru"},
+      {"step": 2, "action": "Practise on old handsets (board soldering, screen replacement, software flashing)", "weeks": 4, "approx_cost_inr": 500, "_TODO": ""},
+      {"step": 3, "action": "Open a small repair kiosk or join an existing mobile repair shop as an assistant", "weeks": 2, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "painting": {
+    "steps": [
+      {"step": 1, "action": "Attend a 2-week house painting and surface preparation course", "weeks": 2, "approx_cost_inr": 500, "_TODO": ""},
+      {"step": 2, "action": "Practise on small surfaces; learn brush, roller and spray techniques", "weeks": 2, "approx_cost_inr": 200, "_TODO": ""},
+      {"step": 3, "action": "Register on UrbanCompany or apply to Asian Paints Home Solutions contractors", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "welder": {
+    "steps": [
+      {"step": 1, "action": "Complete an ITI Welder trade or a 3-month arc/MIG welding short course", "weeks": 12, "approx_cost_inr": 3000, "_TODO": "List Karnataka ITI welding programmes"},
+      {"step": 2, "action": "Practise welding on scrap metal; get used to safety equipment", "weeks": 4, "approx_cost_inr": 500, "_TODO": ""},
+      {"step": 3, "action": "Obtain ASME/AWS entry-level welding certificate and apply to fabrication shops", "weeks": 2, "approx_cost_inr": 500, "_TODO": ""}
+    ]
+  },
+  "carpenter": {
+    "steps": [
+      {"step": 1, "action": "Complete an ITI Carpenter trade (2 years) or a 3-month furniture-making short course", "weeks": 12, "approx_cost_inr": 2000, "_TODO": ""},
+      {"step": 2, "action": "Practise cutting, joining and finishing on scrap wood", "weeks": 4, "approx_cost_inr": 300, "_TODO": ""},
+      {"step": 3, "action": "Apply to furniture shops and construction firms, or list services on Sulekha", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "driving_licence": {
+    "steps": [
+      {"step": 1, "action": "Visit your nearest RTO with Aadhaar, photo and address proof to apply for a learner's licence", "weeks": 1, "approx_cost_inr": 400, "_TODO": "List Bengaluru RTO locations and timings"},
+      {"step": 2, "action": "Study the Motor Vehicles Act rules and traffic signs (free booklet at RTO)", "weeks": 2, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Pass the driving test at the RTO and collect your permanent licence", "weeks": 1, "approx_cost_inr": 200, "_TODO": ""}
+    ]
+  },
+  "food_handler": {
+    "steps": [
+      {"step": 1, "action": "Complete the FSSAI Basic Food Hygiene and Safety self-learning module (free, online)", "weeks": 1, "approx_cost_inr": 0, "_TODO": "Confirm FSSAI FoSCoS portal link"},
+      {"step": 2, "action": "Take the FSSAI Basic Food Handler online exam (free)", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Download your Food Handler Certificate from the FoSCoS portal and add to your profile", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "basic_english": {
+    "steps": [
+      {"step": 1, "action": "Start the free Spoken English course on Duolingo or the British Council App (30 min/day)", "weeks": 4, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 2, "action": "Watch 2 English YouTube videos with subtitles per day; repeat phrases aloud", "weeks": 4, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Practise by greeting customers or speaking to a shopkeeper in English daily", "weeks": 4, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "forklift": {
+    "steps": [
+      {"step": 1, "action": "Attend a Forklift Operator Safety course (theory + practical) at an authorised training centre", "weeks": 2, "approx_cost_inr": 3000, "_TODO": "Find authorised forklift training centres in Bengaluru"},
+      {"step": 2, "action": "Complete 40 hours of supervised forklift practice in a warehouse environment", "weeks": 2, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Obtain Forklift Operator Licence and apply to Safexpress, DHL or Amazon warehouses", "weeks": 1, "approx_cost_inr": 500, "_TODO": ""}
+    ]
+  },
+  "barber": {
+    "steps": [
+      {"step": 1, "action": "Complete a 3-month barbering and hair-cutting course at a local beauty academy", "weeks": 12, "approx_cost_inr": 3000, "_TODO": ""},
+      {"step": 2, "action": "Practise cutting techniques on willing family or friends under supervision", "weeks": 4, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Join an established salon as an assistant or rent a chair in a local barber shop", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "beautician": {
+    "steps": [
+      {"step": 1, "action": "Attend a 3-month beauty therapy course (facials, threading, waxing, nail care)", "weeks": 12, "approx_cost_inr": 5000, "_TODO": "Verify NSDC Beauty & Wellness Sector Skill Council courses"},
+      {"step": 2, "action": "Practise services on willing clients under supervision", "weeks": 4, "approx_cost_inr": 500, "_TODO": ""},
+      {"step": 3, "action": "Register on UrbanCompany as a Beauty & Wellness professional", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "sanitation": {
+    "steps": [
+      {"step": 1, "action": "Attend a 1-week sanitation and waste management awareness training", "weeks": 1, "approx_cost_inr": 0, "_TODO": "Verify BBMP / KSPCB training programmes"},
+      {"step": 2, "action": "Learn safe chemical handling and PPE use for cleaning operations", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Register as a contract sanitation worker with BBMP or a facility management firm", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "gym_trainer": {
+    "steps": [
+      {"step": 1, "action": "Complete a CPT (Certified Personal Trainer) course from an accredited fitness body", "weeks": 8, "approx_cost_inr": 8000, "_TODO": "Verify ACE / ISSA India accredited trainers in Bengaluru"},
+      {"step": 2, "action": "Build a portfolio by training 3–5 clients for free to gain testimonials", "weeks": 4, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Apply to Gold's Gym, Cult.fit or local gyms as a floor trainer or assistant", "weeks": 2, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "telecalling": {
+    "steps": [
+      {"step": 1, "action": "Complete a 2-week BPO/call centre communication skills course", "weeks": 2, "approx_cost_inr": 500, "_TODO": ""},
+      {"step": 2, "action": "Practise speaking clearly in English and Hindi with mock call exercises", "weeks": 2, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Apply to BPO firms (Concentrix, Teleperformance, HCL) on Naukri or Apna.co", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "elder_care": {
+    "steps": [
+      {"step": 1, "action": "Complete a 2-week home caregiver / patient attendant training course", "weeks": 2, "approx_cost_inr": 1000, "_TODO": "Verify Nightingales / Portea caregiver training programmes"},
+      {"step": 2, "action": "Learn basic first aid, medicine administration and mobility assistance techniques", "weeks": 2, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Register with a home health agency (Nightingales, iCliniq at-home) as a caregiver", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "babysitter": {
+    "steps": [
+      {"step": 1, "action": "Complete a child safety and first aid course (St John's Ambulance or Red Cross)", "weeks": 2, "approx_cost_inr": 500, "_TODO": ""},
+      {"step": 2, "action": "Volunteer as a babysitter for 2–3 families in your neighbourhood to build trust", "weeks": 4, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Register on BabyChakra or Care.com India as a verified caregiver", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "gardener": {
+    "steps": [
+      {"step": 1, "action": "Attend a 1-week horticulture and garden maintenance workshop", "weeks": 1, "approx_cost_inr": 300, "_TODO": ""},
+      {"step": 2, "action": "Start a small kitchen garden to practise plant care, watering and composting", "weeks": 4, "approx_cost_inr": 200, "_TODO": ""},
+      {"step": 3, "action": "Register on UrbanCompany or apply to housing societies directly", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "laundry": {
+    "steps": [
+      {"step": 1, "action": "Learn fabric types, stain removal and ironing techniques (YouTube tutorials + practice)", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 2, "action": "Practise washing and pressing 10 different garment types", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Apply to Washmart, UClean or neighbourhood dhobis as an assistant", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "factory_worker": {
+    "steps": [
+      {"step": 1, "action": "Attend a 1-week industrial safety and machine operation awareness course", "weeks": 1, "approx_cost_inr": 0, "_TODO": "Verify Karnataka Labour Department factory safety trainings"},
+      {"step": 2, "action": "Register under the National Apprenticeship Promotion Scheme for a factory apprenticeship", "weeks": 2, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Apply to industrial units in Peenya or Electronic City via Apna.co or walk-in drives", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "farm_worker": {
+    "steps": [
+      {"step": 1, "action": "Attend a 3-day agricultural practices workshop at a Krishi Vigyan Kendra", "weeks": 1, "approx_cost_inr": 0, "_TODO": "Find KVK centres near Bengaluru"},
+      {"step": 2, "action": "Gain hands-on experience on a farm for 2–4 weeks (seasonal harvest work)", "weeks": 4, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Register under MGNREGA or contact farm co-operatives around Yelahanka / Hesaraghatta", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "swimming_pool": {
+    "steps": [
+      {"step": 1, "action": "Complete a pool attendant / lifeguard awareness course", "weeks": 2, "approx_cost_inr": 1000, "_TODO": "Verify Life Saving Society India certification centres in Bengaluru"},
+      {"step": 2, "action": "Learn pool chemistry basics and cleaning procedures", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Apply to hotels and apartment complexes with pools via hotel HR portals", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "event_helper": {
+    "steps": [
+      {"step": 1, "action": "Attend a 2-day event management helper orientation workshop", "weeks": 1, "approx_cost_inr": 200, "_TODO": ""},
+      {"step": 2, "action": "Volunteer at 2–3 local events (weddings, corporate events) to build experience", "weeks": 3, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Register with local event management companies or caterers as on-call staff", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "auto_driver": {
+    "steps": [
+      {"step": 1, "action": "Obtain a three-wheeler (MCWG) licence at your nearest RTO if not already held", "weeks": 3, "approx_cost_inr": 600, "_TODO": ""},
+      {"step": 2, "action": "Apply for a Bengaluru auto permit at the BMTC / RTO permit section", "weeks": 3, "approx_cost_inr": 1000, "_TODO": "Verify current permit procedures in Bengaluru"},
+      {"step": 3, "action": "Register on Namma Auto or OLA Auto app to start taking rides", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  },
+  "truck_driver": {
+    "steps": [
+      {"step": 1, "action": "Obtain a Heavy Motor Vehicle (HMV) learner's licence at your RTO", "weeks": 1, "approx_cost_inr": 500, "_TODO": ""},
+      {"step": 2, "action": "Complete 60+ hours of HMV driving practice with a licensed trainer", "weeks": 6, "approx_cost_inr": 3000, "_TODO": ""},
+      {"step": 3, "action": "Get your HMV permanent licence and apply to logistics firms on TruckSuvidha or Apna.co", "weeks": 2, "approx_cost_inr": 200, "_TODO": ""}
+    ]
+  },
+  "watchman": {
+    "steps": [
+      {"step": 1, "action": "Get a police verification certificate from your local police station", "weeks": 2, "approx_cost_inr": 200, "_TODO": ""},
+      {"step": 2, "action": "Attend a basic watch and ward duties course (4 days)", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""},
+      {"step": 3, "action": "Apply directly to housing societies and commercial buildings in your area", "weeks": 1, "approx_cost_inr": 0, "_TODO": ""}
+    ]
+  }
+}

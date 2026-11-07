@@ -1,0 +1,163 @@
+[
+  {
+    "id": 1,
+    "description": "English – hotel helper, two-wheeler, Whitefield",
+    "input": "I worked as a helper in a hotel for 2 years, I can ride a two-wheeler, I live in Whitefield.",
+    "ui_language": "en",
+    "expected": {
+      "skills_contain": ["hotel_helper", "two_wheeler"],
+      "experience_years": 2.0,
+      "area_id": "whitefield",
+      "detected_language": "en"
+    }
+  },
+  {
+    "id": 2,
+    "description": "Kannada – hotel helper, bike, Whitefield",
+    "input": "ನಾನು ಹೋಟೆಲ್‌ನಲ್ಲಿ ಎರಡು ವರ್ಷ ಹೆಲ್ಪರ್ ಆಗಿ ಕೆಲಸ ಮಾಡಿದ್ದೇನೆ, ಬೈಕ್ ಓಡಿಸಬಲ್ಲೆ, ವೈಟ್‌ಫೀಲ್ಡ್‌ನಲ್ಲಿ ಇರುತ್ತೇನೆ.",
+    "ui_language": "kn",
+    "expected": {
+      "skills_contain": ["hotel_helper", "two_wheeler"],
+      "experience_years": 2.0,
+      "area_id": "whitefield",
+      "detected_language": "kn"
+    }
+  },
+  {
+    "id": 3,
+    "description": "Hindi – driver, car, Electronic City",
+    "input": "मैंने तीन साल ड्राइवर का काम किया है, कार चला सकता हूँ, इलेक्ट्रॉनिक सिटी में रहता हूँ।",
+    "ui_language": "hi",
+    "expected": {
+      "skills_contain": ["driver_car"],
+      "experience_years": 3.0,
+      "area_id": "electronic_city",
+      "detected_language": "hi"
+    }
+  },
+  {
+    "id": 4,
+    "description": "English – tailoring, Yelahanka, multilingual",
+    "input": "I stitch clothes, 5 years experience, live near Yelahanka, speak Kannada and Hindi.",
+    "ui_language": "en",
+    "expected": {
+      "skills_contain": ["tailoring"],
+      "experience_years": 5.0,
+      "area_id": "yelahanka",
+      "languages_contain": ["kannada", "hindi"],
+      "detected_language": "en"
+    }
+  },
+  {
+    "id": 5,
+    "description": "Hindi – cook/canteen, Marathahalli",
+    "input": "मुझे खाना बनाना आता है, दो साल एक कैंटीन में काम किया, मैं मराठहल्ली में रहती हूँ।",
+    "ui_language": "hi",
+    "expected": {
+      "skills_contain": ["cook"],
+      "experience_years": 2.0,
+      "area_id": "marathahalli",
+      "detected_language": "hi"
+    }
+  },
+  {
+    "id": 6,
+    "description": "Kannada – security guard, Jayanagar",
+    "input": "ನಾನು ಸೆಕ್ಯೂರಿಟಿ ಗಾರ್ಡ್ ಆಗಿ ಆರು ವರ್ಷ ಕೆಲಸ ಮಾಡಿದ್ದೇನೆ, ಜಯನಗರದಲ್ಲಿ ಇರುತ್ತೇನೆ.",
+    "ui_language": "kn",
+    "expected": {
+      "skills_contain": ["security_guard"],
+      "experience_years": 6.0,
+      "area_id": "jayanagar",
+      "detected_language": "kn"
+    }
+  },
+  {
+    "id": 7,
+    "description": "GENERATED – Mixed Hinglish, electrician, HSR Layout",
+    "input": "Main electrician ka kaam karta hoon, wiring aur electrical repair mein 4 years ka experience hai, HSR Layout mein rehta hoon.",
+    "ui_language": "hi",
+    "expected": {
+      "skills_contain": ["electrician"],
+      "experience_years": 4.0,
+      "area_id": "hsr_layout",
+      "detected_language": "hi"
+    },
+    "_review_note": "GENERATED – mixed Hinglish; ui_language=hi forces detected_language."
+  },
+  {
+    "id": 8,
+    "description": "GENERATED – Kannada + English mix, housekeeping, BTM Layout",
+    "input": "I do housekeeping work, ಮನೆ ಸ್ವಚ್ಛಗೊಳಿಸುತ್ತೇನೆ, ಮೂರು ವರ್ಷ experience ಇದೆ, BTM Layout ನಲ್ಲಿ ಇದ್ದೇನೆ.",
+    "ui_language": "kn",
+    "expected": {
+      "skills_contain": ["housekeeping"],
+      "experience_years": 3.0,
+      "area_id": "btm_layout",
+      "detected_language": "kn"
+    },
+    "_review_note": "GENERATED – Kannada–English code-switch; ui_language=kn fixes detection."
+  },
+  {
+    "id": 9,
+    "description": "GENERATED – Spelling variant (whitefeild), delivery, two-wheeler",
+    "input": "I am a delivery boy, riding bike since 1 year, staying at whitefeild.",
+    "ui_language": "en",
+    "expected": {
+      "skills_contain": ["delivery", "two_wheeler"],
+      "experience_years": 1.0,
+      "area_id": "whitefield",
+      "detected_language": "en"
+    },
+    "_review_note": "GENERATED – intentional typo 'whitefeild'; alias lookup must resolve it."
+  },
+  {
+    "id": 10,
+    "description": "GENERATED – Hindi plumber, Koramangala, word-number experience",
+    "input": "मैं प्लंबर हूँ, पाँच साल का अनुभव है, कोरमंगला में रहता हूँ।",
+    "ui_language": "hi",
+    "expected": {
+      "skills_contain": ["plumber"],
+      "experience_years": 5.0,
+      "area_id": "koramangala",
+      "detected_language": "hi"
+    },
+    "_review_note": "GENERATED – Hindi word-number 'पाँच' (five); verify word-number parser."
+  },
+  {
+    "id": 11,
+    "description": "INFLECTION – Kannada ಹೆಲ್ಪರ್ ಇದ್ದೇನೆ (I was a helper) — locative inflection",
+    "input": "ನಾನು ಹೋಟೆಲ್‌ನಲ್ಲಿ ಹೆಲ್ಪರ್ ಇದ್ದೇನೆ, ನಾಲ್ಕು ವರ್ಷ ಅನುಭವ ಇದೆ, ಕೋರಮಂಗಲದಲ್ಲಿ ಇರುತ್ತೇನೆ.",
+    "ui_language": "kn",
+    "expected": {
+      "skills_contain": ["hotel_helper"],
+      "experience_years": 4.0,
+      "area_id": "koramangala",
+      "detected_language": "kn"
+    }
+  },
+  {
+    "id": 12,
+    "description": "INFLECTION – Kannada ಡ್ರೈವರ್ ಆಗಿದ್ದೆ (was a driver) — past tense inflection",
+    "input": "ನಾನು ಐದು ವರ್ಷ ಕಾರ್ ಡ್ರೈವರ್ ಆಗಿದ್ದೆ, ಜಯನಗರದಲ್ಲಿ ಇರುತ್ತೇನೆ.",
+    "ui_language": "kn",
+    "expected": {
+      "skills_contain": ["driver_car"],
+      "experience_years": 5.0,
+      "area_id": "jayanagar",
+      "detected_language": "kn"
+    }
+  },
+  {
+    "id": 13,
+    "description": "INFLECTION – Hindi सिलाई करती हूँ (I do stitching) — verbal inflection",
+    "input": "मैं सिलाई करती हूँ, तीन साल से काम कर रही हूँ, येलहंका में रहती हूँ।",
+    "ui_language": "hi",
+    "expected": {
+      "skills_contain": ["tailoring"],
+      "experience_years": 3.0,
+      "area_id": "yelahanka",
+      "detected_language": "hi"
+    }
+  }
+]

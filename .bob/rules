@@ -1,0 +1,8 @@
+Project: Kelasa Mitra, a voice-first job and skill matcher for blue-collar and gig workers in Bengaluru (IBM Bobathon: Build for Bengaluru, theme: More Opportunity, Greater Together).
+Required IBM products: IBM Bob (builds everything) and IBM watsonx Orchestrate (the agent layer).
+Stack: Python FastAPI, SQLite, React 18 + Vite + Tailwind 4 + Framer Motion, browser Web Speech API.
+Core logic is deterministic: rule-based extraction, scoring, and template reasons in en/kn/hi. Numbers never come from an LLM.
+Groq is an optional runtime LLM behind the provider module, with the rule-based fallback always working. No Google, no watsonx.ai, no paid services, no credit card.
+Synthetic data only, always labelled "sample data". No real personal data, no stored audio, no children's data, no government IDs. Never commit API keys; .env stays in .gitignore.
+Design: mobile-first, warm teal/marigold/cream, 48px touch targets, prefers-reduced-motion respected.
+Make small changes. Run pytest after each task and show raw output with exit code. Do not add features I did not ask for.

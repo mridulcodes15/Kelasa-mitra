@@ -1,0 +1,248 @@
+
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kelasa Mitra Audit</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Segoe UI", system-ui, sans-serif; font-size: 14px; line-height: 1.6; background: #ffffff; color: #1f2328; max-width: 760px; margin: 0 auto; padding: 24px 20px 48px; }
+  h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .meta { font-size: 12px; color: #57606a; margin-bottom: 32px; }
+  h2 { font-size: 15px; font-weight: 700; margin: 28px 0 10px; padding-bottom: 6px; border-bottom: 1px solid #e5e7eb; }
+  h3 { font-size: 13px; font-weight: 600; margin: 18px 0 6px; color: #1f2328; }
+  p { margin-bottom: 8px; }
+  code { font-family: "Cascadia Code", "Consolas", monospace; font-size: 12.5px; background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 4px; padding: 1px 5px; }
+  pre { font-family: "Cascadia Code", "Consolas", monospace; font-size: 12px; background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 6px; padding: 12px 14px; overflow-x: auto; margin-bottom: 12px; line-height: 1.5; white-space: pre; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 12px; font-size: 13px; }
+  th { background: #f7f8fa; font-weight: 600; text-align: left; padding: 7px 10px; border: 1px solid #e5e7eb; }
+  td { padding: 6px 10px; border: 1px solid #e5e7eb; vertical-align: top; }
+  tr:nth-child(even) td { background: #fafbfc; }
+  .pass { color: #1a7f37; font-weight: 600; }
+  .fail { color: #cf222e; font-weight: 600; }
+  .warn { color: #9a6700; font-weight: 600; }
+  .ok   { color: #1a7f37; }
+  .tag  { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 10px; }
+  .tag-done  { background: #dafbe1; color: #1a7f37; }
+  .tag-miss  { background: #fff8c5; color: #9a6700; }
+  .tag-stale { background: #fff8c5; color: #9a6700; }
+  .tag-extra { background: #fff8c5; color: #9a6700; }
+  .tag-absent { background: #ffebe9; color: #cf222e; }
+  .tag-dead  { background: #eaeef2; color: #57606a; }
+  ul { padding-left: 20px; margin-bottom: 10px; }
+  li { margin-bottom: 4px; }
+  .section-box { background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px 16px; margin-bottom: 14px; }
+  .verdict { font-size: 13px; font-weight: 600; padding: 10px 14px; border-radius: 6px; margin-bottom: 10px; }
+  .verdict-ok   { background: #dafbe1; color: #1a7f37; border: 1px solid #b7e9c0; }
+  .verdict-warn { background: #fff8c5; color: #9a6700; border: 1px solid #e0c94a; }
+  .verdict-fail { background: #ffebe9; color: #cf222e; border: 1px solid #ffcecb; }
+  footer { text-align: center; font-size: 12px; color: #57606a; padding-top: 24px; margin-top: 40px; border-top: 1px solid #e5e7eb; }
+</style>
+</head>
+<body>
+
+<h1>Kelasa Mitra — Project Audit</h1>
+<p class="meta">Audited 2026-11-07 · Solo IBM Bobathon entry · Bengaluru blue-collar job-matching PWA</p>
+
+
+<h2>1 · Folder Tree &amp; File Status</h2>
+
+<h3>Backend <code>backend/</code></h3>
+<table>
+  <tr><th>File</th><th>Status</th><th>Notes</th></tr>
+  <tr><td><code>main.py</code></td><td><span class="tag tag-done">✓ present</span></td><td>Routes wired: <code>/api/profile/extract-profile</code>, <code>/api/matches</code>, <code>/health</code>. <strong>Missing:</strong> <code>skill_gap_router</code> not included.</td></tr>
+  <tr><td><code>requirements.txt</code></td><td><span class="tag tag-done">✓ present</span></td><td></td></tr>
+  <tr><td><code>pytest.ini</code></td><td><span class="tag tag-done">✓ present</span></td><td><code>asyncio_mode = auto</code></td></tr>
+  <tr><td><code>.env.example</code></td><td><span class="tag tag-done">✓ present</span></td><td></td></tr>
+  <tr><td><code>tools/fallback.py</code></td><td><span class="tag tag-done">✓ present</span></td><td></td></tr>
+  <tr><td><code>tools/provider.py</code></td><td><span class="tag tag-done">✓ present</span></td><td>Groq + LRU cache + rule fallback</td></tr>
+  <tr><td><code>tools/profile_extractor.py</code></td><td><span class="tag tag-done">✓ present</span></td><td></td></tr>
+  <tr><td><code>tools/job_ranker.py</code></td><td><span class="tag tag-done">✓ present</span></td><td></td></tr>
+  <tr><td><code>tools/skill_gap.py</code></td><td><span class="tag tag-done">✓ present</span></td><td>Written; not reachable (router not wired)</td></tr>
+  <tr><td><code>models/worker.py</code>, <code>job.py</code>, <code>skill_gap.py</code></td><td><span class="tag tag-done">✓ present</span></td><td></td></tr>
+  <tr><td><code>db/database.py</code>, <code>seed_jobs.py</code></td><td><span class="tag tag-done">✓ present</span></td><td></td></tr>
+  <tr><td><code>db/kelasa_mitra.db</code> + <code>.db-shm</code> + <code>.db-wal</code></td><td><span class="tag tag-stale">⚠ stale</span></td><td>Contains 79 rows (not 80). Coordinates are <strong>old area-centre values</strong>, not jittered. DB predates the jitter code. Must be deleted so it re-seeds on next startup.</td></tr>
+  <tr><td><code>routers/profile.py</code>, <code>matches.py</code></td><td><span class="tag tag-done">✓ present</span></td><td></td></tr>
+  <tr><td><code>routers/skill_gap.py</code></td><td><span class="tag tag-done">✓ present</span></td><td>Written; not wired into <code>main.py</code></td></tr>
+  <tr><td><code>data/skills.json</code>, <code>areas.json</code>, <code>learning_paths.json</code></td><td><span class="tag tag-done">✓ present</span></td><td></td></tr>
+  <tr><td><code>tests/test_profile.py</code>, <code>test_matches.py</code>, <code>samples.json</code></td><td><span class="tag tag-done">✓ present</span></td><td>40 tests total</td></tr>
+  <tr><td><code>tests/test_skill_gap.py</code></td><td><span class="tag tag-absent">✗ absent</span></td><td>Phase 3 tests not yet written</td></tr>
+  <tr><td><code>scripts/compare_providers.py</code></td><td><span class="tag tag-done">✓ present</span></td><td></td></tr>
+  <tr><td><code>scripts/audit_db.py</code></td><td><span class="tag tag-extra">+ created during audit</span></td><td>Can be deleted or kept for utility</td></tr>
+</table>
+
+<h3>Frontend <code>frontend/src/</code></h3>
+<table>
+  <tr><th>File</th><th>Status</th><th>Notes</th></tr>
+  <tr><td><code>App.tsx</code></td><td><span class="tag tag-done">✓ present</span></td><td>Routes <code>landing</code> ↔ <code>jobs</code> only</td></tr>
+  <tr><td><code>App.css</code></td><td><span class="tag tag-dead">dead weight</span></td><td>Default Vite scaffold CSS (<code>.hero</code>, <code>.counter</code> classes). Not imported anywhere in the project. Safe to delete.</td></tr>
+  <tr><td><code>assets/react.svg</code>, <code>assets/vite.svg</code></td><td><span class="tag tag-dead">dead weight</span></td><td>Vite scaffold assets. Not referenced anywhere. Safe to delete.</td></tr>
+  <tr><td><code>assets/hero.png</code></td><td><span class="tag tag-dead">dead weight</span></td><td>Not referenced anywhere in <code>src/</code>. Safe to delete.</td></tr>
+  <tr><td><code>pages/Landing.tsx</code>, <code>Jobs.tsx</code></td><td><span class="tag tag-done">✓ present</span></td><td></td></tr>
+  <tr><td><code>pages/SkillGap.tsx</code></td><td><span class="tag tag-absent">✗ absent</span></td><td>Phase 3 — not yet built</td></tr>
+  <tr><td><code>components/MicButton.tsx</code>, <code>ProfileCard.tsx</code>, <code>JobCard.tsx</code>, <code>MatchRing.tsx</code>, <code>LanguagePicker.tsx</code></td><td><span class="tag tag-done">✓ present</span></td><td></td></tr>
+  <tr><td><code>components/SkillGapStepper.tsx</code></td><td><span class="tag tag-absent">✗ absent</span></td><td>Phase 3 — not yet built</td></tr>
+  <tr><td><code>hooks/useSpeech.ts</code>, <code>useProfile.ts</code></td><td><span class="tag tag-done">✓ present</span></td><td></td></tr>
+  <tr><td><code>store/appStore.ts</code></td><td><span class="tag tag-done">✓ present</span></td><td>No <code>skillGap</code> state yet (Phase 3 needed)</td></tr>
+  <tr><td><code>lib/api.ts</code></td><td><span class="tag tag-done">✓ present</span></td><td>Missing <code>fetchSkillGap()</code> (Phase 3 needed)</td></tr>
+  <tr><td><code>lib/types.ts</code></td><td><span class="tag tag-done">✓ present</span></td><td>Missing <code>SkillGapItem</code>, <code>SkillGapResponse</code> types (Phase 3 needed)</td></tr>
+  <tr><td><code>lib/i18n.ts</code></td><td><span class="tag tag-done">✓ present</span></td><td>No skill-gap strings yet</td></tr>
+</table>
+
+<h3>Root &amp; PLAN.md-expected files</h3>
+<table>
+  <tr><th>File</th><th>Status</th><th>Notes</th></tr>
+  <tr><td><code>PLAN.md</code>, <code>README.md</code></td><td><span class="tag tag-done">✓ present</span></td><td></td></tr>
+  <tr><td><code>eval/</code> directory</td><td><span class="tag tag-absent">✗ absent</span></td><td>PLAN.md §3 lists <code>eval/eval_config.yaml</code> and <code>eval/datasets/worker_scenarios.json</code>. Phase 6 item — not yet built.</td></tr>
+  <tr><td><code>frontend/tailwind.config.ts</code></td><td><span class="tag tag-absent">✗ absent</span></td><td>PLAN.md lists it. Tailwind 4 uses <code>@tailwindcss/vite</code> plugin with no separate config file — this is intentional, not a bug.</td></tr>
+</table>
+
+
+<h2>2 · Test Results</h2>
+<div class="verdict verdict-ok">✓ 40 / 40 tests pass · exit code 0 · elapsed 2.77 s</div>
+
+<pre>platform win32 -- Python 3.11.0, pytest-8.3.4
+asyncio: mode=Mode.AUTO
+
+tests/test_matches.py  23 PASSED
+tests/test_profile.py  17 PASSED
+
+============================= 40 passed in 2.77s ==============================</pre>
+
+<p><strong>Coverage gap:</strong> <code>tests/test_skill_gap.py</code> does not exist — <code>tools/skill_gap.py</code>, <code>routers/skill_gap.py</code>, and <code>models/skill_gap.py</code> have <strong>zero test coverage</strong>.</p>
+
+
+<h2>3 · Backend &amp; Frontend Startup Health</h2>
+
+<h3>Backend — all imports</h3>
+<div class="verdict verdict-ok">✓ All 15 modules import cleanly with no errors</div>
+<pre>OK  main            OK  routers          OK  routers.profile
+OK  routers.matches  OK  routers.skill_gap  OK  tools.fallback
+OK  tools.provider   OK  tools.profile_extractor  OK  tools.job_ranker
+OK  tools.skill_gap  OK  models.worker    OK  models.job
+OK  models.skill_gap  OK  db.database     OK  db.seed_jobs</pre>
+
+<h3>Backend — live routes registered</h3>
+<div class="verdict verdict-warn">⚠ /api/skill-gap is NOT registered — skill_gap_router missing from main.py</div>
+<pre>GET   /health
+POST  /api/profile/extract-profile
+POST  /api/matches
+GET   /docs   GET /openapi.json   GET /redoc</pre>
+<p><code>skill_gap_router</code> is exported from <code>routers/__init__.py</code> but <code>main.py</code> never calls <code>app.include_router(skill_gap_router)</code>.</p>
+
+<h3>Backend — database state</h3>
+<div class="verdict verdict-warn">⚠ DB is stale: 79 rows (not 80), old non-jittered coordinates</div>
+<pre>DB rows        : 79        (seed has 80 — 80th job "Swimming Pool Attendant" missing)
+Unique lats    : 24        (expected ~76 after jitter)
+Area-centre matches : 24   (all lats are exact area centres = pre-jitter data)</pre>
+<p>The DB was created before jitter code was added. <code>seed_jobs()</code> skips seeding if <code>rowcount &gt; 0</code>, so the old file silently stays. Deleting <code>kelasa_mitra.db</code> + <code>.db-shm</code> + <code>.db-wal</code> and restarting will re-seed with 80 jittered jobs.</p>
+
+<h3>Frontend — TypeScript typecheck</h3>
+<div class="verdict verdict-ok">✓ tsc --noEmit exits with 0 errors</div>
+
+<h3>Frontend — production build</h3>
+<div class="verdict verdict-ok">✓ vite build succeeds in 637 ms · 398 kB JS (128 kB gzip) · 18.8 kB CSS</div>
+
+
+<h2>4 · Contradictions with PLAN.md</h2>
+<table>
+  <tr><th>#</th><th>PLAN.md says</th><th>Reality</th><th>Severity</th></tr>
+  <tr>
+    <td>1</td>
+    <td><code>backend/agent.py</code> — ADK <code>LlmAgent</code> definition</td>
+    <td>Does not exist. IBM ADK was dropped in favour of Groq + rule-based fallback (no credit card required). PLAN.md was never updated to reflect this decision.</td>
+    <td><span class="warn">⚠ doc mismatch</span></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><code>tools/translator.py</code></td>
+    <td>Does not exist. Phase 4 TTS/translation not yet built. PLAN.md lists it in the folder tree as if already decided.</td>
+    <td><span class="warn">⚠ doc mismatch</span></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td><code>models/employer.py</code></td>
+    <td>Does not exist. Phase 5 (employer flow) is on the cut list. Not a bug — a deliberate deferral.</td>
+    <td><span class="ok">ℹ cut-list item</span></td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Router files named <code>routers/jobs.py</code> and <code>routers/gap.py</code></td>
+    <td>Built as <code>routers/matches.py</code> and <code>routers/skill_gap.py</code>. Names diverged during implementation. Both work correctly; only the PLAN.md folder listing is out of date.</td>
+    <td><span class="warn">⚠ doc mismatch</span></td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td><code>db/jobs_seed.json</code> — "50–100 curated Bengaluru jobs"</td>
+    <td>Seed data is inline in <code>db/seed_jobs.py</code> as <code>_SEED</code>, not a separate JSON file. Functionally equivalent; only the file structure differs from PLAN.md.</td>
+    <td><span class="ok">ℹ harmless deviation</span></td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>Phase 3 demo-able on its own ("Skill gap and learning path shown below job cards")</td>
+    <td><code>/api/skill-gap</code> endpoint is written but not wired. <code>SkillGap.tsx</code> and <code>SkillGapStepper.tsx</code> do not exist. Phase 3 is <strong>not yet demo-able</strong>.</td>
+    <td><span class="fail">✗ incomplete phase</span></td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td><code>frontend/tailwind.config.ts</code> listed in folder tree</td>
+    <td>Not present — Tailwind 4 configures itself via <code>@tailwindcss/vite</code> with no separate config file. This is correct for the chosen library version; PLAN.md was written assuming Tailwind 3.</td>
+    <td><span class="ok">ℹ version difference</span></td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td><code>eval/</code> directory with eval config and 10 scenarios</td>
+    <td>Does not exist. Phase 6 item. Not yet started.</td>
+    <td><span class="ok">ℹ phase 6 item</span></td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>DB seed: 80 jobs with jittered coordinates</td>
+    <td>DB has 79 rows with old non-jittered area-centre coordinates. The code is correct; the stale DB file just needs to be deleted.</td>
+    <td><span class="warn">⚠ data bug (trivial fix)</span></td>
+  </tr>
+</table>
+
+
+<h2>5 · Proposed Minimal Cleanup List</h2>
+<p>These are the only changes needed to make the project consistent with its current state. No new features. Ordered by priority.</p>
+
+<table>
+  <tr><th>#</th><th>Action</th><th>Why</th><th>Risk</th></tr>
+  <tr>
+    <td><strong>C1</strong></td>
+    <td>Delete <code>backend/db/kelasa_mitra.db</code>, <code>.db-shm</code>, <code>.db-wal</code></td>
+    <td>Stale DB has 79 rows with wrong (non-jittered) coordinates. Will auto-reseed to 80 correct rows on next <code>uvicorn</code> startup.</td>
+    <td>None — data is entirely synthetic</td>
+  </tr>
+  <tr>
+    <td><strong>C2</strong></td>
+    <td>Add <code>app.include_router(skill_gap_router)</code> to <code>backend/main.py</code></td>
+    <td>The router, tool, and models are all written and import cleanly. One line missing.</td>
+    <td>None</td>
+  </tr>
+  <tr>
+    <td><strong>C3</strong></td>
+    <td>Delete <code>frontend/src/App.css</code>, <code>assets/react.svg</code>, <code>assets/vite.svg</code>, <code>assets/hero.png</code></td>
+    <td>Default Vite scaffold files; not imported or referenced anywhere in the project.</td>
+    <td>None</td>
+  </tr>
+  <tr>
+    <td><strong>C4</strong></td>
+    <td>Delete <code>backend/scripts/audit_db.py</code> (created during this audit)</td>
+    <td>One-off diagnostic script, not part of the project.</td>
+    <td>None</td>
+  </tr>
+  <tr>
+    <td><strong>C5</strong></td>
+    <td>Update <code>PLAN.md §3</code> folder tree to reflect actual file names (<code>matches.py</code> not <code>jobs.py</code>, <code>skill_gap.py</code> not <code>gap.py</code>, no <code>agent.py</code>, no <code>translator.py</code>, no <code>jobs_seed.json</code>)</td>
+    <td>Judges reading PLAN.md will find it matches the actual repo.</td>
+    <td>None — doc-only change</td>
+  </tr>
+</table>
+
+<p style="margin-top:12px;color:#57606a;font-size:13px"><strong>Not included above (deliberate deferrals, not bugs):</strong> <code>test_skill_gap.py</code>, <code>SkillGap.tsx</code>, <code>SkillGapStepper.tsx</code>, <code>fetchSkillGap</code> in <code>api.ts</code>, TTS, employer flow, PWA manifest, eval/ — these are Phase 3–6 work items, not cleanup.</p>
+
+<footer>Made with IBM Bob</footer>
+</body>
+</html>

@@ -1,0 +1,145 @@
+import { useState, useCallback, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useAppStore } from '../store/appStore';
+import { JobCard } from '../components/JobCard';
+import type { JobMatch } from '../lib/types';
+
+export function Jobs() {
+  const { matches, followUpQuestion, isFetchingMatches, setScreen, profile } = useAppStore();
+  const [deck, setDeck] = useState<JobMatch[]>([...matches]);
+  const [savedCount, setSavedCount] = useState(0);
+
+  // Sync deck when matches change (e.g. after re-extraction)
+  useEffect(() => {
+    setDeck([...matches]);
+    setSavedCount(0);
+  }, [matches]);
+
+  const handleSkip = useCallback(() => {
+    setDeck((prev) => prev.slice(1));
+  }, []);
+
+  const handleSave = useCallback(() => {
+    setSavedCount((c) => c + 1);
+    setDeck((prev) => prev.slice(1));
+  }, []);
+
+  // Keyboard navigation
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'ArrowRight') handleSave();
+      if (e.key === 'ArrowLeft') handleSkip();
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [handleSave, handleSkip]);
+
+  const areaName = profile?.area?.name ?? '';
+  const jobCount = matches.length;
+
+  if (isFetchingMatches) {
+    return (
+      <div className="min-h-screen bg-[#fdf8f0] flex items-center justify-center">
+        <p className="text-[#5a6475] animate-pulse">Finding jobs…</p>
+      </div>
+    );
+  }
+
+  if (followUpQuestion) {
+    return (
+      <div className="min-h-screen bg-[#fdf8f0] flex flex-col items-center justify-center px-6 gap-6">
+        <div className="bg-white rounded-3xl shadow-md p-6 max-w-sm w-full">
+          <p className="text-2xl mb-3">🤔</p>
+          <p className="text-[#1a1a2e] font-semibold text-base">{followUpQuestion}</p>
+        </div>
+        <button
+          onClick={() => setScreen('landing')}
+          className="bg-[#0d6e6e] text-white font-semibold py-4 px-8 rounded-2xl touch-target hover:bg-[#0f9d9d]"
+        >
+          ← Answer
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <main className="min-h-screen bg-[#fdf8f0] flex flex-col">
+      {/* Header */}
+      <header className="px-4 pt-5 pb-3 flex items-center gap-3">
+        <button
+          onClick={() => setScreen('landing')}
+          aria-label="Back to profile"
+          className="text-[#0d6e6e] font-semibold text-sm touch-target"
+        >
+          ← Profile
+        </button>
+        <div className="flex-1">
+          <h1 className="text-lg font-bold text-[#1a1a2e]">
+            {jobCount} Jobs Found
+          </h1>
+          {areaName && (
+            <p className="text-xs text-[#5a6475]">near {areaName}</p>
+          )}
+        </div>
+        {savedCount > 0 && (
+          <span className="bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full">
+            {savedCount} saved
+          </span>
+        )}
+      </header>
+
+      {/* Keyboard hint */}
+      <p className="text-xs text-center text-[#5a6475] mb-2 hidden md:block">
+        ← Arrow to skip · → Arrow to save
+      </p>
+
+      {/* Card stack */}
+      {deck.length > 0 ? (
+        <section
+          className="flex-1 relative mx-4"
+          style={{ minHeight: 420 }}
+          aria-label="Job cards"
+        >
+          <AnimatePresence>
+            {/* Show up to 2 cards (current + next peeking behind) */}
+            {deck.slice(0, 2).map((match, i) => (
+              <JobCard
+                key={match.job.id}
+                match={match}
+                isTop={i === 0}
+                onSave={handleSave}
+                onSkip={handleSkip}
+              />
+            )).reverse()}
+          </AnimatePresence>
+
+          {/* Swipe hints */}
+          <div className="absolute bottom-[-40px] left-0 right-0 flex justify-between px-4">
+            <span className="text-xs text-[#5a6475]">← Skip</span>
+            <span className="text-xs text-[#5a6475]">Save →</span>
+          </div>
+        </section>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex-1 flex flex-col items-center justify-center px-6 gap-4 text-center"
+        >
+          <p className="text-4xl">🎉</p>
+          <p className="text-lg font-bold text-[#1a1a2e]">
+            {savedCount > 0 ? `You saved ${savedCount} job${savedCount > 1 ? 's' : ''}!` : 'All done'}
+          </p>
+          <p className="text-sm text-[#5a6475]">
+            {savedCount > 0 ? 'Great choices — go speak to the employer!' : 'No more jobs in your area.'}
+          </p>
+          <button
+            onClick={() => setScreen('landing')}
+            className="mt-4 bg-[#0d6e6e] text-white font-semibold py-4 px-8 rounded-2xl touch-target hover:bg-[#0f9d9d]"
+          >
+            Search Again
+          </button>
+        </motion.div>
+      )}
+    </main>
+  );
+}
