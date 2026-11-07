@@ -12,7 +12,7 @@ load_dotenv(Path(__file__).parent / ".env")
 
 logging.basicConfig(level=logging.INFO)
 
-from routers import profile_router, matches_router  # noqa: E402 (after dotenv load)
+from routers import profile_router, matches_router, skill_gap_router  # noqa: E402 (after dotenv load)
 from db.seed_jobs import seed_jobs  # noqa: E402
 
 app = FastAPI(
@@ -30,6 +30,7 @@ app.add_middleware(
 
 app.include_router(profile_router)
 app.include_router(matches_router)
+app.include_router(skill_gap_router)
 
 
 @app.on_event("startup")

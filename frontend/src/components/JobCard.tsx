@@ -1,5 +1,7 @@
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import type { JobMatch } from '../lib/types';
+import { useAppStore } from '../store/appStore';
+import { t } from '../lib/i18n';
 import { MatchRing } from './MatchRing';
 
 interface JobCardProps {
@@ -14,6 +16,7 @@ function fmt(n: number) {
 }
 
 export function JobCard({ match, onSave, onSkip, isTop }: JobCardProps) {
+  const lang = useAppStore((s) => s.lang);
   const { job, score, distance_km, reason } = match;
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-12, 12]);
@@ -30,7 +33,11 @@ export function JobCard({ match, onSave, onSkip, isTop }: JobCardProps) {
     }
   }
 
-  const typeLabel = job.type === 'apprenticeship' ? '🎓 Apprenticeship' : '💼 Job';
+  const typeLabel = t(lang, job.type === 'apprenticeship' ? 'typeApprenticeship' : 'typeJob');
+  // Coordinates are approximate, so distances are shown as estimates, never as exact figures.
+  const distanceLabel = distance_km < 1
+    ? t(lang, 'inYourArea')
+    : t(lang, 'aboutKm', { km: distance_km.toFixed(1) });
 
   return (
     <motion.div
@@ -44,7 +51,7 @@ export function JobCard({ match, onSave, onSkip, isTop }: JobCardProps) {
         'absolute inset-0 bg-white rounded-3xl shadow-lg p-5 flex flex-col gap-3',
         isTop ? 'cursor-grab active:cursor-grabbing' : 'pointer-events-none',
       ].join(' ')}
-      aria-label={`Job card: ${job.title} at ${job.employer}`}
+      aria-label={t(lang, 'jobCardAria', { title: job.title, employer: job.employer })}
     >
       {/* Top row: title + type badge */}
       <div className="flex items-start justify-between gap-2">
@@ -58,8 +65,8 @@ export function JobCard({ match, onSave, onSkip, isTop }: JobCardProps) {
 
       {/* Info row */}
       <div className="flex flex-wrap gap-3 text-sm text-[#5a6475]">
-        <span>📍 {job.area} · {distance_km < 1 ? 'in your area' : `~${distance_km} km`}</span>
-        <span>💰 ₹{fmt(job.pay_min)}–{fmt(job.pay_max)}/mo</span>
+        <span>📍 {job.area} · {distanceLabel}</span>
+        <span>💰 ₹{fmt(job.pay_min)}–{fmt(job.pay_max)}{t(lang, 'perMonth')}</span>
       </div>
 
       {/* Reason */}
@@ -69,24 +76,24 @@ export function JobCard({ match, onSave, onSkip, isTop }: JobCardProps) {
 
       {/* Sample data tag */}
       {job.is_synthetic && (
-        <p className="text-xs text-[#5a6475] italic">⚠ Sample data — for demonstration only</p>
+        <p className="text-xs text-[#5a6475] italic">{t(lang, 'sampleData')}</p>
       )}
 
       {/* Action buttons (accessibility) */}
       <div className="flex gap-3 mt-auto">
         <button
           onClick={onSkip}
-          aria-label="Skip this job"
+          aria-label={t(lang, 'skipAria')}
           className="flex-1 border border-stone-200 rounded-2xl py-3 text-sm font-semibold text-[#5a6475] hover:bg-stone-50 touch-target"
         >
-          Skip ✕
+          {t(lang, 'skip')}
         </button>
         <button
           onClick={onSave}
-          aria-label="Save this job"
+          aria-label={t(lang, 'saveAria')}
           className="flex-1 bg-[#0d6e6e] rounded-2xl py-3 text-sm font-semibold text-white hover:bg-[#0f9d9d] touch-target"
         >
-          Save ✓
+          {t(lang, 'save')}
         </button>
       </div>
     </motion.div>

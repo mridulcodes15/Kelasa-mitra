@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { LangCode } from '../lib/types';
-import type { WorkerProfile, JobMatch } from '../lib/types';
+import type { WorkerProfile, JobMatch, SkillGapResponse } from '../lib/types';
 
 export type AppScreen = 'landing' | 'jobs';
 
@@ -31,6 +31,16 @@ interface AppState {
   isFetchingMatches: boolean;
   setIsFetchingMatches: (v: boolean) => void;
 
+  // Phase 3
+  skillGap: SkillGapResponse | null;
+  setSkillGap: (g: SkillGapResponse | null) => void;
+
+  isFetchingSkillGap: boolean;
+  setIsFetchingSkillGap: (v: boolean) => void;
+
+  skillGapFailed: boolean;
+  setSkillGapFailed: (v: boolean) => void;
+
   screen: AppScreen;
   setScreen: (s: AppScreen) => void;
 }
@@ -60,6 +70,15 @@ export const useAppStore = create<AppState>((set) => ({
 
   isFetchingMatches: false,
   setIsFetchingMatches: (isFetchingMatches) => set({ isFetchingMatches }),
+
+  skillGap: null,
+  setSkillGap: (skillGap) => set({ skillGap }),
+
+  isFetchingSkillGap: false,
+  setIsFetchingSkillGap: (isFetchingSkillGap) => set({ isFetchingSkillGap }),
+
+  skillGapFailed: false,
+  setSkillGapFailed: (skillGapFailed) => set({ skillGapFailed }),
 
   screen: 'landing',
   setScreen: (screen) => set({ screen }),

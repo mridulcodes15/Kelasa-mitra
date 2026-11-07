@@ -2,8 +2,7 @@
 skill_gap.py — deterministic skill gap analysis tool.
 
 All numbers (jobs_unlocked, avg_pay_uplift) are computed from the seed jobs
-in the DB.  The LLM is NEVER used to generate numbers — it may only rephrase
-the explanation text, and only as an optional enhancement with template fallback.
+in the DB, and explanations come from templates. No LLM is involved.
 
 Algorithm:
   1. Collect all jobs within MAX_DISTANCE_KM of the worker.
@@ -14,7 +13,10 @@ Algorithm:
      b. Count how many NEW strong matches appear → jobs_unlocked.
      c. Compute average midpoint pay of those new jobs → avg_pay_uplift_inr
         (relative to worker's current average strong-match pay).
-  4. Return top 3 gaps sorted by jobs_unlocked desc, then pay_uplift desc.
+        With no current strong matches there is nothing to compare against, so
+        the uplift is 0 and no pay claim is made.
+  4. Return top 3 gaps sorted by jobs_unlocked desc, then pay_uplift desc, then
+     skill id, so ties give the same result on every run.
 """
 from __future__ import annotations
 
@@ -25,7 +27,7 @@ from typing import Any
 
 from models.worker import WorkerProfile
 from models.skill_gap import SkillGapItem, SkillGapResponse, LearningStep
-from tools.job_ranker import rank_jobs, _score, MAX_DISTANCE_KM, _haversine_km
+from tools.job_ranker import _score, MAX_DISTANCE_KM, _haversine_km
 
 logger = logging.getLogger(__name__)
 
@@ -37,14 +39,14 @@ STRONG_MATCH_THRESHOLD = 60    # score >= this counts as a "strong match"
 
 _GAP_TEMPLATES: dict[str, str] = {
     "en": "Learning {skill} could unlock {n} more job{pl} near you, paying about ₹{pay} more per month.",
-    "kn": "{skill} ಕಲಿಯುವುದರಿಂದ ನಿಮ್ಮ ಹತ್ತಿರ {n} ಹೆಚ್ಚಿನ ಕೆಲಸ{pl_kn} ತೆರೆದುಕೊಳ್ಳಬಹುದು, ತಿಂಗಳಿಗೆ ಸರಿಸುಮಾರು ₹{pay} ಹೆಚ್ಚು ಸಂಬಳ ಸಿಗಬಹುದು.",
-    "hi": "{skill} सीखने से आपके पास {n} और काम{pl_hi} मिल सकते हैं, जिनमें महीने में लगभग ₹{pay} अधिक वेतन मिल सकता है।",
+    "kn": "{skill} ಕಲಿತರೆ ನಿಮ್ಮ ಹತ್ತಿರ {n} ಹೊಸ ಕೆಲಸದ ಅವಕಾಶ ಸಿಗಬಹುದು, ತಿಂಗಳಿಗೆ ಸುಮಾರು ₹{pay} ಹೆಚ್ಚು ಸಂಪಾದಿಸಬಹುದು.",
+    "hi": "{skill} सीखने से आपके आस-पास {n} नए काम का मौका मिल सकता है, और महीने में लगभग ₹{pay} ज़्यादा कमाई हो सकती है।",
 }
 
 _GAP_NO_UPLIFT_TEMPLATES: dict[str, str] = {
     "en": "Learning {skill} could unlock {n} more job{pl} near you.",
-    "kn": "{skill} ಕಲಿಯುವುದರಿಂದ ನಿಮ್ಮ ಹತ್ತಿರ {n} ಹೆಚ್ಚಿನ ಕೆಲಸ{pl_kn} ತೆರೆದುಕೊಳ್ಳಬಹುದು.",
-    "hi": "{skill} सीखने से आपके पास {n} और काम{pl_hi} मिल सकते हैं।",
+    "kn": "{skill} ಕಲಿತರೆ ನಿಮ್ಮ ಹತ್ತಿರ {n} ಹೊಸ ಕೆಲಸದ ಅವಕಾಶ ಸಿಗಬಹುದು.",
+    "hi": "{skill} सीखने से आपके आस-पास {n} नए काम का मौका मिल सकता है।",
 }
 
 
@@ -113,7 +115,7 @@ def compute_skill_gap(profile: WorkerProfile, all_jobs: list[dict[str, Any]]) ->
 
     gaps: list[tuple[int, int, SkillGapItem]] = []  # (jobs_unlocked, uplift, item)
 
-    for skill_id in missing_skills:
+    for skill_id in sorted(missing_skills):
         # Hypothetically add the skill
         hypothetical_skills = list(profile.skills) + [skill_id]
         new_strong = {j["id"] for j in nearby
@@ -126,21 +128,19 @@ def compute_skill_gap(profile: WorkerProfile, all_jobs: list[dict[str, Any]]) ->
 
         newly_unlocked_jobs = [j for j in nearby if j["id"] in newly_unlocked_ids]
         new_avg_pay = _avg_midpoint_pay(newly_unlocked_jobs)
-        uplift = max(0, round(new_avg_pay - current_avg_pay))
+        # No current matches means no baseline, so make no pay-uplift claim.
+        uplift = max(0, round(new_avg_pay - current_avg_pay)) if current_strong else 0
 
         label = _skill_label(skill_id, lang_key, skill_labels)
         pl = "s" if jobs_unlocked != 1 else ""
-        pl_kn = "ಗಳು" if jobs_unlocked != 1 else ""
-        pl_hi = "" if jobs_unlocked == 1 else "ें"
 
         if uplift > 0:
             explanation = _GAP_TEMPLATES[lang_key].format(
-                skill=label, n=jobs_unlocked, pl=pl, pl_kn=pl_kn, pl_hi=pl_hi,
-                pay=f"{uplift:,}",
+                skill=label, n=jobs_unlocked, pl=pl, pay=f"{uplift:,}",
             )
         else:
             explanation = _GAP_NO_UPLIFT_TEMPLATES[lang_key].format(
-                skill=label, n=jobs_unlocked, pl=pl, pl_kn=pl_kn, pl_hi=pl_hi,
+                skill=label, n=jobs_unlocked, pl=pl,
             )
 
         raw_steps = learning_paths.get(skill_id, {}).get("steps", [])
@@ -151,6 +151,7 @@ def compute_skill_gap(profile: WorkerProfile, all_jobs: list[dict[str, Any]]) ->
         item = SkillGapItem(
             skill_id=skill_id,
             label_en=skill_labels.get(skill_id, {}).get("en", skill_id),
+            label=label,
             jobs_unlocked=jobs_unlocked,
             avg_pay_uplift_inr=uplift,
             explanation=explanation,
@@ -158,7 +159,7 @@ def compute_skill_gap(profile: WorkerProfile, all_jobs: list[dict[str, Any]]) ->
         )
         gaps.append((jobs_unlocked, uplift, item))
 
-    # Sort: most jobs unlocked first, then highest pay uplift
-    gaps.sort(key=lambda x: (-x[0], -x[1]))
+    # Sort: most jobs unlocked first, then highest pay uplift, then skill id
+    gaps.sort(key=lambda x: (-x[0], -x[1], x[2].skill_id))
     top3 = [item for _, _, item in gaps[:3]]
     return SkillGapResponse(gaps=top3)

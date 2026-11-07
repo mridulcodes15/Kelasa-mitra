@@ -2,10 +2,12 @@ import { useState, useCallback, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAppStore } from '../store/appStore';
 import { JobCard } from '../components/JobCard';
+import { SkillGapSection } from '../components/SkillGapSection';
+import { t } from '../lib/i18n';
 import type { JobMatch } from '../lib/types';
 
 export function Jobs() {
-  const { matches, followUpQuestion, isFetchingMatches, setScreen, profile } = useAppStore();
+  const { lang, matches, isFetchingMatches, setScreen, profile } = useAppStore();
   const [deck, setDeck] = useState<JobMatch[]>([...matches]);
   const [savedCount, setSavedCount] = useState(0);
 
@@ -40,24 +42,7 @@ export function Jobs() {
   if (isFetchingMatches) {
     return (
       <div className="min-h-screen bg-[#fdf8f0] flex items-center justify-center">
-        <p className="text-[#5a6475] animate-pulse">Finding jobs…</p>
-      </div>
-    );
-  }
-
-  if (followUpQuestion) {
-    return (
-      <div className="min-h-screen bg-[#fdf8f0] flex flex-col items-center justify-center px-6 gap-6">
-        <div className="bg-white rounded-3xl shadow-md p-6 max-w-sm w-full">
-          <p className="text-2xl mb-3">🤔</p>
-          <p className="text-[#1a1a2e] font-semibold text-base">{followUpQuestion}</p>
-        </div>
-        <button
-          onClick={() => setScreen('landing')}
-          className="bg-[#0d6e6e] text-white font-semibold py-4 px-8 rounded-2xl touch-target hover:bg-[#0f9d9d]"
-        >
-          ← Answer
-        </button>
+        <p className="text-[#5a6475] animate-pulse motion-reduce:animate-none">{t(lang, 'findingJobs')}</p>
       </div>
     );
   }
@@ -68,37 +53,37 @@ export function Jobs() {
       <header className="px-4 pt-5 pb-3 flex items-center gap-3">
         <button
           onClick={() => setScreen('landing')}
-          aria-label="Back to profile"
+          aria-label={t(lang, 'backToProfileAria')}
           className="text-[#0d6e6e] font-semibold text-sm touch-target"
         >
-          ← Profile
+          {t(lang, 'backToProfile')}
         </button>
         <div className="flex-1">
           <h1 className="text-lg font-bold text-[#1a1a2e]">
-            {jobCount} Jobs Found
+            {t(lang, 'jobsFound', { n: jobCount })}
           </h1>
           {areaName && (
-            <p className="text-xs text-[#5a6475]">near {areaName}</p>
+            <p className="text-xs text-[#5a6475]">{t(lang, 'nearArea', { area: areaName })}</p>
           )}
         </div>
         {savedCount > 0 && (
           <span className="bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full">
-            {savedCount} saved
+            {t(lang, 'savedCount', { n: savedCount })}
           </span>
         )}
       </header>
 
       {/* Keyboard hint */}
       <p className="text-xs text-center text-[#5a6475] mb-2 hidden md:block">
-        ← Arrow to skip · → Arrow to save
+        {t(lang, 'keyboardHint')}
       </p>
 
       {/* Card stack */}
       {deck.length > 0 ? (
         <section
-          className="flex-1 relative mx-4"
+          className="relative mx-4"
           style={{ minHeight: 420 }}
-          aria-label="Job cards"
+          aria-label={t(lang, 'jobCardsLabel')}
         >
           <AnimatePresence>
             {/* Show up to 2 cards (current + next peeking behind) */}
@@ -115,31 +100,33 @@ export function Jobs() {
 
           {/* Swipe hints */}
           <div className="absolute bottom-[-40px] left-0 right-0 flex justify-between px-4">
-            <span className="text-xs text-[#5a6475]">← Skip</span>
-            <span className="text-xs text-[#5a6475]">Save →</span>
+            <span className="text-xs text-[#5a6475]">{t(lang, 'skipHint')}</span>
+            <span className="text-xs text-[#5a6475]">{t(lang, 'saveHint')}</span>
           </div>
         </section>
       ) : (
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex-1 flex flex-col items-center justify-center px-6 gap-4 text-center"
+          className="flex flex-col items-center justify-center px-6 py-8 gap-4 text-center"
         >
           <p className="text-4xl">🎉</p>
           <p className="text-lg font-bold text-[#1a1a2e]">
-            {savedCount > 0 ? `You saved ${savedCount} job${savedCount > 1 ? 's' : ''}!` : 'All done'}
+            {savedCount > 0 ? t(lang, 'savedDoneTitle', { n: savedCount }) : t(lang, 'allDone')}
           </p>
           <p className="text-sm text-[#5a6475]">
-            {savedCount > 0 ? 'Great choices — go speak to the employer!' : 'No more jobs in your area.'}
+            {savedCount > 0 ? t(lang, 'savedDoneBody') : t(lang, 'noMoreJobs')}
           </p>
           <button
             onClick={() => setScreen('landing')}
             className="mt-4 bg-[#0d6e6e] text-white font-semibold py-4 px-8 rounded-2xl touch-target hover:bg-[#0f9d9d]"
           >
-            Search Again
+            {t(lang, 'searchAgain')}
           </button>
         </motion.div>
       )}
+
+      <SkillGapSection />
     </main>
   );
 }

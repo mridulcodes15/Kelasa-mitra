@@ -1,38 +1,72 @@
 import type { LangCode } from './types';
 
-type StringKey =
-  | 'appName'
-  | 'tagline'
-  | 'tapToSpeak'
-  | 'orType'
-  | 'typeHere'
-  | 'listening'
-  | 'findJobs'
-  | 'profileTitle'
-  | 'skillsLabel'
-  | 'expLabel'
-  | 'areaLabel'
-  | 'langsLabel'
-  | 'noMicPermission'
-  | 'micNotSupported';
+// Kannada and Hindi strings have not been checked by a native speaker yet.
+// See docs/TEMPLATES_TO_REVIEW.md. Counts use "label: {n}" or invariant phrasing to
+// avoid plural mistakes.
+const en = {
+  appName: 'Kelasa Mitra',
+  tagline: 'Work Friend — Find jobs near you',
+  tapToSpeak: 'Tap to Speak',
+  orType: 'or type below',
+  typeHere: 'Tell us about your work…',
+  listening: 'Listening…',
+  findJobs: 'Find Jobs for Me →',
+  profileTitle: 'Your Profile',
+  skillsLabel: 'Skills',
+  expLabel: 'Experience',
+  areaLabel: 'Location',
+  langsLabel: 'Languages',
+  noMicPermission: 'Microphone access denied. Please type instead.',
+  micNotSupported: 'Voice not supported on this browser. Please type instead.',
+  followUpHint: 'Tap the mic and answer, or add it to the text below.',
+  findingJobs: 'Finding jobs…',
+  backToProfile: '← Profile',
+  backToProfileAria: 'Back to profile',
+  jobsFound: 'Jobs found: {n}',
+  nearArea: 'near {area}',
+  savedCount: 'Saved: {n}',
+  keyboardHint: '← Arrow to skip · → Arrow to save',
+  jobCardsLabel: 'Job cards',
+  skipHint: '← Skip',
+  saveHint: 'Save →',
+  skip: 'Skip ✕',
+  save: 'Save ✓',
+  skipAria: 'Skip this job',
+  saveAria: 'Save this job',
+  allDone: 'All done',
+  savedDoneTitle: 'Jobs saved: {n}',
+  savedDoneBody: 'These are sample jobs, so there is no employer to contact yet.',
+  noMoreJobs: 'No more jobs in your area.',
+  searchAgain: 'Search Again',
+  typeJob: '💼 Job',
+  typeApprenticeship: '🎓 Apprenticeship',
+  inYourArea: 'in your area',
+  aboutKm: '~{km} km',
+  perMonth: '/mo',
+  sampleData: '⚠ Sample data — for demonstration only',
+  jobCardAria: 'Job card: {title} at {employer}',
+  matchScoreAria: 'Match score: {score}%',
+  skillGapTitle: 'Grow your skills',
+  skillGapIntro: 'Learning one of these could open more jobs near you.',
+  skillGapLoading: 'Checking which skills could help…',
+  skillGapEmpty: 'No new skills to suggest right now.',
+  skillGapError: 'Could not load skill suggestions. Your job matches are not affected.',
+  skillGapSample: '⚠ Sample data: job counts and pay come from sample jobs. Weeks and costs are rough estimates.',
+  moreJobsBadge: '+{n}',
+  moreJobsUnit: 'more jobs',
+  payUplift: '~₹{pay} more/month',
+  stepLabel: 'Step {n}',
+  aboutWeeks: '~{n} wk',
+  aboutCost: '~₹{n}',
+  stepsEnglishOnly: '',
+  showSteps: 'Show steps',
+  hideSteps: 'Hide steps',
+};
 
-const strings: Record<LangCode, Record<StringKey, string>> = {
-  en: {
-    appName: 'Kelasa Mitra',
-    tagline: 'Work Friend — Find jobs near you',
-    tapToSpeak: 'Tap to Speak',
-    orType: 'or type below',
-    typeHere: 'Tell us about your work…',
-    listening: 'Listening…',
-    findJobs: 'Find Jobs for Me →',
-    profileTitle: 'Your Profile',
-    skillsLabel: 'Skills',
-    expLabel: 'Experience',
-    areaLabel: 'Location',
-    langsLabel: 'Languages',
-    noMicPermission: 'Microphone access denied. Please type instead.',
-    micNotSupported: 'Voice not supported on this browser. Please type instead.',
-  },
+export type StringKey = keyof typeof en;
+
+export const strings: Record<LangCode, Record<StringKey, string>> = {
+  en,
   kn: {
     appName: 'ಕೆಲಸ ಮಿತ್ರ',
     tagline: 'ಕೆಲಸದ ಸ್ನೇಹಿತ — ನಿಮ್ಮ ಹತ್ತಿರ ಕೆಲಸ ಹುಡುಕಿ',
@@ -48,6 +82,49 @@ const strings: Record<LangCode, Record<StringKey, string>> = {
     langsLabel: 'ಭಾಷೆಗಳು',
     noMicPermission: 'ಮೈಕ್ ಅನುಮತಿ ನಿರಾಕರಿಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಟೈಪ್ ಮಾಡಿ.',
     micNotSupported: 'ಈ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಧ್ವನಿ ಬೆಂಬಲಿಸುವುದಿಲ್ಲ. ದಯವಿಟ್ಟು ಟೈಪ್ ಮಾಡಿ.',
+    followUpHint: 'ಮೈಕ್ ಒತ್ತಿ ಉತ್ತರಿಸಿ, ಅಥವಾ ಕೆಳಗಿನ ಪಠ್ಯಕ್ಕೆ ಸೇರಿಸಿ.',
+    findingJobs: 'ಕೆಲಸ ಹುಡುಕುತ್ತಿದ್ದೇನೆ…',
+    backToProfile: '← ಪ್ರೊಫೈಲ್',
+    backToProfileAria: 'ಪ್ರೊಫೈಲ್‌ಗೆ ಹಿಂತಿರುಗಿ',
+    jobsFound: 'ಸಿಕ್ಕ ಕೆಲಸಗಳು: {n}',
+    nearArea: '{area} ಹತ್ತಿರ',
+    savedCount: 'ಉಳಿಸಿದ್ದು: {n}',
+    keyboardHint: '← ಬಾಣದ ಕೀ: ಬಿಡಿ · → ಬಾಣದ ಕೀ: ಉಳಿಸಿ',
+    jobCardsLabel: 'ಕೆಲಸದ ಕಾರ್ಡ್‌ಗಳು',
+    skipHint: '← ಬಿಡಿ',
+    saveHint: 'ಉಳಿಸಿ →',
+    skip: 'ಬಿಡಿ ✕',
+    save: 'ಉಳಿಸಿ ✓',
+    skipAria: 'ಈ ಕೆಲಸ ಬಿಡಿ',
+    saveAria: 'ಈ ಕೆಲಸ ಉಳಿಸಿ',
+    allDone: 'ಎಲ್ಲಾ ಮುಗಿಯಿತು',
+    savedDoneTitle: 'ಉಳಿಸಿದ ಕೆಲಸಗಳು: {n}',
+    savedDoneBody: 'ಇವು ಮಾದರಿ ಕೆಲಸಗಳು, ಈಗ ಸಂಪರ್ಕಿಸಲು ಯಾವುದೇ ಉದ್ಯೋಗದಾತರಿಲ್ಲ.',
+    noMoreJobs: 'ನಿಮ್ಮ ಪ್ರದೇಶದಲ್ಲಿ ಇನ್ನು ಕೆಲಸಗಳಿಲ್ಲ.',
+    searchAgain: 'ಮತ್ತೆ ಹುಡುಕಿ',
+    typeJob: '💼 ಕೆಲಸ',
+    typeApprenticeship: '🎓 ಅಪ್ರೆಂಟಿಸ್‌ಶಿಪ್',
+    inYourArea: 'ನಿಮ್ಮ ಪ್ರದೇಶದಲ್ಲಿ',
+    aboutKm: 'ಸುಮಾರು {km} ಕಿಮೀ',
+    perMonth: '/ತಿಂಗಳು',
+    sampleData: '⚠ ಮಾದರಿ ಮಾಹಿತಿ — ಪ್ರದರ್ಶನಕ್ಕಾಗಿ ಮಾತ್ರ',
+    jobCardAria: 'ಕೆಲಸದ ಕಾರ್ಡ್: {employer}, {title}',
+    matchScoreAria: 'ಹೊಂದಾಣಿಕೆ ಅಂಕ: {score}%',
+    skillGapTitle: 'ನಿಮ್ಮ ಕೌಶಲ್ಯ ಬೆಳೆಸಿ',
+    skillGapIntro: 'ಇವುಗಳಲ್ಲಿ ಒಂದನ್ನು ಕಲಿತರೆ ನಿಮ್ಮ ಹತ್ತಿರ ಹೆಚ್ಚು ಕೆಲಸ ಸಿಗಬಹುದು.',
+    skillGapLoading: 'ಯಾವ ಕೌಶಲ್ಯ ಸಹಾಯಕವಾಗಬಹುದು ಎಂದು ನೋಡುತ್ತಿದ್ದೇನೆ…',
+    skillGapEmpty: 'ಸದ್ಯಕ್ಕೆ ಸೂಚಿಸಲು ಹೊಸ ಕೌಶಲ್ಯಗಳಿಲ್ಲ.',
+    skillGapError: 'ಕೌಶಲ್ಯ ಸಲಹೆಗಳನ್ನು ತೆರೆಯಲಾಗಲಿಲ್ಲ. ನಿಮ್ಮ ಕೆಲಸದ ಹೊಂದಾಣಿಕೆಗಳಿಗೆ ತೊಂದರೆ ಇಲ್ಲ.',
+    skillGapSample: '⚠ ಮಾದರಿ ಮಾಹಿತಿ: ಕೆಲಸಗಳ ಸಂಖ್ಯೆ ಮತ್ತು ಸಂಬಳ ಮಾದರಿ ಕೆಲಸಗಳಿಂದ ಬಂದಿವೆ. ವಾರಗಳು ಮತ್ತು ವೆಚ್ಚ ಅಂದಾಜು ಮಾತ್ರ.',
+    moreJobsBadge: '+{n}',
+    moreJobsUnit: 'ಹೊಸ ಕೆಲಸ',
+    payUplift: 'ತಿಂಗಳಿಗೆ ಸುಮಾರು ₹{pay} ಹೆಚ್ಚು',
+    stepLabel: 'ಹಂತ {n}',
+    aboutWeeks: 'ಸುಮಾರು {n} ವಾರ',
+    aboutCost: 'ಸುಮಾರು ₹{n}',
+    stepsEnglishOnly: 'ಹಂತಗಳು ಸದ್ಯಕ್ಕೆ ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ ಮಾತ್ರ ಇವೆ.',
+    showSteps: 'ಹಂತಗಳನ್ನು ತೋರಿಸಿ',
+    hideSteps: 'ಹಂತಗಳನ್ನು ಮರೆಮಾಡಿ',
   },
   hi: {
     appName: 'केलस मित्र',
@@ -64,9 +141,60 @@ const strings: Record<LangCode, Record<StringKey, string>> = {
     langsLabel: 'भाषाएँ',
     noMicPermission: 'माइक्रोफ़ोन अनुमति अस्वीकार। कृपया टाइप करें।',
     micNotSupported: 'इस ब्राउज़र में आवाज़ समर्थित नहीं। कृपया टाइप करें।',
+    followUpHint: 'माइक दबाकर जवाब दें, या नीचे लिखे पाठ में जोड़ें।',
+    findingJobs: 'काम खोज रहे हैं…',
+    backToProfile: '← प्रोफ़ाइल',
+    backToProfileAria: 'प्रोफ़ाइल पर वापस जाएँ',
+    jobsFound: 'मिले काम: {n}',
+    nearArea: '{area} के पास',
+    savedCount: 'सहेजे गए: {n}',
+    keyboardHint: '← तीर: छोड़ें · → तीर: सहेजें',
+    jobCardsLabel: 'काम के कार्ड',
+    skipHint: '← छोड़ें',
+    saveHint: 'सहेजें →',
+    skip: 'छोड़ें ✕',
+    save: 'सहेजें ✓',
+    skipAria: 'यह काम छोड़ें',
+    saveAria: 'यह काम सहेजें',
+    allDone: 'सब हो गया',
+    savedDoneTitle: 'सहेजे गए काम: {n}',
+    savedDoneBody: 'ये नमूना काम हैं, इसलिए अभी संपर्क के लिए कोई नियोक्ता नहीं है।',
+    noMoreJobs: 'आपके इलाके में और काम नहीं हैं।',
+    searchAgain: 'फिर से खोजें',
+    typeJob: '💼 काम',
+    typeApprenticeship: '🎓 अप्रेंटिसशिप',
+    inYourArea: 'आपके इलाके में',
+    aboutKm: 'लगभग {km} किमी',
+    perMonth: '/माह',
+    sampleData: '⚠ नमूना डेटा — केवल प्रदर्शन के लिए',
+    jobCardAria: 'काम का कार्ड: {employer}, {title}',
+    matchScoreAria: 'मिलान स्कोर: {score}%',
+    skillGapTitle: 'अपना कौशल बढ़ाएँ',
+    skillGapIntro: 'इनमें से कोई एक सीखने से आपके आस-पास ज़्यादा काम मिल सकता है।',
+    skillGapLoading: 'देख रहे हैं कि कौन सा कौशल मदद कर सकता है…',
+    skillGapEmpty: 'अभी सुझाने के लिए कोई नया कौशल नहीं है।',
+    skillGapError: 'कौशल के सुझाव नहीं खुल सके। आपके काम के मिलान पर इसका असर नहीं है।',
+    skillGapSample: '⚠ नमूना डेटा: काम की संख्या और वेतन नमूना कामों से हैं। हफ़्ते और खर्च केवल अनुमान हैं।',
+    moreJobsBadge: '+{n}',
+    moreJobsUnit: 'नए काम',
+    payUplift: 'महीने में लगभग ₹{pay} ज़्यादा',
+    stepLabel: 'चरण {n}',
+    aboutWeeks: 'हफ़्ते: लगभग {n}',
+    aboutCost: 'लगभग ₹{n}',
+    stepsEnglishOnly: 'चरण अभी केवल अंग्रेज़ी में हैं।',
+    showSteps: 'चरण दिखाएँ',
+    hideSteps: 'चरण छिपाएँ',
   },
 };
 
-export function t(lang: LangCode, key: StringKey): string {
-  return strings[lang]?.[key] ?? strings.en[key];
+export function t(
+  lang: LangCode,
+  key: StringKey,
+  vars?: Record<string, string | number>,
+): string {
+  const template = strings[lang]?.[key] ?? strings.en[key];
+  if (!vars) return template;
+  return template.replace(/\{(\w+)\}/g, (match, name: string) =>
+    name in vars ? String(vars[name]) : match,
+  );
 }

@@ -46,7 +46,9 @@ def _run_groq(text: str, lang: str) -> dict:
 
     try:
         from groq import Groq  # type: ignore
-        from tools.provider import _build_prompt, _parse_llm_json, _load_reference_data
+        from tools.provider import (
+            _build_prompt, _parse_llm_json, _load_reference_data, _validate_llm_output,
+        )
 
         skills_data, areas_data = _load_reference_data()
         skill_ids = [s["id"] for s in skills_data]
@@ -60,15 +62,17 @@ def _run_groq(text: str, lang: str) -> dict:
             max_tokens=512,
         )
         raw = completion.choices[0].message.content
-        parsed = _parse_llm_json(raw)
-        if parsed is None:
-            return {"_source": "FALLBACK (parse fail)", **extract_profile_fallback(text, lang)}
-        valid_ids = {s["id"] for s in skills_data}
-        parsed["skills"] = [s for s in (parsed.get("skills") or []) if s in valid_ids]
-        parsed["_source"] = f"GROQ/{model}"
-        return parsed
+        try:
+            result = _validate_llm_output(
+                _parse_llm_json(raw), text, lang, {s["id"] for s in skills_data},
+            )
+        except (KeyError, TypeError, ValueError, AttributeError):
+            return {"_source": "FALLBACK (malformed output)", **extract_profile_fallback(text, lang)}
+        result["_source"] = f"GROQ/{model}"
+        return result
     except Exception as exc:
-        return {"_source": f"FALLBACK ({exc})", **extract_profile_fallback(text, lang)}
+        # Exception type only: provider error text can echo request details.
+        return {"_source": f"FALLBACK ({type(exc).__name__})", **extract_profile_fallback(text, lang)}
 
 
 def _fmt_skills(skills: list[str]) -> str:

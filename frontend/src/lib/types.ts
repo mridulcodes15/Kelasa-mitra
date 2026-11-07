@@ -46,3 +46,25 @@ export interface MatchResponse {
   matches: JobMatch[];
   follow_up_question?: string | null;
 }
+
+export interface LearningStep {
+  step: number;
+  action: string;
+  weeks: number;
+  approx_cost_inr: number;
+}
+
+export interface SkillGapItem {
+  skill_id: string;
+  label_en: string;
+  label: string;
+  jobs_unlocked: number;
+  avg_pay_uplift_inr: number;
+  explanation: string;
+  learning_path: LearningStep[];
+}
+
+export interface SkillGapResponse {
+  gaps: SkillGapItem[];
+  is_synthetic: boolean;
+}

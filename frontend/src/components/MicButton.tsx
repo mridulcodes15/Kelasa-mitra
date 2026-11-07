@@ -1,10 +1,13 @@
+import type { Ref } from 'react';
+
 interface MicButtonProps {
   isListening: boolean;
   onClick: () => void;
   label: string;
+  ref?: Ref<HTMLButtonElement>;
 }
 
-export function MicButton({ isListening, onClick, label }: MicButtonProps) {
+export function MicButton({ isListening, onClick, label, ref }: MicButtonProps) {
   return (
     <div className="relative flex items-center justify-center w-48 h-48">
       {/* Animated pulse rings — hidden when not listening */}
@@ -18,6 +21,7 @@ export function MicButton({ isListening, onClick, label }: MicButtonProps) {
 
       {/* Main orb */}
       <button
+        ref={ref}
         onClick={onClick}
         aria-label={label}
         aria-pressed={isListening}

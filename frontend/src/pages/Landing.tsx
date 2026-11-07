@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAppStore } from '../store/appStore';
 import { useProfile } from '../hooks/useProfile';
@@ -10,11 +10,13 @@ import { t } from '../lib/i18n';
 
 
 export function Landing() {
-  const { lang } = useAppStore();
+  const { lang, followUpQuestion } = useAppStore();
   const { transcript, setTranscript, appendTranscript, profile, isExtracting, extractError, runExtraction } =
     useProfile();
 
   const accumulatedRef = useRef('');
+  const micRef = useRef<HTMLButtonElement>(null);
+  const textRef = useRef<HTMLTextAreaElement>(null);
 
   const handleFinalResult = useCallback(
     (text: string) => {
@@ -29,16 +31,24 @@ export function Landing() {
 
   const isListening = status === 'listening';
 
+  // A follow-up question means the worker should answer next: move focus to the mic,
+  // or to the text box on browsers without speech recognition.
+  useEffect(() => {
+    if (!followUpQuestion) return;
+    (micRef.current ?? textRef.current)?.focus();
+  }, [followUpQuestion]);
+
   const handleMicClick = useCallback(() => {
     if (isListening) {
       stopListening();
       const finalText = accumulatedRef.current.trim();
       if (finalText) runExtraction(finalText);
     } else {
-      accumulatedRef.current = '';
+      // An answer to a follow-up adds to what the worker already said.
+      accumulatedRef.current = followUpQuestion ? transcript : '';
       startListening();
     }
-  }, [isListening, runExtraction, startListening, stopListening]);
+  }, [followUpQuestion, isListening, runExtraction, startListening, stopListening, transcript]);
 
   const handleTextSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -68,11 +78,28 @@ export function Landing() {
         </div>
       </header>
 
+      {/* Follow-up question when the profile is missing an area or skills */}
+      <AnimatePresence>
+        {followUpQuestion && (
+          <motion.div
+            role="status"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="mx-auto mt-4 w-[calc(100%-2rem)] max-w-sm bg-white rounded-3xl shadow-md p-5 border-2 border-[#f59e0b]"
+          >
+            <p className="text-[#1a1a2e] font-semibold text-base">🤔 {followUpQuestion}</p>
+            <p className="text-sm text-[#5a6475] mt-2">{t(lang, 'followUpHint')}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Mic area */}
       <section className="flex flex-col items-center mt-8 px-4">
         {isSupported ? (
           <>
             <MicButton
+              ref={micRef}
               isListening={isListening}
               onClick={handleMicClick}
               label={isListening ? t(lang, 'listening') : t(lang, 'tapToSpeak')}
@@ -110,6 +137,7 @@ export function Landing() {
         {/* Text input form */}
         <form onSubmit={handleTextSubmit} className="mt-2 w-full max-w-sm">
           <textarea
+            ref={textRef}
             value={transcript}
             onChange={(e) => setTranscript(e.target.value)}
             placeholder={t(lang, 'typeHere')}

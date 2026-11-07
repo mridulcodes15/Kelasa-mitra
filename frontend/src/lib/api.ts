@@ -1,4 +1,4 @@
-import type { WorkerProfile, MatchResponse } from './types';
+import type { WorkerProfile, MatchResponse, SkillGapResponse } from './types';
 
 const BASE = '/api';
 
@@ -26,4 +26,17 @@ export async function fetchMatches(profile: WorkerProfile): Promise<MatchRespons
     throw new Error(`Match fetch failed: ${res.status} — ${msg}`);
   }
   return res.json() as Promise<MatchResponse>;
+}
+
+export async function fetchSkillGap(profile: WorkerProfile): Promise<SkillGapResponse> {
+  const res = await fetch(`${BASE}/skill-gap`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ profile }),
+  });
+  if (!res.ok) {
+    const msg = await res.text().catch(() => 'Unknown error');
+    throw new Error(`Skill gap fetch failed: ${res.status} — ${msg}`);
+  }
+  return res.json() as Promise<SkillGapResponse>;
 }

@@ -10,12 +10,20 @@ Inflection handling
 Kannada and Hindi are agglutinative: a skill word like "ಡ್ರೈವರ್" appears in
 text as "ಡ್ರೈವರ್ ಆಗಿದ್ದೆ" or "ಡ್ರೈವರ್ ಇದ್ದೇನೆ". We handle this by building a
 stem map: for each Kannada/Hindi synonym we strip common postpositional and
-tense suffixes, then check whether the stem appears anywhere in the input.
+tense suffixes, then check whether the stem appears in the input.
+
+Matching guards
+---------------
+Plain substring matching produced false positives ("aya" inside "Jayanagar",
+"pos" inside "post", "dl" inside "kindly"), so short terms must sit on a word
+boundary: both sides for Latin terms, the left side for Indic terms (Kannada and
+Hindi add suffixes on the right, so an inflected form must still match).
 """
 from __future__ import annotations
 
 import json
 import re
+import unicodedata
 from pathlib import Path
 from typing import Any
 
@@ -59,6 +67,34 @@ _HI_SUFFIXES: list[str] = [
 ]
 
 
+# Terms this short (in code points) must sit on a word boundary.
+_SHORT_TERM_MAX = 6
+# Stems shorter than this are too ambiguous to match on their own.
+_MIN_STEM_LEN = 4
+# Everyday words that only sometimes mean a skill: Hindi "आया" also means "came",
+# Kannada "ಆಯಾ" also means "respective". Other synonyms still cover these skills.
+_AMBIGUOUS_TERMS = {"आया", "ಆಯಾ"}
+
+
+def _is_letter_or_mark(ch: str) -> bool:
+    return unicodedata.category(ch)[0] in ("L", "M")
+
+
+def _term_in_text(term: str, text: str) -> bool:
+    """True if a lowercase term occurs in lowercase text, respecting the guards above."""
+    if len(term) > _SHORT_TERM_MAX:
+        return term in text
+    if term.isascii():
+        # Optional plural so "cooks" and "tailors" still match.
+        return re.search(rf"(?<![a-z0-9]){re.escape(term)}(?:s|es)?(?![a-z0-9])", text) is not None
+    start = text.find(term)
+    while start != -1:
+        if start == 0 or not _is_letter_or_mark(text[start - 1]):
+            return True
+        start = text.find(term, start + 1)
+    return False
+
+
 def _stems_for(synonym: str, is_kn: bool, is_hi: bool) -> list[str]:
     """Return synonym itself plus any stems obtained by stripping known suffixes."""
     stems = [synonym]
@@ -70,7 +106,7 @@ def _stems_for(synonym: str, is_kn: bool, is_hi: bool) -> list[str]:
     for suf in suffixes:
         if synonym.endswith(suf):
             stem = synonym[: -len(suf)].strip()
-            if stem and stem not in stems:
+            if len(stem) >= _MIN_STEM_LEN and stem not in stems:
                 stems.append(stem)
     return stems
 
@@ -86,6 +122,8 @@ for skill in _SKILLS:
         is_hi = idx == 2
         for syn in syn_list:
             key = syn.lower().strip()
+            if key in _AMBIGUOUS_TERMS:
+                continue
             _SKILL_MAP[key] = skill["id"]
             for stem in _stems_for(key, is_kn=is_kn, is_hi=is_hi):
                 _STEM_MAP[stem] = skill["id"]
@@ -95,6 +133,18 @@ _AREA_MAP: dict[str, dict[str, Any]] = {}
 for area in _AREAS:
     for alias in area["aliases"]:
         _AREA_MAP[alias.lower().strip()] = area
+    _AREA_MAP[area["name"].lower().strip()] = area
+
+
+def _area_result(area: dict[str, Any]) -> dict[str, Any]:
+    return {"id": area["id"], "name": area["name"], "lat": area["lat"], "lon": area["lon"]}
+
+
+def lookup_area(name: str) -> dict[str, Any] | None:
+    """Resolve an area name, alias or id to its entry. Coordinates come only from areas.json."""
+    key = name.lower().strip()
+    area = _AREA_MAP.get(key) or next((a for a in _AREAS if a["id"] == key), None)
+    return _area_result(area) if area else None
 
 
 # ── number parsing ───────────────────────────────────────────────────────────
@@ -176,18 +226,18 @@ def extract_profile_fallback(text: str, detected_language: str) -> dict[str, Any
     found_skills: list[str] = []
     # Pass 1: exact synonym match (longest first avoids substring shadowing)
     for synonym in sorted(_SKILL_MAP.keys(), key=len, reverse=True):
-        if synonym in lower and _SKILL_MAP[synonym] not in found_skills:
+        if _SKILL_MAP[synonym] not in found_skills and _term_in_text(synonym, lower):
             found_skills.append(_SKILL_MAP[synonym])
     # Pass 2: stem match for inflected Kannada / Hindi forms
     for stem in sorted(_STEM_MAP.keys(), key=len, reverse=True):
         skill_id = _STEM_MAP[stem]
-        if skill_id not in found_skills and stem in lower:
+        if skill_id not in found_skills and _term_in_text(stem, lower):
             found_skills.append(skill_id)
 
     # ── area ──────────────────────────────────────────────────────────────────
     matched_area: dict[str, Any] | None = None
     for alias in sorted(_AREA_MAP.keys(), key=len, reverse=True):
-        if alias in lower:
+        if _term_in_text(alias, lower):
             matched_area = _AREA_MAP[alias]
             break
 
@@ -208,16 +258,7 @@ def extract_profile_fallback(text: str, detected_language: str) -> dict[str, Any
     result: dict[str, Any] = {
         "skills": found_skills,
         "experience_years": experience_years,
-        "area": (
-            {
-                "id": matched_area["id"],
-                "name": matched_area["name"],
-                "lat": matched_area["lat"],
-                "lon": matched_area["lon"],
-            }
-            if matched_area
-            else None
-        ),
+        "area": _area_result(matched_area) if matched_area else None,
         "languages": spoken,
     }
     return result

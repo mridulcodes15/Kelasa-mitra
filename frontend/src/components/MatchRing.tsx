@@ -1,12 +1,19 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useAppStore } from '../store/appStore';
+import { t } from '../lib/i18n';
 
 interface MatchRingProps {
   score: number;   // 0-100
   size?: number;   // diameter in px (default 80)
 }
 
+function prefersReducedMotion(): boolean {
+  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+}
+
 export function MatchRing({ score, size = 80 }: MatchRingProps) {
+  const lang = useAppStore((s) => s.lang);
   const radius = (size - 10) / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference * (1 - score / 100);
@@ -21,9 +28,13 @@ export function MatchRing({ score, size = 80 }: MatchRingProps) {
   useEffect(() => {
     const el = circleRef.current;
     if (!el) return;
+    // CSS media queries cannot stop el.animate(), so check here and show the final value.
+    if (prefersReducedMotion()) {
+      el.setAttribute('stroke-dashoffset', String(offset));
+      return;
+    }
     // Start fully hidden
     el.style.strokeDashoffset = String(circumference);
-    // Animate to target (respects prefers-reduced-motion via CSS)
     const animation = el.animate(
       [{ strokeDashoffset: circumference }, { strokeDashoffset: offset }],
       { duration: 700, easing: 'cubic-bezier(0.4,0,0.2,1)', fill: 'forwards' },
@@ -38,7 +49,7 @@ export function MatchRing({ score, size = 80 }: MatchRingProps) {
       transition={{ type: 'spring', stiffness: 260, damping: 20 }}
       className="relative flex items-center justify-center"
       style={{ width: size, height: size }}
-      aria-label={`Match score: ${score}%`}
+      aria-label={t(lang, 'matchScoreAria', { score })}
     >
       <svg width={size} height={size} className="rotate-[-90deg]">
         {/* Background ring */}
