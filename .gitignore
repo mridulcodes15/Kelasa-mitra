@@ -1,4 +1,3 @@
-@"
 .env
 *.db
 *.db-shm
@@ -10,4 +9,3 @@ __pycache__/
 *.pyc
 .pytest_cache/
 dist/
-"@ | Set-Content -Encoding ascii .gitignore
