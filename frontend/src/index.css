@@ -19,6 +19,12 @@
   * {
     -webkit-tap-highlight-color: transparent;
   }
+
+  /* A clear keyboard focus ring; the browser default is a thin line that is hard to see on teal. */
+  :focus-visible {
+    outline: 3px solid var(--marigold);
+    outline-offset: 2px;
+  }
 }
 
 @layer utilities {
@@ -56,11 +62,24 @@
   animation: mic-pulse-ring 1.4s ease-out 0.7s infinite;
 }
 
+/* Listening waveform: bars grow and shrink in a fixed rhythm while recording. */
+@keyframes listening-wave {
+  0%, 100% { transform: scaleY(0.25); }
+  50%      { transform: scaleY(1); }
+}
+
+.listening-bar {
+  transform: scaleY(0.5);
+  transform-origin: center;
+  animation: listening-wave 0.9s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mic-orb-pulse,
   .mic-ring,
   .mic-ring-2,
-  .mic-ring-3 {
+  .mic-ring-3,
+  .listening-bar {
     animation: none;
   }
 
@@ -68,5 +87,44 @@
     /* Skip animation — show final value immediately */
     animation: none !important;
     transition: none !important;
+  }
+}
+
+/* ── App frame ─────────────────────────────────────────────────────────────
+   Phones get the full width. From 600px up the app sits in a centred phone-width
+   column on a soft, purely decorative cream/teal/marigold backdrop (no images). */
+.app-backdrop {
+  background: var(--cream);
+}
+
+/* Clip, not hidden: a clip does not create a scroll container, so nothing scrolls sideways. */
+.app-column {
+  overflow: clip;
+}
+
+.page-min-h {
+  min-height: 100vh;
+}
+
+@media (min-width: 600px) {
+  .app-backdrop {
+    background-color: #f4ede0;
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(245, 158, 11, 0.18) 0, transparent 32%),
+      radial-gradient(circle at 88% 12%, rgba(13, 110, 110, 0.14) 0, transparent 30%),
+      radial-gradient(circle at 80% 85%, rgba(245, 158, 11, 0.14) 0, transparent 34%),
+      radial-gradient(circle at 15% 90%, rgba(13, 110, 110, 0.12) 0, transparent 30%);
+    background-attachment: fixed;
+    padding: 24px 0;
+  }
+
+  .app-column {
+    max-width: 440px;
+    border-radius: 32px;
+    box-shadow: 0 20px 60px rgba(26, 26, 46, 0.12), 0 2px 8px rgba(26, 26, 46, 0.06);
+  }
+
+  .page-min-h {
+    min-height: calc(100vh - 48px);
   }
 }

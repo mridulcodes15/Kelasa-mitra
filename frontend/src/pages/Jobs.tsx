@@ -2,15 +2,24 @@ import { useState, useCallback, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAppStore } from '../store/appStore';
 import { JobCard } from '../components/JobCard';
+import { SaveBurst } from '../components/SaveBurst';
+import { prefersReducedMotion } from '../lib/motion';
 import { SkillGapSection } from '../components/SkillGapSection';
 import { AgentPanel } from '../components/AgentPanel';
+import { SpeakToggle } from '../components/SpeakToggle';
+import { useReadAloud } from '../hooks/useReadAloud';
 import { t } from '../lib/i18n';
 import type { JobMatch } from '../lib/types';
+import { CARD_HEIGHT, VISIBLE_CARDS, peekStyle } from '../lib/deck';
 
 export function Jobs() {
   const { lang, matches, isFetchingMatches, setScreen, profile } = useAppStore();
+  // Read the best match's reason once, when a new set of matches arrives.
+  useReadAloud(isFetchingMatches ? null : matches[0]?.reason);
   const [deck, setDeck] = useState<JobMatch[]>([...matches]);
   const [savedCount, setSavedCount] = useState(0);
+  // Each save starts a new short burst (none under reduced motion).
+  const [burst, setBurst] = useState(0);
 
   // Sync deck when matches change (e.g. after re-extraction)
   useEffect(() => {
@@ -24,6 +33,7 @@ export function Jobs() {
 
   const handleSave = useCallback(() => {
     setSavedCount((c) => c + 1);
+    if (!prefersReducedMotion()) setBurst((b) => b + 1);
     setDeck((prev) => prev.slice(1));
   }, []);
 
@@ -42,14 +52,14 @@ export function Jobs() {
 
   if (isFetchingMatches) {
     return (
-      <div className="min-h-screen bg-[#fdf8f0] flex items-center justify-center">
+      <div className="page-min-h bg-[#fdf8f0] flex items-center justify-center">
         <p className="text-[#5a6475] animate-pulse motion-reduce:animate-none">{t(lang, 'findingJobs')}</p>
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-[#fdf8f0] flex flex-col">
+    <main className="page-min-h bg-[#fdf8f0] flex flex-col">
       {/* Header */}
       <header className="px-4 pt-5 pb-3 flex items-center gap-3">
         <button
@@ -67,6 +77,7 @@ export function Jobs() {
             <p className="text-xs text-[#5a6475]">{t(lang, 'nearArea', { area: areaName })}</p>
           )}
         </div>
+        <SpeakToggle />
         {savedCount > 0 && (
           <span className="bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full">
             {t(lang, 'savedCount', { n: savedCount })}
@@ -88,21 +99,24 @@ export function Jobs() {
       {deck.length > 0 ? (
         <section
           className="relative mx-4"
-          style={{ minHeight: 420 }}
+          style={{ minHeight: CARD_HEIGHT + peekStyle(VISIBLE_CARDS - 1).y }}
           aria-label={t(lang, 'jobCardsLabel')}
         >
           <AnimatePresence>
-            {/* Show up to 2 cards (current + next peeking behind) */}
-            {deck.slice(0, 2).map((match, i) => (
+            {/* The top card plus the next two peeking behind it */}
+            {deck.slice(0, VISIBLE_CARDS).map((match, i) => (
               <JobCard
                 key={match.job.id}
                 match={match}
                 isTop={i === 0}
+                depth={i}
                 onSave={handleSave}
                 onSkip={handleSkip}
               />
             )).reverse()}
           </AnimatePresence>
+
+          {burst > 0 && <SaveBurst key={burst} onDone={() => setBurst(0)} />}
 
           {/* Swipe hints */}
           <div className="absolute bottom-[-40px] left-0 right-0 flex justify-between px-4">

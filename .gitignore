@@ -9,3 +9,8 @@ __pycache__/
 *.pyc
 .pytest_cache/
 dist/
+.claude
+CLAUDE.md
+DOCS_TODO.md
+orchestrate/spike_tool/
+orchestrate/spike_tool_pydantic/

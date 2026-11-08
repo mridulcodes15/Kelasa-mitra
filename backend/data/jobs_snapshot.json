@@ -1612,5 +1612,288 @@
   "type": "job",
   "posted_at": "2026-01-01T00:00:00+00:00",
   "is_synthetic": true
+ },
+ {
+  "id": "job-081",
+  "title": "Cook",
+  "employer": "Whitefield Home Kitchen Co.",
+  "area": "Whitefield",
+  "lat": 12.962936,
+  "lon": 77.751998,
+  "pay_min": 13000,
+  "pay_max": 16000,
+  "skills_required": [
+   "cook"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-082",
+  "title": "Kitchen Helper",
+  "employer": "Hoodi Tiffin Corner",
+  "area": "Hoodi",
+  "lat": 12.988163,
+  "lon": 77.722387,
+  "pay_min": 11000,
+  "pay_max": 13500,
+  "skills_required": [
+   "cook",
+   "hotel_helper"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-083",
+  "title": "Canteen Cook",
+  "employer": "Outer Ring Food Court Services",
+  "area": "Marathahalli",
+  "lat": 12.964854,
+  "lon": 77.690234,
+  "pay_min": 13500,
+  "pay_max": 17000,
+  "skills_required": [
+   "cook"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-084",
+  "title": "Canteen Worker",
+  "employer": "Mess Mitra Kitchens",
+  "area": "KR Puram",
+  "lat": 13.004808,
+  "lon": 77.700104,
+  "pay_min": 12000,
+  "pay_max": 14500,
+  "skills_required": [
+   "cook"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-085",
+  "title": "Head Cook (Food Safety Trained)",
+  "employer": "Ragi Mudde House",
+  "area": "Whitefield",
+  "lat": 12.965228,
+  "lon": 77.744017,
+  "pay_min": 19000,
+  "pay_max": 24000,
+  "skills_required": [
+   "cook",
+   "food_handler"
+  ],
+  "languages": [
+   "kannada",
+   "english"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-086",
+  "title": "Kitchen Supervisor",
+  "employer": "Outer Ring Food Court Services",
+  "area": "Marathahalli",
+  "lat": 12.966068,
+  "lon": 77.698237,
+  "pay_min": 20000,
+  "pay_max": 25000,
+  "skills_required": [
+   "cook",
+   "food_handler"
+  ],
+  "languages": [
+   "kannada",
+   "english"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-087",
+  "title": "Office Shuttle Driver",
+  "employer": "Hosur Road Shuttles",
+  "area": "Electronic City",
+  "lat": 12.844763,
+  "lon": 77.664754,
+  "pay_min": 15000,
+  "pay_max": 19000,
+  "skills_required": [
+   "driver_car"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-088",
+  "title": "Company Cab Driver",
+  "employer": "Hosur Road Shuttles",
+  "area": "Electronic City",
+  "lat": 12.85012,
+  "lon": 77.655247,
+  "pay_min": 20000,
+  "pay_max": 26000,
+  "skills_required": [
+   "driver_car",
+   "driving_licence"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-089",
+  "title": "Tailor",
+  "employer": "Yelahanka Stitch Works",
+  "area": "Yelahanka",
+  "lat": 13.094251,
+  "lon": 77.595197,
+  "pay_min": 12000,
+  "pay_max": 15500,
+  "skills_required": [
+   "tailoring"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-090",
+  "title": "Garment Machine Operator",
+  "employer": "Yelahanka Stitch Works",
+  "area": "Yelahanka",
+  "lat": 13.099477,
+  "lon": 77.595772,
+  "pay_min": 15000,
+  "pay_max": 19000,
+  "skills_required": [
+   "tailoring",
+   "factory_worker"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-091",
+  "title": "Security Guard",
+  "employer": "Ashoka Residency Owners Association",
+  "area": "Jayanagar",
+  "lat": 12.928665,
+  "lon": 77.596574,
+  "pay_min": 13000,
+  "pay_max": 16000,
+  "skills_required": [
+   "security_guard"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-092",
+  "title": "Electrician",
+  "employer": "HSR Home Repairs",
+  "area": "HSR Layout",
+  "lat": 12.919347,
+  "lon": 77.640975,
+  "pay_min": 17000,
+  "pay_max": 22000,
+  "skills_required": [
+   "electrician"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-093",
+  "title": "Electrician (AC Installation)",
+  "employer": "HSR Home Repairs",
+  "area": "HSR Layout",
+  "lat": 12.910042,
+  "lon": 77.644829,
+  "pay_min": 22000,
+  "pay_max": 28000,
+  "skills_required": [
+   "electrician",
+   "ac_technician"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-094",
+  "title": "Family Driver",
+  "employer": "South End Driver Services",
+  "area": "Jayanagar",
+  "lat": 12.930787,
+  "lon": 77.589779,
+  "pay_min": 15000,
+  "pay_max": 19000,
+  "skills_required": [
+   "driver_car"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
  }
 ]

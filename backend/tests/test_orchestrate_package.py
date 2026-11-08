@@ -1,6 +1,6 @@
 """
 The watsonx Orchestrate tool package must hold exact copies of the backend logic and give
-the same results as the backend endpoints, for the 13 samples and the 80 seed jobs.
+the same results as the backend endpoints, for the 13 samples and all seed jobs.
 """
 from __future__ import annotations
 
@@ -76,7 +76,7 @@ def test_built_package_in_repo_is_up_to_date(package):
 
 def test_seed_ids_are_deterministic():
     ids = [row["id"] for row in build_seed_rows()]
-    assert ids == [f"job-{i:03d}" for i in range(1, 81)]
+    assert ids == [f"job-{i:03d}" for i in range(1, len(ids) + 1)] and len(ids) == 94
     assert build_seed_rows() == build_seed_rows()
 
 

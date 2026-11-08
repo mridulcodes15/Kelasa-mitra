@@ -1,2 +1,0 @@
-ibm-watsonx-orchestrate==2.19.1
-pydantic==2.14.3

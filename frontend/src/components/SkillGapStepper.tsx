@@ -2,22 +2,35 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { LangCode, SkillGapItem } from '../lib/types';
 import { t } from '../lib/i18n';
+import { staggerDelay, useCountUp } from '../lib/motion';
 
 interface SkillGapStepperProps {
   gap: SkillGapItem;
   lang: LangCode;
   defaultOpen?: boolean;
+  /** Position in the list, for the staggered entrance. */
+  index?: number;
 }
 
-export function SkillGapStepper({ gap, lang, defaultOpen = false }: SkillGapStepperProps) {
+export function SkillGapStepper({ gap, lang, defaultOpen = false, index = 0 }: SkillGapStepperProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const stepsId = `skill-gap-steps-${gap.skill_id}`;
+  const shownJobs = useCountUp(gap.jobs_unlocked);
 
   return (
-    <article className="bg-white rounded-3xl shadow-md p-5">
+    <motion.article
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25, delay: staggerDelay(index) }}
+      className="bg-white rounded-3xl shadow-md p-5"
+    >
       <div className="flex items-start gap-3">
         <div className="flex-shrink-0 min-w-16 rounded-2xl bg-amber-100 text-amber-800 px-2 py-2 text-center">
-          <p className="text-xl font-bold leading-none">{t(lang, 'moreJobsBadge', { n: gap.jobs_unlocked })}</p>
+          {/* Screen readers get the real number at once; the visible one counts up. */}
+          <p className="text-xl font-bold leading-none">
+            <span className="sr-only">{t(lang, 'moreJobsBadge', { n: gap.jobs_unlocked })}</span>
+            <span aria-hidden="true" data-countup>{t(lang, 'moreJobsBadge', { n: shownJobs })}</span>
+          </p>
           <p className="text-xs font-semibold mt-1">{t(lang, 'moreJobsUnit')}</p>
         </div>
         <div className="min-w-0">
@@ -83,6 +96,6 @@ export function SkillGapStepper({ gap, lang, defaultOpen = false }: SkillGapStep
           </motion.div>
         )}
       </AnimatePresence>
-    </article>
+    </motion.article>
   );
 }

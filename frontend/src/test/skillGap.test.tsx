@@ -12,7 +12,7 @@ import { jobMatch, profile, skillGapItem } from './fixtures';
 describe('SkillGapStepper', () => {
   it('shows jobs unlocked, pay uplift and steps', () => {
     render(<SkillGapStepper gap={skillGapItem()} lang="en" defaultOpen />);
-    expect(screen.getByText('+2')).toBeTruthy();
+    expect(screen.getByText('+2', { selector: '.sr-only' })).toBeTruthy();
     expect(screen.getByText('~₹6,000 more/month')).toBeTruthy();
     expect(screen.getByText('First step')).toBeTruthy();
     expect(screen.getByText(/~₹3,000/)).toBeTruthy();
@@ -22,7 +22,7 @@ describe('SkillGapStepper', () => {
     const { container } = render(
       <SkillGapStepper gap={skillGapItem({ avg_pay_uplift_inr: 0, learning_path: [] })} lang="en" defaultOpen />,
     );
-    expect(screen.getByText('+2')).toBeTruthy();
+    expect(screen.getByText('+2', { selector: '.sr-only' })).toBeTruthy();
     expect(container.textContent).not.toContain('₹');
   });
 

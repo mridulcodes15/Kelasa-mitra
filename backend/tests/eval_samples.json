@@ -1,0 +1,80 @@
+{
+  "_about": "Synthetic worker inputs for backend/scripts/run_eval.py. No real people. Written by Claude Code; the Kannada and Hindi inputs have not been checked by a native speaker. Every 'expected' block is a DRAFT written from what the input says, not from what the app outputs, and must be reviewed by the owner before results are quoted.",
+  "samples": [
+    {
+      "id": "en-1", "language": "en",
+      "input": "I have done housekeeping in offices for 4 years. I live in Indiranagar.",
+      "expected": {"label_status": "DRAFT, owner to review", "skills_contain": ["housekeeping"], "area_id": "indiranagar", "experience_years": 4, "top_match_requires_any": ["housekeeping"]}
+    },
+    {
+      "id": "en-2", "language": "en",
+      "input": "I am a security guard with 6 years experience, staying in Electronic City. I speak Kannada and Hindi.",
+      "expected": {"label_status": "DRAFT, owner to review", "skills_contain": ["security_guard"], "area_id": "electronic_city", "experience_years": 6, "top_match_requires_any": ["security_guard"]}
+    },
+    {
+      "id": "en-3", "language": "en",
+      "input": "I can drive a car and I have a driving licence. I live in Yeshwanthpur.",
+      "expected": {"label_status": "DRAFT, owner to review", "skills_contain": ["driver_car", "driving_licence"], "area_id": "yeshwanthpur", "experience_years": null, "top_match_requires_any": ["driver_car", "driving_licence"]}
+    },
+    {
+      "id": "en-4", "language": "en",
+      "input": "Two years of warehouse packing work in Peenya.",
+      "expected": {"label_status": "DRAFT, owner to review", "skills_contain": ["warehouse"], "area_id": "peenya", "experience_years": 2, "top_match_requires_any": ["warehouse"]}
+    },
+    {
+      "id": "en-5", "language": "en",
+      "input": "I do tailoring and stitching at home in Malleshwaram.",
+      "expected": {"label_status": "DRAFT, owner to review", "skills_contain": ["tailoring"], "area_id": "malleshwaram", "experience_years": null, "top_match_requires_any": ["tailoring"]}
+    },
+    {
+      "id": "kn-1", "language": "kn",
+      "input": "ನಾನು ಎಲೆಕ್ಟ್ರಿಷಿಯನ್ ಆಗಿ ಮೂರು ವರ್ಷ ಕೆಲಸ ಮಾಡಿದ್ದೇನೆ, ಹೆಬ್ಬಾಳದಲ್ಲಿ ಇರುತ್ತೇನೆ.",
+      "expected": {"label_status": "DRAFT, owner to review", "skills_contain": ["electrician"], "area_id": "hebbal", "experience_years": 3, "top_match_requires_any": ["electrician"]}
+    },
+    {
+      "id": "kn-2", "language": "kn",
+      "input": "ನಾನು ಪ್ಲಂಬರ್, ಬಿಟಿಎಂ ಲೇಔಟ್‌ನಲ್ಲಿ ಇದ್ದೇನೆ.",
+      "expected": {"label_status": "DRAFT, owner to review", "skills_contain": ["plumber"], "area_id": "btm_layout", "experience_years": null, "top_match_requires_any": ["plumber"]}
+    },
+    {
+      "id": "kn-3", "language": "kn",
+      "input": "ನಾನು ಡೆಲಿವರಿ ಕೆಲಸ ಮಾಡುತ್ತೇನೆ, ಬೈಕ್ ಓಡಿಸುತ್ತೇನೆ, ಕೋರಮಂಗಲದಲ್ಲಿ ಇರುತ್ತೇನೆ.",
+      "expected": {"label_status": "DRAFT, owner to review", "skills_contain": ["delivery", "two_wheeler"], "area_id": "koramangala", "experience_years": null, "top_match_requires_any": ["delivery", "two_wheeler"]}
+    },
+    {
+      "id": "kn-4", "language": "kn",
+      "input": "ನಾನು ಅಡುಗೆ ಮಾಡುತ್ತೇನೆ, ಐದು ವರ್ಷ ಅನುಭವ ಇದೆ, ಜಯನಗರದಲ್ಲಿ ಇರುತ್ತೇನೆ.",
+      "expected": {"label_status": "DRAFT, owner to review", "skills_contain": ["cook"], "area_id": "jayanagar", "experience_years": 5, "top_match_requires_any": ["cook"]}
+    },
+    {
+      "id": "kn-5", "language": "kn",
+      "input": "ನಾನು ಗೋದಾಮು ಕೆಲಸ ಮಾಡಿದ್ದೇನೆ, ವೈಟ್‌ಫೀಲ್ಡ್‌ನಲ್ಲಿ ಇರುತ್ತೇನೆ.",
+      "expected": {"label_status": "DRAFT, owner to review", "skills_contain": ["warehouse"], "area_id": "whitefield", "experience_years": null, "top_match_requires_any": ["warehouse"]}
+    },
+    {
+      "id": "hi-1", "language": "hi",
+      "input": "मैं ड्राइवर हूँ, मेरे पास ड्राइविंग लाइसेंस है, केआर पुरम में रहता हूँ।",
+      "expected": {"label_status": "DRAFT, owner to review", "skills_contain": ["driver_car", "driving_licence"], "area_id": "kr_puram", "experience_years": null, "top_match_requires_any": ["driver_car", "driving_licence"]}
+    },
+    {
+      "id": "hi-2", "language": "hi",
+      "input": "मैंने चार साल सफाई का काम किया है, एचएसआर लेआउट में रहती हूँ।",
+      "expected": {"label_status": "DRAFT, owner to review", "skills_contain": ["housekeeping"], "area_id": "hsr_layout", "experience_years": 4, "top_match_requires_any": ["housekeeping"]}
+    },
+    {
+      "id": "hi-3", "language": "hi",
+      "input": "मैं सिक्योरिटी गार्ड हूँ, मराठहल्ली में रहता हूँ।",
+      "expected": {"label_status": "DRAFT, owner to review", "skills_contain": ["security_guard"], "area_id": "marathahalli", "experience_years": null, "top_match_requires_any": ["security_guard"]}
+    },
+    {
+      "id": "hi-4", "language": "hi",
+      "input": "मुझे वेल्डिंग आती है, पीन्या में रहता हूँ, तीन साल का अनुभव है।",
+      "expected": {"label_status": "DRAFT, owner to review", "skills_contain": ["welder"], "area_id": "peenya", "experience_years": 3, "top_match_requires_any": ["welder"]}
+    },
+    {
+      "id": "hi-5", "language": "hi",
+      "input": "मैं पेंटर हूँ, दो साल से काम कर रहा हूँ, राजाजीनगर में रहता हूँ।",
+      "expected": {"label_status": "DRAFT, owner to review", "skills_contain": ["painting"], "area_id": "rajajinagar", "experience_years": 2, "top_match_requires_any": ["painting"]}
+    }
+  ]
+}

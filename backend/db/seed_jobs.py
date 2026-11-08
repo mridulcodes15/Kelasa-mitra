@@ -1,5 +1,5 @@
 """
-Seed 80 synthetic Bengaluru jobs into the database.
+Seed 94 synthetic Bengaluru jobs into the database.
 Run directly:  python -m db.seed_jobs
 Or called from main.py at startup.
 
@@ -9,7 +9,7 @@ Coordinate jitter: each job lat/lon is randomised up to ±0.008° (about 0.9 km 
 each axis, about 1.2 km at most) from the area centre so distances shown to workers are realistic rather than all
 being identical.
 
-Everything is deterministic: job IDs are job-001 to job-080, the jitter uses a fixed
+Everything is deterministic: job IDs are job-001 to job-094, the jitter uses a fixed
 random seed, and posted_at is a fixed date. build_seed_rows() is the single source
 for both the SQLite seed and data/jobs_snapshot.json (used by the Orchestrate tools).
 """
@@ -127,6 +127,27 @@ _SEED: list[dict] = [
     {"title": "POS Billing Staff", "employer": "Janata Bazaar Store", "area": "BTM Layout", "lat": 12.9165, "lon": 77.6101, "pay_min": 12000, "pay_max": 15000, "skills": ["pos_billing", "basic_english"], "languages": ["kannada", "english"], "type": "job"},
     {"title": "Food Handler (FSSAI Certified)", "employer": "FreshCrate Supplies", "area": "Domlur", "lat": 12.9601, "lon": 77.6394, "pay_min": 14000, "pay_max": 18000, "skills": ["food_handler", "warehouse"], "languages": ["kannada", "english"], "type": "job"},
     {"title": "Swimming Pool Attendant", "employer": "Cubbon Lane Hotel", "area": "Malleshwaram", "lat": 13.0030, "lon": 77.5690, "pay_min": 13000, "pay_max": 17000, "skills": ["swimming_pool"], "languages": ["english", "kannada"], "type": "job"},
+    # ── ADDED 2026-11-09 for demo coverage (invented employers) ───────────────
+    # Kitchen jobs in the east (Whitefield, Hoodi, Marathahalli, KR Puram). Jobs that also
+    # need food_handler pay more, so the skill-gap pay difference comes from the data.
+    {"title": "Cook", "employer": "Whitefield Home Kitchen Co.", "area": "Whitefield", "lat": 12.9698, "lon": 77.7499, "pay_min": 13000, "pay_max": 16000, "skills": ["cook"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Kitchen Helper", "employer": "Hoodi Tiffin Corner", "area": "Hoodi", "lat": 12.9925, "lon": 77.7159, "pay_min": 11000, "pay_max": 13500, "skills": ["cook", "hotel_helper"], "languages": ["kannada"], "type": "job"},
+    {"title": "Canteen Cook", "employer": "Outer Ring Food Court Services", "area": "Marathahalli", "lat": 12.9591, "lon": 77.6971, "pay_min": 13500, "pay_max": 17000, "skills": ["cook"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Canteen Worker", "employer": "Mess Mitra Kitchens", "area": "KR Puram", "lat": 13.0090, "lon": 77.6974, "pay_min": 12000, "pay_max": 14500, "skills": ["cook"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Head Cook (Food Safety Trained)", "employer": "Ragi Mudde House", "area": "Whitefield", "lat": 12.9698, "lon": 77.7499, "pay_min": 19000, "pay_max": 24000, "skills": ["cook", "food_handler"], "languages": ["kannada", "english"], "type": "job"},
+    {"title": "Kitchen Supervisor", "employer": "Outer Ring Food Court Services", "area": "Marathahalli", "lat": 12.9591, "lon": 77.6971, "pay_min": 20000, "pay_max": 25000, "skills": ["cook", "food_handler"], "languages": ["kannada", "english"], "type": "job"},
+    # Drivers in Electronic City: a licence opens better-paid cab work.
+    {"title": "Office Shuttle Driver", "employer": "Hosur Road Shuttles", "area": "Electronic City", "lat": 12.8452, "lon": 77.6602, "pay_min": 15000, "pay_max": 19000, "skills": ["driver_car"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Company Cab Driver", "employer": "Hosur Road Shuttles", "area": "Electronic City", "lat": 12.8452, "lon": 77.6602, "pay_min": 20000, "pay_max": 26000, "skills": ["driver_car", "driving_licence"], "languages": ["kannada", "hindi"], "type": "job"},
+    # Tailoring near Yelahanka: embroidery-machine work pays more.
+    {"title": "Tailor", "employer": "Yelahanka Stitch Works", "area": "Yelahanka", "lat": 13.1007, "lon": 77.5963, "pay_min": 12000, "pay_max": 15500, "skills": ["tailoring"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Garment Machine Operator", "employer": "Yelahanka Stitch Works", "area": "Yelahanka", "lat": 13.1007, "lon": 77.5963, "pay_min": 15000, "pay_max": 19000, "skills": ["tailoring", "factory_worker"], "languages": ["kannada", "hindi"], "type": "job"},
+    # Security in Jayanagar.
+    {"title": "Security Guard", "employer": "Ashoka Residency Owners Association", "area": "Jayanagar", "lat": 12.9250, "lon": 77.5938, "pay_min": 13000, "pay_max": 16000, "skills": ["security_guard"], "languages": ["kannada"], "type": "job"},
+    # Electricians in HSR Layout: AC skills pay more.
+    {"title": "Electrician", "employer": "HSR Home Repairs", "area": "HSR Layout", "lat": 12.9116, "lon": 77.6474, "pay_min": 17000, "pay_max": 22000, "skills": ["electrician"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Electrician (AC Installation)", "employer": "HSR Home Repairs", "area": "HSR Layout", "lat": 12.9116, "lon": 77.6474, "pay_min": 22000, "pay_max": 28000, "skills": ["electrician", "ac_technician"], "languages": ["kannada", "hindi"], "type": "job"},    # A driver job in south Bengaluru, so drivers there are not sent to Electronic City first.
+    {"title": "Family Driver", "employer": "South End Driver Services", "area": "Jayanagar", "lat": 12.9250, "lon": 77.5938, "pay_min": 15000, "pay_max": 19000, "skills": ["driver_car"], "languages": ["kannada"], "type": "job"},
 ]
 # fmt: on
 

@@ -1,14 +1,25 @@
+import { useEffect } from 'react';
 import { AnimatePresence, MotionConfig, motion } from 'framer-motion';
 import { useAppStore } from './store/appStore';
 import { Landing } from './pages/Landing';
 import { Jobs } from './pages/Jobs';
+import { useSkipAnimationsWhenReduced } from './lib/motion';
 
 export default function App() {
-  const { screen } = useAppStore();
+  const { screen, lang } = useAppStore();
+  useSkipAnimationsWhenReduced();
+
+  // Screen readers pick their voice from <html lang>; keep it in step with the picker.
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   return (
     // reducedMotion="user" turns off Framer Motion transforms for prefers-reduced-motion.
     <MotionConfig reducedMotion="user">
+      {/* Phones: full width. Wider screens: a centred phone-width column on a soft backdrop. */}
+      <div className="app-backdrop min-h-screen">
+      <div data-testid="app-column" className="app-column relative mx-auto w-full page-min-h bg-[#fdf8f0]">
       <AnimatePresence mode="wait">
         {screen === 'landing' ? (
           <motion.div
@@ -32,6 +43,8 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      </div>
+      </div>
     </MotionConfig>
   );
 }

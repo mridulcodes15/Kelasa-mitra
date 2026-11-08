@@ -28,5 +28,6 @@
   { "id": "malleshwaram",     "name": "Malleshwaram",       "name_kn": "ಮಲ್ಲೇಶ್ವರಂ",       "name_hi": "मल्लेश्वरम",          "lat": 13.0030, "lon": 77.5690, "aliases": ["malleshwaram", "ಮಲ್ಲೇಶ್ವರಂ", "मल्लेश्वरम", "malleswaram"] },
   { "id": "ulsoor",           "name": "Ulsoor",             "name_kn": "ಉಲ್ಸೂರು",          "name_hi": "उल्सूर",              "lat": 12.9819, "lon": 77.6207, "aliases": ["ulsoor", "ಉಲ್ಸೂರು", "उल्सूर", "halasuru"] },
   { "id": "peenya",           "name": "Peenya",             "name_kn": "ಪೀಣ್ಯ",            "name_hi": "पीन्या",              "lat": 13.0284, "lon": 77.5176, "aliases": ["peenya", "ಪೀಣ್ಯ", "पीन्या"] },
-  { "id": "bidadi",           "name": "Bidadi",             "name_kn": "ಬಿಡದಿ",            "name_hi": "बिदादी",              "lat": 12.7987, "lon": 77.3867, "aliases": ["bidadi", "ಬಿಡದಿ", "बिदादी"] }
+  { "id": "bidadi",           "name": "Bidadi",             "name_kn": "ಬಿಡದಿ",            "name_hi": "बिदादी",              "lat": 12.7987, "lon": 77.3867, "aliases": ["bidadi", "ಬಿಡದಿ", "बिदादी"] },
+  { "id": "hoodi",            "name": "Hoodi",              "name_kn": "ಹೂಡಿ",             "name_hi": "हूडी",               "lat": 12.9916, "lon": 77.7164, "aliases": ["hoodi", "ಹೂಡಿ", "हूडी", "हुडी"] }
 ]

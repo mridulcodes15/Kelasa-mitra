@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
+import { MotionGlobalConfig } from 'framer-motion';
 import { useAppStore } from '../store/appStore';
 
 function stubMatchMedia(reduced: boolean) {
@@ -20,6 +21,7 @@ beforeEach(() => {
   // jsdom has no Web Animations API.
   Element.prototype.animate = vi.fn(() => ({ cancel: () => {} })) as unknown as Element['animate'];
   useAppStore.setState(useAppStore.getInitialState(), true);
+  MotionGlobalConfig.skipAnimations = false;
 });
 
 afterEach(() => {

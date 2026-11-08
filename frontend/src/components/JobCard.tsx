@@ -3,29 +3,57 @@ import type { JobMatch } from '../lib/types';
 import { useAppStore } from '../store/appStore';
 import { t } from '../lib/i18n';
 import { MatchRing } from './MatchRing';
+import { SWIPE_THRESHOLD, dragFeedback, peekStyle, tiltFor } from '../lib/deck';
+import { jobIcon, skillName } from '../lib/skills';
+import { prefersReducedMotion, staggerDelay } from '../lib/motion';
 
 interface JobCardProps {
   match: JobMatch;
   onSave: () => void;
   onSkip: () => void;
   isTop: boolean;
+  /** Place in the stack: 0 is the top card, 1 and 2 peek behind it. */
+  depth?: number;
+}
+
+function SkillChips({ label, kind, names }: { label: string; kind: 'matched' | 'missing'; names: string[] }) {
+  const style = kind === 'matched'
+    ? 'bg-green-50 text-green-800 border-green-200'
+    : 'bg-stone-100 text-stone-600 border-stone-200';
+  return (
+    <div className="flex flex-wrap items-center gap-1.5" data-skills={kind}>
+      <span className="text-xs font-semibold text-[#5a6475] mr-0.5">{label}:</span>
+      {names.map((name) => (
+        <span key={name} className={`rounded-full border px-2.5 py-0.5 text-xs font-semibold ${style}`}>
+          <span aria-hidden="true">{kind === 'matched' ? '✓ ' : '+ '}</span>
+          {name}
+        </span>
+      ))}
+    </div>
+  );
 }
 
 function fmt(n: number) {
   return n >= 1000 ? `${Math.round(n / 1000)}k` : String(n);
 }
 
-export function JobCard({ match, onSave, onSkip, isTop }: JobCardProps) {
+export function JobCard({ match, onSave, onSkip, isTop, depth = isTop ? 0 : 1 }: JobCardProps) {
   const lang = useAppStore((s) => s.lang);
+  const reduced = prefersReducedMotion();
   const { job, score, distance_km, reason } = match;
   const x = useMotionValue(0);
-  const rotate = useTransform(x, [-200, 200], [-12, 12]);
-  const opacity = useTransform(x, [-200, -100, 0, 100, 200], [0, 1, 1, 1, 0]);
+  // The top card tilts while dragged, and tints green (save) or grey (skip) up to the threshold.
+  const rotate = useTransform(x, (v) => tiltFor(v, reduced));
+  const saveTint = useTransform(x, (v) => dragFeedback(v).save);
+  const skipTint = useTransform(x, (v) => dragFeedback(v).skip);
+  const saveStamp = useTransform(x, (v) => (dragFeedback(v).decision === 'save' ? 1 : 0));
+  const skipStamp = useTransform(x, (v) => (dragFeedback(v).decision === 'skip' ? 1 : 0));
+  const peek = peekStyle(depth);
 
   function handleDragEnd(_: unknown, info: { offset: { x: number } }) {
-    if (info.offset.x > 100) {
+    if (info.offset.x >= SWIPE_THRESHOLD) {
       onSave();
-    } else if (info.offset.x < -100) {
+    } else if (info.offset.x <= -SWIPE_THRESHOLD) {
       onSkip();
     } else {
       // snap back
@@ -41,32 +69,80 @@ export function JobCard({ match, onSave, onSkip, isTop }: JobCardProps) {
 
   return (
     <motion.div
-      style={{ x, rotate, opacity }}
+      // Scale from the bottom edge so each card behind shows a strip of exactly peek.y px.
+      style={{ x, rotate, transformOrigin: 'center bottom' }}
       drag={isTop ? 'x' : false}
       dragConstraints={{ left: -300, right: 300 }}
       onDragEnd={handleDragEnd}
-      initial={{ scale: isTop ? 1 : 0.96, y: isTop ? 0 : 8 }}
-      animate={{ scale: isTop ? 1 : 0.96, y: isTop ? 0 : 8 }}
+      // Cards fade up into place, a little after one another (skipped under reduced motion).
+      initial={{ ...peek, opacity: 0, y: peek.y + 16 }}
+      animate={{ ...peek, opacity: 1 }}
+      transition={{ duration: 0.25, delay: staggerDelay(depth) }}
+      data-depth={depth}
       className={[
-        'absolute inset-0 bg-white rounded-3xl shadow-lg p-5 flex flex-col gap-3',
+        'absolute inset-x-0 top-0 bottom-7 bg-white rounded-3xl shadow-lg p-5 flex flex-col gap-3 overflow-hidden',
         isTop ? 'cursor-grab active:cursor-grabbing' : 'pointer-events-none',
       ].join(' ')}
       aria-label={t(lang, 'jobCardAria', { title: job.title, employer: job.employer })}
+      // The card peeking behind is decoration: keep its buttons out of the tab order and screen readers.
+      inert={!isTop}
+      aria-hidden={!isTop || undefined}
     >
-      {/* Top row: title + type badge */}
-      <div className="flex items-start justify-between gap-2">
-        <div>
+      {isTop && (
+        <>
+          {/* Drag feedback: decoration only; the buttons and arrow keys do the same thing. */}
+          <motion.div aria-hidden="true" data-tint="save" style={{ opacity: saveTint }}
+            className="pointer-events-none absolute inset-0 bg-green-500" />
+          <motion.div aria-hidden="true" data-tint="skip" style={{ opacity: skipTint }}
+            className="pointer-events-none absolute inset-0 bg-stone-500" />
+          <motion.span aria-hidden="true" style={{ opacity: saveStamp }}
+            className="pointer-events-none absolute top-5 left-5 z-10 rotate-[-12deg] rounded-xl border-4 border-green-700 bg-white/90 px-3 py-1 text-lg font-extrabold text-green-700">
+            {t(lang, 'save')}
+          </motion.span>
+          <motion.span aria-hidden="true" style={{ opacity: skipStamp }}
+            className="pointer-events-none absolute top-5 right-5 z-10 rotate-[12deg] rounded-xl border-4 border-stone-600 bg-white/90 px-3 py-1 text-lg font-extrabold text-stone-700">
+            {t(lang, 'skip')}
+          </motion.span>
+        </>
+      )}
+
+      {/* Top row: icon, title, match ring */}
+      <div className="flex items-start gap-3">
+        <span
+          aria-hidden="true"
+          data-job-icon
+          className="flex-shrink-0 grid place-items-center w-14 h-14 rounded-2xl bg-amber-50 border border-amber-100 text-4xl leading-none"
+        >
+          {jobIcon(job.skills_required)}
+        </span>
+        <div className="min-w-0 flex-1">
           <p className="text-xs text-[#5a6475] font-medium">{typeLabel}</p>
-          <h3 className="text-lg font-bold text-[#1a1a2e] leading-tight">{job.title}</h3>
-          <p className="text-sm text-[#5a6475]">{job.employer}</p>
+          <h3 className="text-lg font-bold text-[#1a1a2e] leading-tight break-words">{job.title}</h3>
+          <p className="text-sm text-[#5a6475] break-words">{job.employer}</p>
         </div>
-        <MatchRing score={score} size={72} />
+        <MatchRing score={score} size={64} />
       </div>
 
-      {/* Info row */}
-      <div className="flex flex-wrap gap-3 text-sm text-[#5a6475]">
-        <span>📍 {job.area} · {distanceLabel}</span>
-        <span>💰 ₹{fmt(job.pay_min)}–{fmt(job.pay_max)}{t(lang, 'perMonth')}</span>
+      {/* Distance and pay chips */}
+      <div className="flex flex-wrap gap-2 text-sm font-semibold">
+        <span data-chip="distance" className="rounded-full bg-[#e6f4f4] text-[#0d6e6e] px-3 py-1">
+          📍 {job.area} · {distanceLabel}
+        </span>
+        <span data-chip="pay" className="rounded-full bg-amber-100 text-amber-900 px-3 py-1">
+          💰 ₹{fmt(job.pay_min)}–{fmt(job.pay_max)}{t(lang, 'perMonth')}
+        </span>
+      </div>
+
+      {/* Skills: matched in green, missing in grey; marked with ✓ / + so colour is not the only cue */}
+      <div className="flex flex-col gap-1.5">
+        {match.matched_skills.length > 0 && (
+          <SkillChips label={t(lang, 'skillsYouHave')} kind="matched"
+            names={match.matched_skills.map((id) => skillName(id, lang))} />
+        )}
+        {match.missing_skills.length > 0 && (
+          <SkillChips label={t(lang, 'skillsToLearn')} kind="missing"
+            names={match.missing_skills.map((id) => skillName(id, lang))} />
+        )}
       </div>
 
       {/* Reason */}

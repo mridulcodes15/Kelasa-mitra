@@ -33,6 +33,7 @@ Reviewed by: TODO  |  Date: TODO
 | Key | English | Kannada | Hindi | Review |
 |---|---|---|---|---|
 | no_area | Where in Bengaluru do you live? (e.g. Whitefield, Koramangala, Jayanagar) | ನೀವು ಬೆಂಗಳೂರಿನ ಯಾವ ಭಾಗದಲ್ಲಿ ವಾಸಿಸುತ್ತೀರಿ? (ಉದಾ: ವೈಟ್‌ಫೀಲ್ಡ್, ಕೋರಮಂಗಲ, ಜಯನಗರ) | आप बेंगलुरु के किस इलाके में रहते हैं? (जैसे व्हाइटफील्ड, कोरमंगला, जयनगर) | |
+| city_only | Bengaluru is a big city. Which area do you live in? (e.g. Whitefield, Koramangala, Jayanagar) | ಬೆಂಗಳೂರು ದೊಡ್ಡ ನಗರ. ನೀವು ಯಾವ ಪ್ರದೇಶದಲ್ಲಿ ವಾಸಿಸುತ್ತೀರಿ? (ಉದಾ: ವೈಟ್‌ಫೀಲ್ಡ್, ಕೋರಮಂಗಲ, ಜಯನಗರ) | बेंगलुरु बड़ा शहर है। आप किस इलाके में रहते हैं? (जैसे व्हाइटफील्ड, कोरमंगला, जयनगर) | |
 | no_skills | What kind of work have you done? (e.g. cooking, security, delivery, tailoring) | ನೀವು ಯಾವ ರೀತಿಯ ಕೆಲಸ ಮಾಡಿದ್ದೀರಿ? (ಉದಾ: ಅಡುಗೆ, ಸೆಕ್ಯೂರಿಟಿ, ಡೆಲಿವರಿ, ಹೊಲಿಗೆ) | आपने किस तरह का काम किया है? (जैसे खाना बनाना, सुरक्षा, डिलीवरी, सिलाई) | |
 
 ## 4. Screen text (`frontend/src/lib/i18n.ts`)
@@ -99,6 +100,15 @@ Reviewed by: TODO  |  Date: TODO
 | agentLabel | IBM watsonx Orchestrate agent | IBM watsonx Orchestrate ಏಜೆಂಟ್ | IBM watsonx Orchestrate एजेंट | |
 | agentThinking | Asking the IBM watsonx Orchestrate agent… | IBM watsonx Orchestrate ಏಜೆಂಟ್ ಅನ್ನು ಕೇಳುತ್ತಿದ್ದೇನೆ… | IBM watsonx Orchestrate एजेंट से पूछ रहे हैं… | |
 | agentOffline | Agent offline: using the built-in rules. Your job matches are the same. | ಏಜೆಂಟ್ ಲಭ್ಯವಿಲ್ಲ: ಅಂತರ್ಗತ ನಿಯಮಗಳನ್ನು ಬಳಸಲಾಗುತ್ತಿದೆ. ನಿಮ್ಮ ಕೆಲಸದ ಹೊಂದಾಣಿಕೆಗಳು ಬದಲಾಗುವುದಿಲ್ಲ. | एजेंट उपलब्ध नहीं: अंतर्निहित नियमों का उपयोग हो रहा है। आपके काम के मिलान वही रहेंगे। | |
+| readAloudOn | Read aloud: on | ಓದಿ ಹೇಳುವುದು: ಆನ್ | पढ़कर सुनाना: चालू | |
+| readAloudOff | Read aloud: off | ಓದಿ ಹೇಳುವುದು: ಆಫ್ | पढ़कर सुनाना: बंद | |
+| areaChipsLabel | Or tap your area: | ಅಥವಾ ನಿಮ್ಮ ಪ್ರದೇಶವನ್ನು ಒತ್ತಿ: | या अपना इलाका चुनें: | |
+| saveOnDevice | Save my profile on this device | ನನ್ನ ಪ್ರೊಫೈಲ್ ಅನ್ನು ಈ ಸಾಧನದಲ್ಲಿ ಉಳಿಸಿ | मेरी प्रोफ़ाइल इस डिवाइस पर सहेजें | |
+| saveOnDeviceNote | Saved only in this browser on this device, never on our server. Your voice and typed words are not saved. | ಈ ಸಾಧನದ ಈ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಮಾತ್ರ ಉಳಿಸಲಾಗುತ್ತದೆ, ನಮ್ಮ ಸರ್ವರ್‌ನಲ್ಲಿ ಎಂದಿಗೂ ಇಲ್ಲ. ನಿಮ್ಮ ಧ್ವನಿ ಮತ್ತು ಬರೆದ ಪದಗಳನ್ನು ಉಳಿಸುವುದಿಲ್ಲ. | सिर्फ़ इस डिवाइस के इसी ब्राउज़र में सहेजी जाती है, हमारे सर्वर पर कभी नहीं। आपकी आवाज़ और लिखे शब्द नहीं सहेजे जाते। | |
+| deleteMyData | Delete my data | ನನ್ನ ಮಾಹಿತಿಯನ್ನು ಅಳಿಸಿ | मेरा डेटा मिटाएँ | |
+| dataDeleted | Your saved profile was deleted from this device. | ಉಳಿಸಿದ ಪ್ರೊಫೈಲ್ ಅನ್ನು ಈ ಸಾಧನದಿಂದ ಅಳಿಸಲಾಗಿದೆ. | सहेजी गई प्रोफ़ाइल इस डिवाइस से मिटा दी गई। | |
+| storageBlocked | This browser is blocking storage, so your profile cannot be saved. It will be forgotten when you close the page. | ಈ ಬ್ರೌಸರ್ ಸಂಗ್ರಹಣೆಯನ್ನು ತಡೆಯುತ್ತಿದೆ, ಆದ್ದರಿಂದ ಪ್ರೊಫೈಲ್ ಉಳಿಸಲು ಆಗುವುದಿಲ್ಲ. ಪುಟ ಮುಚ್ಚಿದಾಗ ಅದು ಮರೆತುಹೋಗುತ್ತದೆ. | यह ब्राउज़र स्टोरेज रोक रहा है, इसलिए प्रोफ़ाइल सहेजी नहीं जा सकती। पेज बंद करने पर यह भूल जाएगी। | |
+| useSavedProfile | Find jobs with my saved profile → | ಉಳಿಸಿದ ಪ್ರೊಫೈಲ್‌ನಿಂದ ಕೆಲಸ ಹುಡುಕಿ → | सहेजी गई प्रोफ़ाइल से काम खोजें → | |
 
 ## 5. Skill names in match reasons (`backend/tools/job_ranker.py`)
 

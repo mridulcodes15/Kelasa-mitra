@@ -142,6 +142,7 @@ def _haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
 
 
 MAX_DISTANCE_KM = 20.0
+MIN_SKILL_MATCHES = 3  # below this, nearby jobs without a skill match are still shown
 
 
 def _score(worker_skills: list[str], job: dict[str, Any], worker_lat: float, worker_lon: float, worker_langs: list[str]) -> tuple[float, float, list[str], list[str]]:
@@ -207,6 +208,12 @@ def rank_jobs(profile: WorkerProfile, all_jobs: list[dict[str, Any]], top_n: int
             missing_skills=missing,
             reason=reason,
         )))
+
+    # A job that uses none of the worker's skills is not a "match". Show such jobs only when
+    # fewer than MIN_SKILL_MATCHES skill-matched jobs exist within MAX_DISTANCE_KM.
+    skill_matched = [r for r in results if r[2].matched_skills]
+    if len(skill_matched) >= MIN_SKILL_MATCHES:
+        results = skill_matched
 
     results.sort(key=lambda x: (-x[0], x[1]))
     return [jm for _, _, jm in results[:top_n]]
