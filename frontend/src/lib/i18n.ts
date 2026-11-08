@@ -61,6 +61,9 @@ const en = {
   stepsEnglishOnly: '',
   showSteps: 'Show steps',
   hideSteps: 'Hide steps',
+  agentLabel: 'IBM watsonx Orchestrate agent',
+  agentThinking: 'Asking the IBM watsonx Orchestrate agent…',
+  agentOffline: 'Agent offline: using the built-in rules. Your job matches are the same.',
 };
 
 export type StringKey = keyof typeof en;
@@ -125,6 +128,9 @@ export const strings: Record<LangCode, Record<StringKey, string>> = {
     stepsEnglishOnly: 'ಹಂತಗಳು ಸದ್ಯಕ್ಕೆ ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ ಮಾತ್ರ ಇವೆ.',
     showSteps: 'ಹಂತಗಳನ್ನು ತೋರಿಸಿ',
     hideSteps: 'ಹಂತಗಳನ್ನು ಮರೆಮಾಡಿ',
+    agentLabel: 'IBM watsonx Orchestrate ಏಜೆಂಟ್',
+    agentThinking: 'IBM watsonx Orchestrate ಏಜೆಂಟ್ ಅನ್ನು ಕೇಳುತ್ತಿದ್ದೇನೆ…',
+    agentOffline: 'ಏಜೆಂಟ್ ಲಭ್ಯವಿಲ್ಲ: ಅಂತರ್ಗತ ನಿಯಮಗಳನ್ನು ಬಳಸಲಾಗುತ್ತಿದೆ. ನಿಮ್ಮ ಕೆಲಸದ ಹೊಂದಾಣಿಕೆಗಳು ಬದಲಾಗುವುದಿಲ್ಲ.',
   },
   hi: {
     appName: 'केलस मित्र',
@@ -184,6 +190,9 @@ export const strings: Record<LangCode, Record<StringKey, string>> = {
     stepsEnglishOnly: 'चरण अभी केवल अंग्रेज़ी में हैं।',
     showSteps: 'चरण दिखाएँ',
     hideSteps: 'चरण छिपाएँ',
+    agentLabel: 'IBM watsonx Orchestrate एजेंट',
+    agentThinking: 'IBM watsonx Orchestrate एजेंट से पूछ रहे हैं…',
+    agentOffline: 'एजेंट उपलब्ध नहीं: अंतर्निहित नियमों का उपयोग हो रहा है। आपके काम के मिलान वही रहेंगे।',
   },
 };
 

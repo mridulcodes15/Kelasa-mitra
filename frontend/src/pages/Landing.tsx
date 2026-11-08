@@ -6,6 +6,7 @@ import { useSpeech } from '../hooks/useSpeech';
 import { MicButton } from '../components/MicButton';
 import { ProfileCard } from '../components/ProfileCard';
 import { LanguagePicker } from '../components/LanguagePicker';
+import { AgentPanel } from '../components/AgentPanel';
 import { t } from '../lib/i18n';
 
 
@@ -93,6 +94,11 @@ export function Landing() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* IBM watsonx Orchestrate agent reply, or the offline banner */}
+      <div className="px-4 mt-3">
+        <AgentPanel hideReplyEqualTo={followUpQuestion} />
+      </div>
 
       {/* Mic area */}
       <section className="flex flex-col items-center mt-8 px-4">

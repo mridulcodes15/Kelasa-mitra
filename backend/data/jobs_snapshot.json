@@ -1,0 +1,1616 @@
+[
+ {
+  "id": "job-001",
+  "title": "Hotel Room Attendant",
+  "employer": "Sampige Court Hotel",
+  "area": "Residency Road",
+  "lat": 12.975531,
+  "lon": 77.5942,
+  "pay_min": 12000,
+  "pay_max": 16000,
+  "skills_required": [
+   "hotel_helper",
+   "housekeeping"
+  ],
+  "languages": [
+   "kannada",
+   "english"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-002",
+  "title": "Restaurant Helper",
+  "employer": "Malli Tiffin Room",
+  "area": "Majestic",
+  "lat": 12.9737,
+  "lon": 77.566871,
+  "pay_min": 10000,
+  "pay_max": 13000,
+  "skills_required": [
+   "hotel_helper",
+   "cook"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-003",
+  "title": "Kitchen Assistant",
+  "employer": "Kavana Grand Hotel",
+  "area": "MG Road",
+  "lat": 12.979384,
+  "lon": 77.612727,
+  "pay_min": 14000,
+  "pay_max": 18000,
+  "skills_required": [
+   "cook",
+   "food_handler"
+  ],
+  "languages": [
+   "english",
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-004",
+  "title": "Canteen Worker",
+  "employer": "Techpark Campus Canteen Co.",
+  "area": "Electronic City",
+  "lat": 12.851475,
+  "lon": 77.653591,
+  "pay_min": 11000,
+  "pay_max": 14000,
+  "skills_required": [
+   "cook",
+   "food_handler"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-005",
+  "title": "Catering Assistant",
+  "employer": "Nandi Banquets & Catering",
+  "area": "MG Road",
+  "lat": 12.974351,
+  "lon": 77.602377,
+  "pay_min": 13000,
+  "pay_max": 17000,
+  "skills_required": [
+   "cook",
+   "event_helper",
+   "food_handler"
+  ],
+  "languages": [
+   "english"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-006",
+  "title": "Banquet Staff",
+  "employer": "Residency Hall Banquets",
+  "area": "Residency Road",
+  "lat": 12.968798,
+  "lon": 77.601886,
+  "pay_min": 12000,
+  "pay_max": 15000,
+  "skills_required": [
+   "event_helper",
+   "hotel_helper"
+  ],
+  "languages": [
+   "english",
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-007",
+  "title": "Hotel Housekeeper",
+  "employer": "Whitefield Stay Hotel",
+  "area": "Whitefield",
+  "lat": 12.962225,
+  "lon": 77.745081,
+  "pay_min": 11000,
+  "pay_max": 14500,
+  "skills_required": [
+   "housekeeping",
+   "hotel_helper"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-008",
+  "title": "Pool Attendant",
+  "employer": "Kabini Pool Hotel",
+  "area": "Brigade Road",
+  "lat": 12.973998,
+  "lon": 77.610619,
+  "pay_min": 12000,
+  "pay_max": 15000,
+  "skills_required": [
+   "swimming_pool",
+   "housekeeping"
+  ],
+  "languages": [
+   "english"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-009",
+  "title": "Delivery Executive",
+  "employer": "QuickDabba Delivery",
+  "area": "Koramangala",
+  "lat": 12.930727,
+  "lon": 77.625928,
+  "pay_min": 16000,
+  "pay_max": 22000,
+  "skills_required": [
+   "delivery",
+   "two_wheeler"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-010",
+  "title": "Delivery Executive",
+  "employer": "FoodHop Riders",
+  "area": "Indiranagar",
+  "lat": 12.983351,
+  "lon": 77.632904,
+  "pay_min": 15000,
+  "pay_max": 21000,
+  "skills_required": [
+   "delivery",
+   "two_wheeler"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-011",
+  "title": "Last Mile Delivery Agent",
+  "employer": "LastMile Mitra",
+  "area": "Whitefield",
+  "lat": 12.974693,
+  "lon": 77.75307,
+  "pay_min": 17000,
+  "pay_max": 23000,
+  "skills_required": [
+   "delivery",
+   "two_wheeler",
+   "driving_licence"
+  ],
+  "languages": [
+   "english",
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-012",
+  "title": "Courier Delivery Boy",
+  "employer": "SwiftParcel Couriers",
+  "area": "Marathahalli",
+  "lat": 12.956544,
+  "lon": 77.691588,
+  "pay_min": 14000,
+  "pay_max": 18000,
+  "skills_required": [
+   "delivery",
+   "two_wheeler"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-013",
+  "title": "Personal Driver",
+  "employer": "CityLine Executive Transport",
+  "area": "MG Road",
+  "lat": 12.982915,
+  "lon": 77.607286,
+  "pay_min": 18000,
+  "pay_max": 25000,
+  "skills_required": [
+   "driver_car",
+   "driving_licence"
+  ],
+  "languages": [
+   "english",
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-014",
+  "title": "Cab Driver",
+  "employer": "GreenRoute Cabs",
+  "area": "Yeshwanthpur",
+  "lat": 13.014484,
+  "lon": 77.530647,
+  "pay_min": 20000,
+  "pay_max": 30000,
+  "skills_required": [
+   "driver_car",
+   "driving_licence",
+   "basic_english"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-015",
+  "title": "App-Based Driver",
+  "employer": "ZipRide Bikes",
+  "area": "Majestic",
+  "lat": 12.98286,
+  "lon": 77.57296,
+  "pay_min": 14000,
+  "pay_max": 20000,
+  "skills_required": [
+   "two_wheeler",
+   "driving_licence"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-016",
+  "title": "Logistics Executive",
+  "employer": "CartRoute Logistics",
+  "area": "Electronic City",
+  "lat": 12.850114,
+  "lon": 77.663876,
+  "pay_min": 16000,
+  "pay_max": 20000,
+  "skills_required": [
+   "delivery",
+   "warehouse",
+   "two_wheeler"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-017",
+  "title": "Auto Driver",
+  "employer": "Self-Employed (Auto Stand Co-op)",
+  "area": "Jayanagar",
+  "lat": 12.92558,
+  "lon": 77.60137,
+  "pay_min": 15000,
+  "pay_max": 22000,
+  "skills_required": [
+   "auto_driver",
+   "driving_licence"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-018",
+  "title": "Security Guard",
+  "employer": "Kaval Security Services",
+  "area": "Whitefield",
+  "lat": 12.967857,
+  "lon": 77.750733,
+  "pay_min": 13000,
+  "pay_max": 16000,
+  "skills_required": [
+   "security_guard"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-019",
+  "title": "Security Guard",
+  "employer": "Gatewatch Security",
+  "area": "Electronic City",
+  "lat": 12.85047,
+  "lon": 77.662096,
+  "pay_min": 12500,
+  "pay_max": 15500,
+  "skills_required": [
+   "security_guard"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-020",
+  "title": "Night Watchman",
+  "employer": "Lakeview Residences",
+  "area": "Koramangala",
+  "lat": 12.940987,
+  "lon": 77.625738,
+  "pay_min": 12000,
+  "pay_max": 14500,
+  "skills_required": [
+   "watchman",
+   "security_guard"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-021",
+  "title": "Gatekeeper",
+  "employer": "Greenpark Apartments",
+  "area": "Marathahalli",
+  "lat": 12.962373,
+  "lon": 77.689833,
+  "pay_min": 13000,
+  "pay_max": 16000,
+  "skills_required": [
+   "watchman"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-022",
+  "title": "Security Supervisor",
+  "employer": "Suraksha Mitra Agency",
+  "area": "HSR Layout",
+  "lat": 12.907246,
+  "lon": 77.64403,
+  "pay_min": 17000,
+  "pay_max": 21000,
+  "skills_required": [
+   "security_guard",
+   "basic_english"
+  ],
+  "languages": [
+   "kannada",
+   "english"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-023",
+  "title": "Housekeeping Staff",
+  "employer": "Shubhra Facility Care",
+  "area": "Indiranagar",
+  "lat": 12.971677,
+  "lon": 77.636525,
+  "pay_min": 10000,
+  "pay_max": 13000,
+  "skills_required": [
+   "housekeeping"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-024",
+  "title": "Office Cleaning Staff",
+  "employer": "Spotless Office Care",
+  "area": "Koramangala",
+  "lat": 12.928816,
+  "lon": 77.620948,
+  "pay_min": 10000,
+  "pay_max": 13500,
+  "skills_required": [
+   "housekeeping",
+   "sanitation"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-025",
+  "title": "Domestic Help",
+  "employer": "HomeHelp Mitra",
+  "area": "BTM Layout",
+  "lat": 12.918671,
+  "lon": 77.607937,
+  "pay_min": 12000,
+  "pay_max": 16000,
+  "skills_required": [
+   "housekeeping",
+   "cook"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-026",
+  "title": "Nanny / Babysitter",
+  "employer": "Little Steps Home Services",
+  "area": "Jayanagar",
+  "lat": 12.922923,
+  "lon": 77.589152,
+  "pay_min": 10000,
+  "pay_max": 14000,
+  "skills_required": [
+   "babysitter"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-027",
+  "title": "Elder Care Attendant",
+  "employer": "Arogya Home Attendants",
+  "area": "JP Nagar",
+  "lat": 12.902572,
+  "lon": 77.592686,
+  "pay_min": 12000,
+  "pay_max": 16000,
+  "skills_required": [
+   "elder_care"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-028",
+  "title": "Laundry Worker",
+  "employer": "Fresh Fold Laundry",
+  "area": "Rajajinagar",
+  "lat": 12.995969,
+  "lon": 77.554446,
+  "pay_min": 9000,
+  "pay_max": 12000,
+  "skills_required": [
+   "laundry"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-029",
+  "title": "Gardener",
+  "employer": "Cubbon View Apartments",
+  "area": "Banashankari",
+  "lat": 12.920138,
+  "lon": 77.550466,
+  "pay_min": 9000,
+  "pay_max": 12000,
+  "skills_required": [
+   "gardener"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-030",
+  "title": "Electrician (Residential)",
+  "employer": "Shilpa Builders",
+  "area": "Yelahanka",
+  "lat": 13.095314,
+  "lon": 77.594371,
+  "pay_min": 18000,
+  "pay_max": 25000,
+  "skills_required": [
+   "electrician"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-031",
+  "title": "Electrical Technician",
+  "employer": "TechCampus Facilities",
+  "area": "Electronic City",
+  "lat": 12.853032,
+  "lon": 77.66244,
+  "pay_min": 20000,
+  "pay_max": 28000,
+  "skills_required": [
+   "electrician",
+   "ac_technician"
+  ],
+  "languages": [
+   "kannada",
+   "english"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-032",
+  "title": "Plumber",
+  "employer": "Mantap Maintenance",
+  "area": "Whitefield",
+  "lat": 12.970711,
+  "lon": 77.752854,
+  "pay_min": 16000,
+  "pay_max": 22000,
+  "skills_required": [
+   "plumber"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-033",
+  "title": "Plumbing Helper",
+  "employer": "Happy Tap Maintenance",
+  "area": "BTM Layout",
+  "lat": 12.921986,
+  "lon": 77.614516,
+  "pay_min": 12000,
+  "pay_max": 16000,
+  "skills_required": [
+   "plumber",
+   "construction_helper"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-034",
+  "title": "Mason",
+  "employer": "Gopura Constructions",
+  "area": "Hebbal",
+  "lat": 13.030965,
+  "lon": 77.589514,
+  "pay_min": 20000,
+  "pay_max": 28000,
+  "skills_required": [
+   "mason"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-035",
+  "title": "Construction Worker",
+  "employer": "Vasati Projects",
+  "area": "Yelahanka",
+  "lat": 13.097747,
+  "lon": 77.592584,
+  "pay_min": 14000,
+  "pay_max": 18000,
+  "skills_required": [
+   "construction_helper"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-036",
+  "title": "AC Technician",
+  "employer": "CoolAir Service Centre",
+  "area": "Vijayanagar",
+  "lat": 12.968176,
+  "lon": 77.540787,
+  "pay_min": 18000,
+  "pay_max": 26000,
+  "skills_required": [
+   "ac_technician"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-037",
+  "title": "Painter",
+  "employer": "Rangoli Home Painters",
+  "area": "Malleshwaram",
+  "lat": 13.009022,
+  "lon": 77.566035,
+  "pay_min": 16000,
+  "pay_max": 22000,
+  "skills_required": [
+   "painting"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-038",
+  "title": "Welder Helper",
+  "employer": "Peenya Fabrication Works",
+  "area": "Peenya",
+  "lat": 13.030887,
+  "lon": 77.51593,
+  "pay_min": 14000,
+  "pay_max": 19000,
+  "skills_required": [
+   "welder",
+   "factory_worker"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-039",
+  "title": "Carpenter",
+  "employer": "Teakline Furniture",
+  "area": "Yeshwanthpur",
+  "lat": 13.027633,
+  "lon": 77.536442,
+  "pay_min": 18000,
+  "pay_max": 24000,
+  "skills_required": [
+   "carpenter"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-040",
+  "title": "Mobile Repair Technician",
+  "employer": "PhoneFix Corner",
+  "area": "Indiranagar",
+  "lat": 12.974638,
+  "lon": 77.636746,
+  "pay_min": 14000,
+  "pay_max": 20000,
+  "skills_required": [
+   "mobile_repair"
+  ],
+  "languages": [
+   "kannada",
+   "english"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-041",
+  "title": "Retail Sales Executive",
+  "employer": "Janata Smart Store",
+  "area": "HSR Layout",
+  "lat": 12.912582,
+  "lon": 77.643604,
+  "pay_min": 12000,
+  "pay_max": 16000,
+  "skills_required": [
+   "retail_sales",
+   "pos_billing"
+  ],
+  "languages": [
+   "kannada",
+   "english"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-042",
+  "title": "Cashier",
+  "employer": "DailyCart Store",
+  "area": "Koramangala",
+  "lat": 12.936553,
+  "lon": 77.630865,
+  "pay_min": 13000,
+  "pay_max": 16000,
+  "skills_required": [
+   "pos_billing"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-043",
+  "title": "Store Associate",
+  "employer": "ValueMart Marathahalli",
+  "area": "Marathahalli",
+  "lat": 12.95749,
+  "lon": 77.692609,
+  "pay_min": 12000,
+  "pay_max": 15000,
+  "skills_required": [
+   "retail_sales",
+   "warehouse"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-044",
+  "title": "Data Entry Operator",
+  "employer": "DataDesk Services",
+  "area": "Electronic City",
+  "lat": 12.853161,
+  "lon": 77.660352,
+  "pay_min": 14000,
+  "pay_max": 18000,
+  "skills_required": [
+   "data_entry",
+   "basic_english"
+  ],
+  "languages": [
+   "english",
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-045",
+  "title": "Telecaller",
+  "employer": "HelloLine Call Centre",
+  "area": "Whitefield",
+  "lat": 12.963255,
+  "lon": 77.742654,
+  "pay_min": 14000,
+  "pay_max": 18000,
+  "skills_required": [
+   "telecalling",
+   "basic_english"
+  ],
+  "languages": [
+   "english",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-046",
+  "title": "Customer Support Executive",
+  "employer": "VoiceDesk BPO",
+  "area": "Electronic City",
+  "lat": 12.838954,
+  "lon": 77.662239,
+  "pay_min": 15000,
+  "pay_max": 20000,
+  "skills_required": [
+   "telecalling",
+   "basic_english"
+  ],
+  "languages": [
+   "english"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-047",
+  "title": "Stitching Operator",
+  "employer": "Silk Thread Garments",
+  "area": "Peenya",
+  "lat": 13.033073,
+  "lon": 77.516355,
+  "pay_min": 12000,
+  "pay_max": 16000,
+  "skills_required": [
+   "tailoring"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-048",
+  "title": "Tailor (Alterations)",
+  "employer": "Fashion Corner Alterations",
+  "area": "Malleshwaram",
+  "lat": 12.996016,
+  "lon": 77.567106,
+  "pay_min": 13000,
+  "pay_max": 17000,
+  "skills_required": [
+   "tailoring"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-049",
+  "title": "Garment Production Helper",
+  "employer": "Kasuti Garment Exports",
+  "area": "Peenya",
+  "lat": 13.036338,
+  "lon": 77.518066,
+  "pay_min": 11000,
+  "pay_max": 14000,
+  "skills_required": [
+   "tailoring",
+   "factory_worker"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-050",
+  "title": "Warehouse Packer",
+  "employer": "BoxHub Fulfilment",
+  "area": "Whitefield",
+  "lat": 12.977337,
+  "lon": 77.755672,
+  "pay_min": 14000,
+  "pay_max": 18000,
+  "skills_required": [
+   "warehouse"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-051",
+  "title": "Inventory Helper",
+  "employer": "CartRoute Warehouse",
+  "area": "Domlur",
+  "lat": 12.952284,
+  "lon": 77.642932,
+  "pay_min": 13000,
+  "pay_max": 17000,
+  "skills_required": [
+   "warehouse",
+   "data_entry"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-052",
+  "title": "Forklift Operator",
+  "employer": "SafeLift Logistics",
+  "area": "Peenya",
+  "lat": 13.031307,
+  "lon": 77.518192,
+  "pay_min": 18000,
+  "pay_max": 24000,
+  "skills_required": [
+   "forklift",
+   "warehouse"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-053",
+  "title": "Loading Staff",
+  "employer": "SwiftParcel Hub",
+  "area": "Yeshwanthpur",
+  "lat": 13.017269,
+  "lon": 77.539355,
+  "pay_min": 12000,
+  "pay_max": 15000,
+  "skills_required": [
+   "warehouse"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-054",
+  "title": "Barber",
+  "employer": "Sundari Salon",
+  "area": "Indiranagar",
+  "lat": 12.972185,
+  "lon": 77.639756,
+  "pay_min": 14000,
+  "pay_max": 20000,
+  "skills_required": [
+   "barber"
+  ],
+  "languages": [
+   "kannada",
+   "english"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-055",
+  "title": "Beautician",
+  "employer": "Mallige Beauty Parlour",
+  "area": "Koramangala",
+  "lat": 12.93446,
+  "lon": 77.631761,
+  "pay_min": 15000,
+  "pay_max": 22000,
+  "skills_required": [
+   "beautician"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-056",
+  "title": "Gym Trainer",
+  "employer": "IronWorks Gym Whitefield",
+  "area": "Whitefield",
+  "lat": 12.975814,
+  "lon": 77.746114,
+  "pay_min": 16000,
+  "pay_max": 24000,
+  "skills_required": [
+   "gym_trainer",
+   "basic_english"
+  ],
+  "languages": [
+   "english",
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-057",
+  "title": "Massage Therapist",
+  "employer": "Tranquil Spa & Wellness",
+  "area": "Residency Road",
+  "lat": 12.973309,
+  "lon": 77.596658,
+  "pay_min": 15000,
+  "pay_max": 22000,
+  "skills_required": [
+   "beautician",
+   "elder_care"
+  ],
+  "languages": [
+   "english"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-058",
+  "title": "Machine Operator",
+  "employer": "Peenya Fasteners Works",
+  "area": "Peenya",
+  "lat": 13.035002,
+  "lon": 77.523528,
+  "pay_min": 16000,
+  "pay_max": 21000,
+  "skills_required": [
+   "factory_worker"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-059",
+  "title": "Production Worker",
+  "employer": "Bidadi Auto Parts Works",
+  "area": "Bidadi",
+  "lat": 12.795475,
+  "lon": 77.388923,
+  "pay_min": 14000,
+  "pay_max": 18000,
+  "skills_required": [
+   "factory_worker"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-060",
+  "title": "Quality Inspector",
+  "employer": "Precision Parts Supplier",
+  "area": "Peenya",
+  "lat": 13.030144,
+  "lon": 77.512045,
+  "pay_min": 18000,
+  "pay_max": 24000,
+  "skills_required": [
+   "factory_worker",
+   "data_entry"
+  ],
+  "languages": [
+   "kannada",
+   "english"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-061",
+  "title": "Packaging Line Worker",
+  "employer": "Bidadi Paperboard Works",
+  "area": "Bidadi",
+  "lat": 12.8029,
+  "lon": 77.38733,
+  "pay_min": 13000,
+  "pay_max": 17000,
+  "skills_required": [
+   "factory_worker",
+   "warehouse"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-062",
+  "title": "Electrician Apprentice",
+  "employer": "Wiring Skills Training Yard",
+  "area": "Majestic",
+  "lat": 12.981758,
+  "lon": 77.571786,
+  "pay_min": 8000,
+  "pay_max": 10000,
+  "skills_required": [
+   "electrician"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "apprenticeship",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-063",
+  "title": "Plumbing Apprentice",
+  "employer": "Jayanagar Trades Workshop",
+  "area": "Jayanagar",
+  "lat": 12.917009,
+  "lon": 77.590986,
+  "pay_min": 7000,
+  "pay_max": 9500,
+  "skills_required": [
+   "plumber"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "apprenticeship",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-064",
+  "title": "Tailoring Apprentice",
+  "employer": "Stitchcraft Workshop",
+  "area": "Peenya",
+  "lat": 13.020712,
+  "lon": 77.524466,
+  "pay_min": 6000,
+  "pay_max": 8500,
+  "skills_required": [
+   "tailoring"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "apprenticeship",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-065",
+  "title": "Mobile Repair Apprentice",
+  "employer": "Whitefield Repair Workshop",
+  "area": "Whitefield",
+  "lat": 12.97586,
+  "lon": 77.755207,
+  "pay_min": 6500,
+  "pay_max": 9000,
+  "skills_required": [
+   "mobile_repair"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "apprenticeship",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-066",
+  "title": "Carpentry Apprentice",
+  "employer": "Peenya Woodcraft Workshop",
+  "area": "Peenya",
+  "lat": 13.02532,
+  "lon": 77.510527,
+  "pay_min": 7500,
+  "pay_max": 10000,
+  "skills_required": [
+   "carpenter"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "apprenticeship",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-067",
+  "title": "AC Service Apprentice",
+  "employer": "CoolAir Training Yard",
+  "area": "Electronic City",
+  "lat": 12.851248,
+  "lon": 77.667351,
+  "pay_min": 7000,
+  "pay_max": 10000,
+  "skills_required": [
+   "ac_technician"
+  ],
+  "languages": [
+   "kannada",
+   "english"
+  ],
+  "type": "apprenticeship",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-068",
+  "title": "Data Entry Apprentice",
+  "employer": "Keyboard Skills Workshop",
+  "area": "Koramangala",
+  "lat": 12.92857,
+  "lon": 77.624276,
+  "pay_min": 7000,
+  "pay_max": 9500,
+  "skills_required": [
+   "data_entry",
+   "basic_english"
+  ],
+  "languages": [
+   "english",
+   "kannada"
+  ],
+  "type": "apprenticeship",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-069",
+  "title": "Welding Apprentice",
+  "employer": "Rajajinagar Welding Workshop",
+  "area": "Rajajinagar",
+  "lat": 12.986707,
+  "lon": 77.55687,
+  "pay_min": 7500,
+  "pay_max": 10000,
+  "skills_required": [
+   "welder"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "apprenticeship",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-070",
+  "title": "Cooking Apprentice",
+  "employer": "Malleshwaram Kitchen Workshop",
+  "area": "Malleshwaram",
+  "lat": 13.007253,
+  "lon": 77.563054,
+  "pay_min": 6000,
+  "pay_max": 8500,
+  "skills_required": [
+   "cook",
+   "food_handler"
+  ],
+  "languages": [
+   "kannada",
+   "english"
+  ],
+  "type": "apprenticeship",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-071",
+  "title": "Security Training Programme",
+  "employer": "Kaval Training Yard",
+  "area": "Yelahanka",
+  "lat": 13.100305,
+  "lon": 77.597097,
+  "pay_min": 7000,
+  "pay_max": 9000,
+  "skills_required": [
+   "security_guard"
+  ],
+  "languages": [
+   "kannada",
+   "english"
+  ],
+  "type": "apprenticeship",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-072",
+  "title": "Housekeeping Apprentice",
+  "employer": "Sampige Hospitality Training",
+  "area": "MG Road",
+  "lat": 12.971841,
+  "lon": 77.615859,
+  "pay_min": 6500,
+  "pay_max": 9000,
+  "skills_required": [
+   "housekeeping",
+   "hotel_helper"
+  ],
+  "languages": [
+   "english",
+   "kannada"
+  ],
+  "type": "apprenticeship",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-073",
+  "title": "Driving Training (LMV)",
+  "employer": "Steady Wheels Driving Yard",
+  "area": "Jayanagar",
+  "lat": 12.92377,
+  "lon": 77.589189,
+  "pay_min": 7000,
+  "pay_max": 9500,
+  "skills_required": [
+   "driver_car",
+   "driving_licence"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "apprenticeship",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-074",
+  "title": "Sanitation Worker",
+  "employer": "Clean Ward Contractors",
+  "area": "Majestic",
+  "lat": 12.977929,
+  "lon": 77.574979,
+  "pay_min": 11000,
+  "pay_max": 14000,
+  "skills_required": [
+   "sanitation"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-075",
+  "title": "Farm / Garden Labourer",
+  "employer": "Green Acre Farm Co-op",
+  "area": "Yelahanka",
+  "lat": 13.095918,
+  "lon": 77.593287,
+  "pay_min": 10000,
+  "pay_max": 13000,
+  "skills_required": [
+   "gardener",
+   "farm_worker"
+  ],
+  "languages": [
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-076",
+  "title": "Truck Driver (LMV)",
+  "employer": "RoadLine Logistics",
+  "area": "KR Puram",
+  "lat": 13.016922,
+  "lon": 77.699798,
+  "pay_min": 20000,
+  "pay_max": 30000,
+  "skills_required": [
+   "truck_driver",
+   "driving_licence"
+  ],
+  "languages": [
+   "hindi",
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-077",
+  "title": "Event Helper",
+  "employer": "Utsava Event Helpers",
+  "area": "Whitefield",
+  "lat": 12.96881,
+  "lon": 77.750181,
+  "pay_min": 10000,
+  "pay_max": 14000,
+  "skills_required": [
+   "event_helper"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-078",
+  "title": "POS Billing Staff",
+  "employer": "Janata Bazaar Store",
+  "area": "BTM Layout",
+  "lat": 12.910436,
+  "lon": 77.605695,
+  "pay_min": 12000,
+  "pay_max": 15000,
+  "skills_required": [
+   "pos_billing",
+   "basic_english"
+  ],
+  "languages": [
+   "kannada",
+   "english"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-079",
+  "title": "Food Handler (FSSAI Certified)",
+  "employer": "FreshCrate Supplies",
+  "area": "Domlur",
+  "lat": 12.957509,
+  "lon": 77.640813,
+  "pay_min": 14000,
+  "pay_max": 18000,
+  "skills_required": [
+   "food_handler",
+   "warehouse"
+  ],
+  "languages": [
+   "kannada",
+   "english"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-080",
+  "title": "Swimming Pool Attendant",
+  "employer": "Cubbon Lane Hotel",
+  "area": "Malleshwaram",
+  "lat": 12.998682,
+  "lon": 77.564523,
+  "pay_min": 13000,
+  "pay_max": 17000,
+  "skills_required": [
+   "swimming_pool"
+  ],
+  "languages": [
+   "english",
+   "kannada"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ }
+]

@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useAppStore } from '../store/appStore';
 import { JobCard } from '../components/JobCard';
 import { SkillGapSection } from '../components/SkillGapSection';
+import { AgentPanel } from '../components/AgentPanel';
 import { t } from '../lib/i18n';
 import type { JobMatch } from '../lib/types';
 
@@ -72,6 +73,11 @@ export function Jobs() {
           </span>
         )}
       </header>
+
+      {/* IBM watsonx Orchestrate agent reply, or the offline banner */}
+      <div className="px-4 mb-3">
+        <AgentPanel />
+      </div>
 
       {/* Keyboard hint */}
       <p className="text-xs text-center text-[#5a6475] mb-2 hidden md:block">

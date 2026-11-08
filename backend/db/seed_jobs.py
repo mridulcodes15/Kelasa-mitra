@@ -7,15 +7,17 @@ All employers are invented names; no job here is real.
 
 Coordinate jitter: each job lat/lon is randomised up to ±0.008° (about 0.9 km on
 each axis, about 1.2 km at most) from the area centre so distances shown to workers are realistic rather than all
-being identical.  The seed is deterministic (seeded by job index) so the DB
-is stable across re-seeds.
+being identical.
+
+Everything is deterministic: job IDs are job-001 to job-080, the jitter uses a fixed
+random seed, and posted_at is a fixed date. build_seed_rows() is the single source
+for both the SQLite seed and data/jobs_snapshot.json (used by the Orchestrate tools).
 """
 from __future__ import annotations
 
 import json
 import random
-import uuid
-from datetime import datetime, timezone
+from typing import Any
 
 from sqlalchemy import insert
 
@@ -128,7 +130,34 @@ _SEED: list[dict] = [
 ]
 # fmt: on
 
-POSTED_AT = datetime.now(timezone.utc).isoformat()
+POSTED_AT = "2026-01-01T00:00:00+00:00"  # fixed, so every seed and snapshot is identical
+
+
+def build_seed_rows() -> list[dict[str, Any]]:
+    """
+    Return the 80 seed jobs in the shape get_all_jobs() returns
+    (skills_required and languages as lists). Same output on every call.
+    """
+    rng = random.Random(42)
+    rows = []
+    for index, entry in enumerate(_SEED, start=1):
+        jlat, jlon = _jitter(rng, entry["lat"], entry["lon"])
+        rows.append({
+            "id": f"job-{index:03d}",
+            "title": entry["title"],
+            "employer": entry["employer"],
+            "area": entry["area"],
+            "lat": jlat,
+            "lon": jlon,
+            "pay_min": entry["pay_min"],
+            "pay_max": entry["pay_max"],
+            "skills_required": list(entry["skills"]),
+            "languages": list(entry["languages"]),
+            "type": entry["type"],
+            "posted_at": POSTED_AT,
+            "is_synthetic": True,
+        })
+    return rows
 
 
 def seed_jobs() -> int:
@@ -139,25 +168,12 @@ def seed_jobs() -> int:
         if existing_count > 0:
             return 0  # already seeded
 
-        rng = random.Random(42)  # same coordinates on every re-seed
-        rows = []
-        for entry in _SEED:
-            jlat, jlon = _jitter(rng, entry["lat"], entry["lon"])
-            rows.append({
-                "id": str(uuid.uuid4()),
-                "title": entry["title"],
-                "employer": entry["employer"],
-                "area": entry["area"],
-                "lat": jlat,
-                "lon": jlon,
-                "pay_min": entry["pay_min"],
-                "pay_max": entry["pay_max"],
-                "skills_required": json.dumps(entry["skills"]),
-                "languages": json.dumps(entry["languages"]),
-                "type": entry["type"],
-                "posted_at": POSTED_AT,
-                "is_synthetic": True,
-            })
+        rows = [
+            {**row,
+             "skills_required": json.dumps(row["skills_required"]),
+             "languages": json.dumps(row["languages"])}
+            for row in build_seed_rows()
+        ]
         conn.execute(insert(jobs_table), rows)
         conn.commit()
         return len(rows)

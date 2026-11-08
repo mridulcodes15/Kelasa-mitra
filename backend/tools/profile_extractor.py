@@ -16,7 +16,8 @@ from typing import Any, Optional
 
 from langdetect import detect, LangDetectException
 
-from models.worker import WorkerProfile, AreaLocation
+from models.worker import WorkerProfile
+from tools.profile_builder import build_profile
 from tools.provider import call_llm
 
 logger = logging.getLogger(__name__)
@@ -46,17 +47,6 @@ def _resolve_language(text: str, ui_language: Optional[str]) -> str:
     return _detect_language(text)
 
 
-def _build_area_location(area_dict: dict[str, Any] | None) -> AreaLocation | None:
-    if area_dict is None:
-        return None
-    return AreaLocation(
-        id=area_dict["id"],
-        name=area_dict["name"],
-        lat=area_dict["lat"],
-        lon=area_dict["lon"],
-    )
-
-
 def extract_profile(text: str, ui_language: Optional[str] = None) -> WorkerProfile:
     """
     Extract a structured WorkerProfile from free-form worker text.
@@ -71,12 +61,4 @@ def extract_profile(text: str, ui_language: Optional[str] = None) -> WorkerProfi
     """
     detected_language = _resolve_language(text, ui_language)
     raw: dict[str, Any] = call_llm(text, detected_language)
-
-    return WorkerProfile(
-        skills=raw.get("skills") or [],
-        experience_years=raw.get("experience_years"),
-        area=_build_area_location(raw.get("area")),
-        languages=raw.get("languages") or [],
-        detected_language=detected_language,
-        raw_input=text,
-    )
+    return build_profile(raw, text, detected_language)

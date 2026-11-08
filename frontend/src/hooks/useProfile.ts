@@ -1,6 +1,9 @@
 import { useCallback } from 'react';
 import { useAppStore } from '../store/appStore';
-import { extractProfile, fetchMatches, fetchSkillGap } from '../lib/api';
+import { agentChat, extractProfile, fetchMatches, fetchSkillGap } from '../lib/api';
+
+// Only the latest request may update the agent panel.
+let agentRequestId = 0;
 
 export function useProfile() {
   const {
@@ -8,11 +11,27 @@ export function useProfile() {
     profile, setProfile, isExtracting, setIsExtracting, extractError, setExtractError,
     setMatches, setFollowUpQuestion, setIsFetchingMatches, setScreen,
     setSkillGap, setIsFetchingSkillGap, setSkillGapFailed,
+    setAgentReply, setIsAskingAgent,
   } = useAppStore();
+
+  const askAgent = useCallback(
+    async (text: string) => {
+      const requestId = ++agentRequestId;
+      setAgentReply(null);
+      setIsAskingAgent(true);
+      const reply = await agentChat(text, lang);
+      if (requestId !== agentRequestId) return;
+      setAgentReply(reply);
+      setIsAskingAgent(false);
+    },
+    [lang, setAgentReply, setIsAskingAgent],
+  );
 
   const runExtraction = useCallback(
     async (text: string) => {
       if (!text.trim()) return;
+      // The agent runs alongside the deterministic pipeline; cards never wait for it.
+      void askAgent(text);
       setIsExtracting(true);
       setExtractError(null);
       setMatches([]);
@@ -59,7 +78,7 @@ export function useProfile() {
         setIsExtracting(false);
       }
     },
-    [lang, setExtractError, setIsExtracting, setIsFetchingMatches, setMatches,
+    [askAgent, lang, setExtractError, setIsExtracting, setIsFetchingMatches, setMatches,
      setFollowUpQuestion, setProfile, setScreen, setSkillGap, setIsFetchingSkillGap,
      setSkillGapFailed],
   );

@@ -68,3 +68,10 @@ export interface SkillGapResponse {
   gaps: SkillGapItem[];
   is_synthetic: boolean;
 }
+
+export interface AgentChatResponse {
+  source: 'agent' | 'rules';
+  reply: string | null;
+  reason: string | null;
+  thread_id: string | null;
+}

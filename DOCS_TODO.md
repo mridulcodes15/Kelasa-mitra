@@ -1,0 +1,44 @@
+# DOCS_TODO
+
+Checklist for the final docs stage. One line per item that is wrong or outdated in the docs.
+
+- [ ] README.md:39,44,49,299 say Bob wrote every line or file; this must change, because Claude Code has also edited the code, so state each tool's part factually.
+- [ ] README.md:301-307 list what Bob did, including running pytest and tsc after each change; git shows one baseline commit (a8117a6), so these claims have no commit trail and need a stated source.
+- [ ] README.md:40,66,88 and PLAN.md:55,68,356,482 say Orchestrate is pending access; access is now confirmed (hello-world agent answered), but say "integrated" only after the real agent has called our tools end to end.
+- [ ] ORCHESTRATE STATUS (2026-11-08): NOT verified end to end. Verified so far: spike tools (plain, and pydantic returning a dict) ran in the owner's tenant. Built and tested only locally: orchestrate/kelasa_tools (3 tools), agents/kelasa_agent.yaml, /api/agent/chat with fake HTTP. Write "integrated" only once backend/scripts/agent_warmup.py prints OK and the console trace shows extract_profile, find_matches and skill_gap calls; record the date here.
+- [ ] Describe the Orchestrate design as built: backend modules copied byte-for-byte into orchestrate/kelasa_tools by orchestrate/build_kelasa_tools.py, jobs from backend/data/jobs_snapshot.json (read-only filesystem, no SQLite), tools take only worker text + language so no numbers pass through the model, /api/agent/chat keeps the key server-side, cards always come from the deterministic endpoints, and a 3-language offline banner shows when the rules answer.
+- [ ] The tool entry file is orchestrate/kelasa_tools/kelasa_mitra_tools.py, not kelasa_tools.py: the ADK imports it as <package folder>.<entry file>, and a kelasa_tools.py inside the kelasa_tools folder shadowed the folder ("'kelasa_tools' is not a package"; found 2026-11-09, covered by test_adk_loader_accepts_the_package_like_the_cli). Use this file name in the run instructions.
+- [ ] Document ORCHESTRATE_AUTH_TYPE: the backend gets its token like the ADK does (IBM Cloud IAM only for *.cloud.ibm.com hosts; MCSP v1/v2 for AWS-hosted ones such as api.ap-south-1.dl.watson-orchestrate.ibm.com). Found 2026-11-09 when the IAM-only client got token_rejected 400.
+- [ ] PLAN.md:512-526 (OpenAPI import, tunnel, Code Engine) describes the design that was not chosen; replace with the Python-tools design and say why (no public URL needed, nothing paid).
+- [ ] Note the spike finding: for an open question the model skipped the tool and answered from its own knowledge, so the agent instructions force extract_profile on every message and forbid any job, pay, place or number not returned by a tool.
+- [ ] Run instructions must include: export snapshot, build package, the orchestrate import commands, the backend/.env ORCHESTRATE_* variables from .env.example, and the warm-up script (first tool call after import can take over a minute).
+- [ ] Seed jobs now have fixed IDs job-001..job-080 and a fixed posted_at (2026-01-01); a DB seeded before this change must be deleted and re-seeded.
+- [ ] PLAN.md:583,597,606 treat Orchestrate as optional or cuttable; it is required, and the cut list is TTS, employer flow, PWA and animations only (PLAN.md:595-606 needs a rewrite).
+- [ ] PLAN.md:516-526,538 describe unverified Orchestrate steps ("HTTP skill", localhost spec, IBM Cloud Code Engine); replace with what is actually built.
+- [ ] PLAN.md:195,642 and README stale-term grep: remove Google ADK/Gemini mentions; backend/tests/test_profile.py:4 also still says WATSONX_API_KEY.
+- [ ] .bob/rules:3 says React 18; installed is 19.3.1 (leave Bob's file as history or correct it, owner's call).
+- [ ] .bob/artifacts audit report mentions ADK as history; decide whether the stale-term cleanup should exempt it.
+- [ ] README.md:280,293 say no real employers are listed; now true for the seed data (replaced with invented names, enforced by tests/test_seed_data.py), but PLAN.md:223,409-410 and the README examples still show real names such as Chancery Pavilion.
+- [ ] README.md:292 says the Web Speech API runs entirely in the browser; correct it to: Chrome's Web Speech API sends audio to the browser vendor's speech service; our app never stores or receives audio, only transcript text.
+- [ ] README.md:291-292 omit that transcript text goes to Groq when GROQ_API_KEY is set.
+- [ ] README.md:281 and PLAN.md:81 say the LLM never produces numbers; now true (Groq returns only skill IDs, an area name and languages; coordinates come from areas.json and experience from rules), so describe that; PLAN.md:49 and the Groq section should match.
+- [ ] PLAN.md:454 says numbers come from seed data; weeks and approx_cost_inr in backend/data/learning_paths.json are hand-authored estimates with no source (see docs/learning_paths_changes.md).
+- [ ] README.md:84 and PLAN.md:307 mark the follow-up question done; it now shows on the Landing screen and focuses the mic, and Jobs.tsx no longer renders it; PLAN.md:165 and README.md:184 say Jobs has it.
+- [ ] Say plainly that kn/hi text is not reviewed by a native speaker (docs/TEMPLATES_TO_REVIEW.md), and that learning-path steps show in English in all languages.
+- [ ] README and the audit say `tsc --noEmit` passes; plain `tsc --noEmit` checks nothing here (root tsconfig has files: []), and `tsc -b` actually failed at the baseline until @types/dom-speech-recognition was added; document `npx tsc --noEmit -p tsconfig.app.json` and `npm run build`.
+- [ ] Document the frontend tests (`npm test`, vitest) and new docs/ files in the how-to-run and folder-tree sections.
+- [ ] README.md:63,131,143 and PLAN.md:91,293,308,587 quote test counts (40/17/23); update to the real count.
+- [ ] README.md:85-86,155,161,172,249 and PLAN.md:42,112,122,138,152,166,174,185,188,314-328 describe skill gap as unwired or unbuilt; update after Stage 1.
+- [ ] README.md:174 and PLAN.md:141 say 40 skills; skills.json has 41.
+- [ ] README.md:176 and PLAN.md:143 say 35 learning paths; learning_paths.json has 41.
+- [ ] README.md:80,282 and PLAN.md:131 say ±1.5 km jitter; ±0.008° is about ±0.89 km per axis, about 1.24 km at most (the seed_jobs.py comment is already corrected).
+- [ ] README.md:27-28,242 and PLAN.md:245 show exact distances ("2.4 km"); the app shows approximate "~2.4 km".
+- [ ] README.md:264-266 and PLAN.md:254-262 show an example response with figures the code may not produce; replace with real output.
+- [ ] README.md:285 describes TTS fallback behaviour, and PLAN.md:34,100 show TTS in the stack; no TTS code exists.
+- [ ] PLAN.md:17,33 call the app a PWA; there is no manifest or service worker.
+- [ ] PLAN.md:166,325 plan a pages/SkillGap.tsx; Stage 1 asks for a section under the job cards instead, so record what was built.
+- [ ] README.md:97-110 uses bash-style commands and `cp`; add Windows commands and keep the stale-DB note.
+- [ ] README.md:147-199 and PLAN.md:106-189 folder trees omit current files (scripts/, orchestrate/, CLAUDE.md, DOCS_TODO.md); regenerate from the real tree.
+- [ ] README.md:284 browser support claims (Safari on iOS, Firefox) were not verified.
+- [ ] Privacy section has no delete-my-data statement; decide what it can truthfully say (nothing is persisted server-side, profile lives in browser memory).
+- [ ] frontend/README.md is the untouched Vite scaffold README; replace or delete it.

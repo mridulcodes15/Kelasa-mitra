@@ -13,7 +13,7 @@ BACKEND = Path(__file__).parent.parent
 ROOT = BACKEND.parent
 sys.path.insert(0, str(BACKEND))
 
-from routers.matches import _FOLLOW_UP  # noqa: E402
+from tools.follow_up import _FOLLOW_UP  # noqa: E402
 from tools.job_ranker import _REASON_TEMPLATES, _build_reason  # noqa: E402
 from tools.profile_extractor import _resolve_language  # noqa: E402
 from tools.skill_gap import _GAP_NO_UPLIFT_TEMPLATES, _GAP_TEMPLATES  # noqa: E402

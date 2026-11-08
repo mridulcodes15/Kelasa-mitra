@@ -1,4 +1,4 @@
-import type { WorkerProfile, MatchResponse, SkillGapResponse } from './types';
+import type { AgentChatResponse, WorkerProfile, MatchResponse, SkillGapResponse } from './types';
 
 const BASE = '/api';
 
@@ -26,6 +26,24 @@ export async function fetchMatches(profile: WorkerProfile): Promise<MatchRespons
     throw new Error(`Match fetch failed: ${res.status} — ${msg}`);
   }
   return res.json() as Promise<MatchResponse>;
+}
+
+/**
+ * Ask the IBM watsonx Orchestrate agent through our backend. The Orchestrate key never
+ * reaches the browser. Any failure is reported as source "rules" so the app carries on.
+ */
+export async function agentChat(text: string, uiLanguage: string): Promise<AgentChatResponse> {
+  try {
+    const res = await fetch(`${BASE}/agent/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, ui_language: uiLanguage }),
+    });
+    if (!res.ok) throw new Error(String(res.status));
+    return (await res.json()) as AgentChatResponse;
+  } catch {
+    return { source: 'rules', reply: null, reason: 'backend_unreachable', thread_id: null };
+  }
 }
 
 export async function fetchSkillGap(profile: WorkerProfile): Promise<SkillGapResponse> {

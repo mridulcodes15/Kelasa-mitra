@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { LangCode } from '../lib/types';
-import type { WorkerProfile, JobMatch, SkillGapResponse } from '../lib/types';
+import type { AgentChatResponse, WorkerProfile, JobMatch, SkillGapResponse } from '../lib/types';
 
 export type AppScreen = 'landing' | 'jobs';
 
@@ -41,6 +41,13 @@ interface AppState {
   skillGapFailed: boolean;
   setSkillGapFailed: (v: boolean) => void;
 
+  // IBM watsonx Orchestrate agent (via /api/agent/chat)
+  agentReply: AgentChatResponse | null;
+  setAgentReply: (r: AgentChatResponse | null) => void;
+
+  isAskingAgent: boolean;
+  setIsAskingAgent: (v: boolean) => void;
+
   screen: AppScreen;
   setScreen: (s: AppScreen) => void;
 }
@@ -79,6 +86,12 @@ export const useAppStore = create<AppState>((set) => ({
 
   skillGapFailed: false,
   setSkillGapFailed: (skillGapFailed) => set({ skillGapFailed }),
+
+  agentReply: null,
+  setAgentReply: (agentReply) => set({ agentReply }),
+
+  isAskingAgent: false,
+  setIsAskingAgent: (isAskingAgent) => set({ isAskingAgent }),
 
   screen: 'landing',
   setScreen: (screen) => set({ screen }),

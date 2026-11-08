@@ -28,7 +28,7 @@ Reviewed by: TODO  |  Date: TODO
 | with pay uplift | Learning {skill} could unlock {n} more job{pl} near you, paying about ₹{pay} more per month. | {skill} ಕಲಿತರೆ ನಿಮ್ಮ ಹತ್ತಿರ {n} ಹೊಸ ಕೆಲಸದ ಅವಕಾಶ ಸಿಗಬಹುದು, ತಿಂಗಳಿಗೆ ಸುಮಾರು ₹{pay} ಹೆಚ್ಚು ಸಂಪಾದಿಸಬಹುದು. | {skill} सीखने से आपके आस-पास {n} नए काम का मौका मिल सकता है, और महीने में लगभग ₹{pay} ज़्यादा कमाई हो सकती है। | |
 | without pay uplift | Learning {skill} could unlock {n} more job{pl} near you. | {skill} ಕಲಿತರೆ ನಿಮ್ಮ ಹತ್ತಿರ {n} ಹೊಸ ಕೆಲಸದ ಅವಕಾಶ ಸಿಗಬಹುದು. | {skill} सीखने से आपके आस-पास {n} नए काम का मौका मिल सकता है। | |
 
-## 3. Follow-up questions (`backend/routers/matches.py`)
+## 3. Follow-up questions (`backend/tools/follow_up.py`)
 
 | Key | English | Kannada | Hindi | Review |
 |---|---|---|---|---|
@@ -96,6 +96,9 @@ Reviewed by: TODO  |  Date: TODO
 | stepsEnglishOnly |  | ಹಂತಗಳು ಸದ್ಯಕ್ಕೆ ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ ಮಾತ್ರ ಇವೆ. | चरण अभी केवल अंग्रेज़ी में हैं। | |
 | showSteps | Show steps | ಹಂತಗಳನ್ನು ತೋರಿಸಿ | चरण दिखाएँ | |
 | hideSteps | Hide steps | ಹಂತಗಳನ್ನು ಮರೆಮಾಡಿ | चरण छिपाएँ | |
+| agentLabel | IBM watsonx Orchestrate agent | IBM watsonx Orchestrate ಏಜೆಂಟ್ | IBM watsonx Orchestrate एजेंट | |
+| agentThinking | Asking the IBM watsonx Orchestrate agent… | IBM watsonx Orchestrate ಏಜೆಂಟ್ ಅನ್ನು ಕೇಳುತ್ತಿದ್ದೇನೆ… | IBM watsonx Orchestrate एजेंट से पूछ रहे हैं… | |
+| agentOffline | Agent offline: using the built-in rules. Your job matches are the same. | ಏಜೆಂಟ್ ಲಭ್ಯವಿಲ್ಲ: ಅಂತರ್ಗತ ನಿಯಮಗಳನ್ನು ಬಳಸಲಾಗುತ್ತಿದೆ. ನಿಮ್ಮ ಕೆಲಸದ ಹೊಂದಾಣಿಕೆಗಳು ಬದಲಾಗುವುದಿಲ್ಲ. | एजेंट उपलब्ध नहीं: अंतर्निहित नियमों का उपयोग हो रहा है। आपके काम के मिलान वही रहेंगे। | |
 
 ## 5. Skill names in match reasons (`backend/tools/job_ranker.py`)
 
