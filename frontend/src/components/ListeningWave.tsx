@@ -1,13 +1,12 @@
 /**
- * Animated bars shown while the mic is recording. Decorative only: the bars follow a fixed
- * rhythm, not the real sound level (the Web Speech API gives no audio level, and we do not
- * open a second microphone stream). Under prefers-reduced-motion the bars stand still.
+ * Decorative bars shown while the mic is recording. They move in a fixed rhythm and are
+ * hidden from screen readers. Under prefers-reduced-motion the bars stand still.
  */
 export const WAVE_BARS = 7;
 
 export function ListeningWave() {
   return (
-    <div aria-hidden="true" data-listening-wave className="flex items-center justify-center gap-1.5 h-10 mt-3">
+    <div aria-hidden="true" data-listening-wave data-decorative="true" className="flex items-center justify-center gap-1.5 h-10 mt-3">
       {Array.from({ length: WAVE_BARS }, (_, i) => (
         <span
           key={i}

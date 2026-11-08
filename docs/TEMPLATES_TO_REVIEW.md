@@ -109,6 +109,15 @@ Reviewed by: TODO  |  Date: TODO
 | dataDeleted | Your saved profile was deleted from this device. | ಉಳಿಸಿದ ಪ್ರೊಫೈಲ್ ಅನ್ನು ಈ ಸಾಧನದಿಂದ ಅಳಿಸಲಾಗಿದೆ. | सहेजी गई प्रोफ़ाइल इस डिवाइस से मिटा दी गई। | |
 | storageBlocked | This browser is blocking storage, so your profile cannot be saved. It will be forgotten when you close the page. | ಈ ಬ್ರೌಸರ್ ಸಂಗ್ರಹಣೆಯನ್ನು ತಡೆಯುತ್ತಿದೆ, ಆದ್ದರಿಂದ ಪ್ರೊಫೈಲ್ ಉಳಿಸಲು ಆಗುವುದಿಲ್ಲ. ಪುಟ ಮುಚ್ಚಿದಾಗ ಅದು ಮರೆತುಹೋಗುತ್ತದೆ. | यह ब्राउज़र स्टोरेज रोक रहा है, इसलिए प्रोफ़ाइल सहेजी नहीं जा सकती। पेज बंद करने पर यह भूल जाएगी। | |
 | useSavedProfile | Find jobs with my saved profile → | ಉಳಿಸಿದ ಪ್ರೊಫೈಲ್‌ನಿಂದ ಕೆಲಸ ಹುಡುಕಿ → | सहेजी गई प्रोफ़ाइल से काम खोजें → | |
+| skillsYouHave | Your skills | ನಿಮ್ಮ ಕೌಶಲ್ಯಗಳು | आपके कौशल | |
+| skillsToLearn | To learn | ಕಲಿಯಬೇಕಾದದ್ದು | सीखना है | |
+| agentStepsLabel | Agent steps | ಏಜೆಂಟ್ ಹಂತಗಳು | एजेंट के चरण | |
+| agentStepProfile | Reading your profile | ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಓದುತ್ತಿದೆ | आपकी प्रोफ़ाइल पढ़ रहे हैं | |
+| agentStepJobs | Finding jobs | ಕೆಲಸ ಹುಡುಕುತ್ತಿದೆ | काम खोज रहे हैं | |
+| agentStepSkills | Checking skills | ಕೌಶಲ್ಯ ಪರಿಶೀಲಿಸುತ್ತಿದೆ | कौशल जाँच रहे हैं | |
+| stepsProgress | Steps done: {done} of {total} | ಮುಗಿದ ಹಂತಗಳು: {total} ರಲ್ಲಿ {done} | पूरे हुए चरण: {total} में से {done} | |
+| tapStepHint | Tap a step when you finish it. | ಹಂತ ಮುಗಿದಾಗ ಅದನ್ನು ಒತ್ತಿ. | चरण पूरा होने पर उसे टैप करें। | |
+| stepsComplete | All steps done. Well done! | ಎಲ್ಲಾ ಹಂತಗಳು ಮುಗಿದಿವೆ. ಶಭಾಷ್! | सभी चरण पूरे हुए। शाबाश! | |
 
 ## 5. Skill names in match reasons (`backend/tools/job_ranker.py`)
 

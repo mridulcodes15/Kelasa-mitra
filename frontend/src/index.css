@@ -74,12 +74,23 @@
   animation: listening-wave 0.9s ease-in-out infinite;
 }
 
+/* Agent "thinking" dots: rise and fade in turn. */
+@keyframes thinking-dot {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.35; }
+  40%           { transform: translateY(-4px); opacity: 1; }
+}
+
+.thinking-dot {
+  animation: thinking-dot 1.2s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mic-orb-pulse,
   .mic-ring,
   .mic-ring-2,
   .mic-ring-3,
-  .listening-bar {
+  .listening-bar,
+  .thinking-dot {
     animation: none;
   }
 

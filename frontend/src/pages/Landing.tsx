@@ -9,6 +9,7 @@ import { LanguagePicker } from '../components/LanguagePicker';
 import { AgentPanel } from '../components/AgentPanel';
 import { SpeakToggle } from '../components/SpeakToggle';
 import { SaveOnDevice } from '../components/SaveOnDevice';
+import { ListeningWave } from '../components/ListeningWave';
 import { useReadAloud } from '../hooks/useReadAloud';
 import { stopSpeaking } from '../lib/tts';
 import { t } from '../lib/i18n';
@@ -153,6 +154,8 @@ export function Landing() {
               onClick={handleMicClick}
               label={isListening ? t(lang, 'listening') : t(lang, 'tapToSpeak')}
             />
+            {/* Decorative waveform while recording (fixed rhythm) */}
+            {isListening && <ListeningWave />}
             <p className="mt-3 text-sm text-[#5a6475]">
               {isListening ? t(lang, 'listening') : t(lang, 'tapToSpeak')}
             </p>
@@ -170,8 +173,13 @@ export function Landing() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
-              className="mt-4 max-w-sm w-full bg-white rounded-2xl shadow px-4 py-3 text-sm text-[#1a1a2e]"
+              data-live-words
+              className={[
+                'mt-4 max-w-sm w-full bg-white rounded-2xl shadow px-4 py-3 text-[#1a1a2e] break-words',
+                isListening ? 'text-base border-2 border-[#0d6e6e]/40' : 'text-sm',
+              ].join(' ')}
             >
+              {/* Words appear as they are heard; the part not yet confirmed is grey and italic. */}
               {transcript}
               {interimText && (
                 <span className="text-[#5a6475] italic">{interimText}</span>

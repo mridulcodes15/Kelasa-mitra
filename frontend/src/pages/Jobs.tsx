@@ -61,15 +61,16 @@ export function Jobs() {
   return (
     <main className="page-min-h bg-[#fdf8f0] flex flex-col">
       {/* Header */}
-      <header className="px-4 pt-5 pb-3 flex items-center gap-3">
+      {/* Buttons on the first row and the title on its own row, so long kn/hi titles do not squeeze */}
+      <header className="px-4 pt-5 pb-3 flex flex-wrap items-center gap-x-3 gap-y-1">
         <button
           onClick={() => setScreen('landing')}
           aria-label={t(lang, 'backToProfileAria')}
-          className="text-[#0d6e6e] font-semibold text-sm touch-target"
+          className="text-[#0d6e6e] font-semibold text-sm touch-target whitespace-nowrap mr-auto"
         >
           {t(lang, 'backToProfile')}
         </button>
-        <div className="flex-1">
+        <div className="basis-full order-last min-w-0">
           <h1 className="text-lg font-bold text-[#1a1a2e]">
             {t(lang, 'jobsFound', { n: jobCount })}
           </h1>

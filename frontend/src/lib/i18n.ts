@@ -75,6 +75,13 @@ const en = {
   useSavedProfile: 'Find jobs with my saved profile →',
   skillsYouHave: 'Your skills',
   skillsToLearn: 'To learn',
+  agentStepsLabel: 'Agent steps',
+  agentStepProfile: 'Reading your profile',
+  agentStepJobs: 'Finding jobs',
+  agentStepSkills: 'Checking skills',
+  stepsProgress: 'Steps done: {done} of {total}',
+  tapStepHint: 'Tap a step when you finish it.',
+  stepsComplete: 'All steps done. Well done!',
 };
 
 export type StringKey = keyof typeof en;
@@ -153,6 +160,13 @@ export const strings: Record<LangCode, Record<StringKey, string>> = {
     useSavedProfile: 'ಉಳಿಸಿದ ಪ್ರೊಫೈಲ್‌ನಿಂದ ಕೆಲಸ ಹುಡುಕಿ →',
     skillsYouHave: 'ನಿಮ್ಮ ಕೌಶಲ್ಯಗಳು',
     skillsToLearn: 'ಕಲಿಯಬೇಕಾದದ್ದು',
+    agentStepsLabel: 'ಏಜೆಂಟ್ ಹಂತಗಳು',
+    agentStepProfile: 'ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಓದುತ್ತಿದೆ',
+    agentStepJobs: 'ಕೆಲಸ ಹುಡುಕುತ್ತಿದೆ',
+    agentStepSkills: 'ಕೌಶಲ್ಯ ಪರಿಶೀಲಿಸುತ್ತಿದೆ',
+    stepsProgress: 'ಮುಗಿದ ಹಂತಗಳು: {total} ರಲ್ಲಿ {done}',
+    tapStepHint: 'ಹಂತ ಮುಗಿದಾಗ ಅದನ್ನು ಒತ್ತಿ.',
+    stepsComplete: 'ಎಲ್ಲಾ ಹಂತಗಳು ಮುಗಿದಿವೆ. ಶಭಾಷ್!',
   },
   hi: {
     appName: 'केलस मित्र',
@@ -226,6 +240,13 @@ export const strings: Record<LangCode, Record<StringKey, string>> = {
     useSavedProfile: 'सहेजी गई प्रोफ़ाइल से काम खोजें →',
     skillsYouHave: 'आपके कौशल',
     skillsToLearn: 'सीखना है',
+    agentStepsLabel: 'एजेंट के चरण',
+    agentStepProfile: 'आपकी प्रोफ़ाइल पढ़ रहे हैं',
+    agentStepJobs: 'काम खोज रहे हैं',
+    agentStepSkills: 'कौशल जाँच रहे हैं',
+    stepsProgress: 'पूरे हुए चरण: {total} में से {done}',
+    tapStepHint: 'चरण पूरा होने पर उसे टैप करें।',
+    stepsComplete: 'सभी चरण पूरे हुए। शाबाश!',
   },
 };
 

@@ -2,6 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MotionGlobalConfig } from 'framer-motion';
 import App from '../App';
+import { Jobs } from '../pages/Jobs';
+import { useAppStore } from '../store/appStore';
+import { jobMatch, profile } from './fixtures';
 import { stubMatchMedia } from './setup';
 import { readFileSync } from 'node:fs';
 
@@ -38,6 +41,19 @@ describe('app frame', () => {
 
   it('clips instead of scrolling sideways', () => {
     expect(CSS).toMatch(/\.app-column\s*{[^}]*overflow:\s*clip/);
+  });
+});
+
+describe('jobs header', () => {
+  it('puts the title on its own row so long kn/hi titles do not squeeze the buttons', () => {
+    useAppStore.setState({ lang: 'kn', matches: [jobMatch()], profile });
+    render(<Jobs />);
+    const header = document.querySelector('header') as HTMLElement;
+    expect(header.className).toContain('flex-wrap');
+    const titleRow = header.querySelector('h1')?.parentElement as HTMLElement;
+    expect(titleRow.className).toContain('basis-full');
+    const back = screen.getByRole('button', { name: 'ಪ್ರೊಫೈಲ್‌ಗೆ ಹಿಂತಿರುಗಿ' });
+    expect(back.className).toContain('whitespace-nowrap');
   });
 });
 
