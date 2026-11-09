@@ -149,7 +149,7 @@ _SEED: list[dict] = [
     {"title": "Electrician (AC Installation)", "employer": "HSR Home Repairs", "area": "HSR Layout", "lat": 12.9116, "lon": 77.6474, "pay_min": 22000, "pay_max": 28000, "skills": ["electrician", "ac_technician"], "languages": ["kannada", "hindi"], "type": "job"},
     # A driver job in south Bengaluru, so drivers there are not sent to Electronic City first.
     {"title": "Family Driver", "employer": "South End Driver Services", "area": "Jayanagar", "lat": 12.9250, "lon": 77.5938, "pay_min": 15000, "pay_max": 19000, "skills": ["driver_car"], "languages": ["kannada"], "type": "job"},
-    # ── ADDED 2026-11-10 for demo coverage (invented employers) ───────────────
+    # ── ADDED 2026-11-09 for demo coverage (invented employers) ───────────────
     # One single-skill job per gap, so that for every area chip and each of the 8 most common
     # skills in the sample inputs the top match shares the skill and is within 5 km
     # (tests/test_demo_quality.py::test_area_chip_and_common_skill_coverage).

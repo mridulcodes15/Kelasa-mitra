@@ -1,7 +1,7 @@
 """
 Tests for Phase 1 – profile extraction.
 
-Runs entirely against the offline fallback (no WATSONX_API_KEY required).
+Runs entirely against the offline fallback (no GROQ_API_KEY required).
 Language is driven by ui_language (picker), not langdetect, so detected_language
 is deterministic and the wide allow-lists are gone.
 """
