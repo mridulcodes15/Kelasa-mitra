@@ -1,9 +1,10 @@
 # ಕೆಲಸ ಮಿತ್ರ — Kelasa Mitra
 
 **Built by:** Mridul Paradkar, Smt. Indira Gandhi College of Engineering, 3rd year, CSE (AI & ML)
+
 **Entry:** IBM Bobathon: Build for Bengaluru · Student category · Theme: *More Opportunity, Greater Together* · Solo
 
-*Live demo:* https://kelasa-mitra.onrender.com/ (free hosting, so the first load can take about a minute to wake up; sample data only, please do not enter personal details)
+**Live demo:** https://kelasa-mitra.onrender.com/ (free hosting, so the first load can take about a minute to wake up; sample data only, please do not enter personal details)
 
 *Kelasa Mitra* means "work friend" in Kannada. A blue-collar or gig worker in Bengaluru speaks or
 types one sentence about their work in Kannada, Hindi or English, and gets nearby jobs with a
