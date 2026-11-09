@@ -30,7 +30,10 @@ export function useProfile() {
 
   /** Matches, then skill gap, for a profile; asks the follow-up question when one is due. */
   const findJobsFor = useCallback(
-    async (result: WorkerProfile) => {
+    async (found: WorkerProfile) => {
+      // Reasons, follow-up questions and skill-gap text come back in profile.detected_language,
+      // so it always carries the picker's language (a saved profile may hold an older one).
+      const result: WorkerProfile = { ...found, detected_language: lang };
       setIsFetchingMatches(true);
       let hasMatches = false;
       try {
@@ -61,7 +64,7 @@ export function useProfile() {
         }
       }
     },
-    [setFollowUpQuestion, setIsFetchingMatches, setIsFetchingSkillGap, setMatches, setScreen,
+    [lang, setFollowUpQuestion, setIsFetchingMatches, setIsFetchingSkillGap, setMatches, setScreen,
      setSkillGap, setSkillGapFailed],
   );
 

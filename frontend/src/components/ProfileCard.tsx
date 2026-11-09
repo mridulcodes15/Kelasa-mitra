@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import type { WorkerProfile } from '../lib/types';
 import type { LangCode } from '../lib/types';
 import { t } from '../lib/i18n';
+import { skillName } from '../lib/skills';
 
 interface SkillBadgeProps {
   label: string;
@@ -49,13 +50,6 @@ interface ProfileCardProps {
   profile: WorkerProfile;
   lang: LangCode;
   isLoading?: boolean;
-}
-
-// Human-readable skill label from ID
-function skillLabel(id: string): string {
-  return id
-    .replace(/_/g, ' ')
-    .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 export function ProfileCard({ profile, lang, isLoading }: ProfileCardProps) {
@@ -108,7 +102,7 @@ export function ProfileCard({ profile, lang, isLoading }: ProfileCardProps) {
           </p>
           <AnimatePresence>
             {profile.skills.map((s) => (
-              <SkillBadge key={s} label={skillLabel(s)} />
+              <SkillBadge key={s} label={skillName(s, lang)} />
             ))}
           </AnimatePresence>
         </div>

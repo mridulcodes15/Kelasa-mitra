@@ -10,6 +10,7 @@ import { AgentPanel } from '../components/AgentPanel';
 import { SpeakToggle } from '../components/SpeakToggle';
 import { SaveOnDevice } from '../components/SaveOnDevice';
 import { ListeningWave } from '../components/ListeningWave';
+import { LanguageNudge } from '../components/LanguageNudge';
 import { useReadAloud } from '../hooks/useReadAloud';
 import { stopSpeaking } from '../lib/tts';
 import { t } from '../lib/i18n';
@@ -211,6 +212,9 @@ export function Landing() {
             {isExtracting ? '…' : t(lang, 'findJobs')}
           </button>
         </form>
+
+        {/* Suggest switching the picker when the words are clearly in another language */}
+        <LanguageNudge text={`${transcript} ${interimText}`} />
 
         {/* Error message */}
         <AnimatePresence>

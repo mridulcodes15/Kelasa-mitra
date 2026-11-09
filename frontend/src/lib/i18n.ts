@@ -82,6 +82,8 @@ const en = {
   stepsProgress: 'Steps done: {done} of {total}',
   tapStepHint: 'Tap a step when you finish it.',
   stepsComplete: 'All steps done. Well done!',
+  switchLangPrompt: 'Looks like English. Switch to English?',
+  notNow: 'Not now',
 };
 
 export type StringKey = keyof typeof en;
@@ -167,6 +169,8 @@ export const strings: Record<LangCode, Record<StringKey, string>> = {
     stepsProgress: 'ಮುಗಿದ ಹಂತಗಳು: {total} ರಲ್ಲಿ {done}',
     tapStepHint: 'ಹಂತ ಮುಗಿದಾಗ ಅದನ್ನು ಒತ್ತಿ.',
     stepsComplete: 'ಎಲ್ಲಾ ಹಂತಗಳು ಮುಗಿದಿವೆ. ಶಭಾಷ್!',
+    switchLangPrompt: 'ಇದು ಕನ್ನಡದಂತೆ ಕಾಣುತ್ತಿದೆ. ಕನ್ನಡಕ್ಕೆ ಬದಲಿಸುವುದೇ?',
+    notNow: 'ಈಗ ಬೇಡ',
   },
   hi: {
     appName: 'केलस मित्र',
@@ -247,6 +251,8 @@ export const strings: Record<LangCode, Record<StringKey, string>> = {
     stepsProgress: 'पूरे हुए चरण: {total} में से {done}',
     tapStepHint: 'चरण पूरा होने पर उसे टैप करें।',
     stepsComplete: 'सभी चरण पूरे हुए। शाबाश!',
+    switchLangPrompt: 'यह हिंदी जैसा लग रहा है। हिंदी पर बदलें?',
+    notNow: 'अभी नहीं',
   },
 };
 

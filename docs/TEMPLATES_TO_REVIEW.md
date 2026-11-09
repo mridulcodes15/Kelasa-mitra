@@ -118,6 +118,8 @@ Reviewed by: TODO  |  Date: TODO
 | stepsProgress | Steps done: {done} of {total} | ಮುಗಿದ ಹಂತಗಳು: {total} ರಲ್ಲಿ {done} | पूरे हुए चरण: {total} में से {done} | |
 | tapStepHint | Tap a step when you finish it. | ಹಂತ ಮುಗಿದಾಗ ಅದನ್ನು ಒತ್ತಿ. | चरण पूरा होने पर उसे टैप करें। | |
 | stepsComplete | All steps done. Well done! | ಎಲ್ಲಾ ಹಂತಗಳು ಮುಗಿದಿವೆ. ಶಭಾಷ್! | सभी चरण पूरे हुए। शाबाश! | |
+| switchLangPrompt | Looks like English. Switch to English? | ಇದು ಕನ್ನಡದಂತೆ ಕಾಣುತ್ತಿದೆ. ಕನ್ನಡಕ್ಕೆ ಬದಲಿಸುವುದೇ? | यह हिंदी जैसा लग रहा है। हिंदी पर बदलें? | |
+| notNow | Not now | ಈಗ ಬೇಡ | अभी नहीं | |
 
 ## 5. Skill names in match reasons (`backend/tools/job_ranker.py`)
 
