@@ -4,16 +4,19 @@ from __future__ import annotations
 from typing import Optional
 
 from fastapi import APIRouter
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from tools.profile_extractor import extract_profile
 from models.worker import WorkerProfile
 
 router = APIRouter(prefix="/api/profile", tags=["profile"])
 
+# Same limit as /api/agent/chat: bounds the work done on untrusted input.
+MAX_TEXT_CHARS = 2000
+
 
 class ExtractRequest(BaseModel):
-    text: str
+    text: str = Field(..., max_length=MAX_TEXT_CHARS)
     ui_language: Optional[str] = None  # "en" | "kn" | "hi" — set by frontend language picker
 
 

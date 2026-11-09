@@ -9,7 +9,7 @@ Coordinate jitter: each job lat/lon is randomised up to ±0.008° (about 0.9 km 
 each axis, about 1.2 km at most) from the area centre so distances shown to workers are realistic rather than all
 being identical.
 
-Everything is deterministic: job IDs are job-001 to job-094, the jitter uses a fixed
+Everything is deterministic: job IDs are job-001 to job-130, the jitter uses a fixed
 random seed, and posted_at is a fixed date. build_seed_rows() is the single source
 for both the SQLite seed and data/jobs_snapshot.json (used by the Orchestrate tools).
 """
@@ -146,8 +146,51 @@ _SEED: list[dict] = [
     {"title": "Security Guard", "employer": "Ashoka Residency Owners Association", "area": "Jayanagar", "lat": 12.9250, "lon": 77.5938, "pay_min": 13000, "pay_max": 16000, "skills": ["security_guard"], "languages": ["kannada"], "type": "job"},
     # Electricians in HSR Layout: AC skills pay more.
     {"title": "Electrician", "employer": "HSR Home Repairs", "area": "HSR Layout", "lat": 12.9116, "lon": 77.6474, "pay_min": 17000, "pay_max": 22000, "skills": ["electrician"], "languages": ["kannada", "hindi"], "type": "job"},
-    {"title": "Electrician (AC Installation)", "employer": "HSR Home Repairs", "area": "HSR Layout", "lat": 12.9116, "lon": 77.6474, "pay_min": 22000, "pay_max": 28000, "skills": ["electrician", "ac_technician"], "languages": ["kannada", "hindi"], "type": "job"},    # A driver job in south Bengaluru, so drivers there are not sent to Electronic City first.
+    {"title": "Electrician (AC Installation)", "employer": "HSR Home Repairs", "area": "HSR Layout", "lat": 12.9116, "lon": 77.6474, "pay_min": 22000, "pay_max": 28000, "skills": ["electrician", "ac_technician"], "languages": ["kannada", "hindi"], "type": "job"},
+    # A driver job in south Bengaluru, so drivers there are not sent to Electronic City first.
     {"title": "Family Driver", "employer": "South End Driver Services", "area": "Jayanagar", "lat": 12.9250, "lon": 77.5938, "pay_min": 15000, "pay_max": 19000, "skills": ["driver_car"], "languages": ["kannada"], "type": "job"},
+    # ── ADDED 2026-11-10 for demo coverage (invented employers) ───────────────
+    # One single-skill job per gap, so that for every area chip and each of the 8 most common
+    # skills in the sample inputs the top match shares the skill and is within 5 km
+    # (tests/test_demo_quality.py::test_area_chip_and_common_skill_coverage).
+    {"title": "Two-Wheeler Rider", "employer": "Whitefield Bike Courier Co-op", "area": "Whitefield", "lat": 12.9698, "lon": 77.7499, "pay_min": 13000, "pay_max": 17000, "skills": ["two_wheeler"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Car Driver", "employer": "Whitefield Car Driver Services", "area": "Whitefield", "lat": 12.9698, "lon": 77.7499, "pay_min": 15000, "pay_max": 19000, "skills": ["driver_car"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Tailor", "employer": "Whitefield Stitch Studio", "area": "Whitefield", "lat": 12.9698, "lon": 77.7499, "pay_min": 12000, "pay_max": 15500, "skills": ["tailoring"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Housekeeping Staff", "employer": "Whitefield Home Cleaning Co-op", "area": "Whitefield", "lat": 12.9698, "lon": 77.7499, "pay_min": 11000, "pay_max": 14000, "skills": ["housekeeping"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Delivery Associate", "employer": "Whitefield Parcel Hub", "area": "Whitefield", "lat": 12.9698, "lon": 77.7499, "pay_min": 13000, "pay_max": 16500, "skills": ["delivery"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Two-Wheeler Rider", "employer": "Koramangala Bike Courier Co-op", "area": "Koramangala", "lat": 12.9352, "lon": 77.6245, "pay_min": 13000, "pay_max": 17000, "skills": ["two_wheeler"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Tailor", "employer": "Koramangala Stitch Studio", "area": "Koramangala", "lat": 12.9352, "lon": 77.6245, "pay_min": 12000, "pay_max": 15500, "skills": ["tailoring"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Cook", "employer": "Koramangala Meals Kitchen Co.", "area": "Koramangala", "lat": 12.9352, "lon": 77.6245, "pay_min": 13000, "pay_max": 16000, "skills": ["cook"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Delivery Associate", "employer": "Koramangala Parcel Hub", "area": "Koramangala", "lat": 12.9352, "lon": 77.6245, "pay_min": 13000, "pay_max": 16500, "skills": ["delivery"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Housekeeping Staff", "employer": "Jayanagar Home Cleaning Co-op", "area": "Jayanagar", "lat": 12.925, "lon": 77.5938, "pay_min": 11000, "pay_max": 14000, "skills": ["housekeeping"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Two-Wheeler Rider", "employer": "Electronic City Bike Courier Co-op", "area": "Electronic City", "lat": 12.8452, "lon": 77.6602, "pay_min": 13000, "pay_max": 17000, "skills": ["two_wheeler"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Hotel Helper", "employer": "Electronic City Lodge Helpers Pool", "area": "Electronic City", "lat": 12.8452, "lon": 77.6602, "pay_min": 11000, "pay_max": 14000, "skills": ["hotel_helper"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Hotel Helper", "employer": "Whitefield Lodge Helpers Pool", "area": "Whitefield", "lat": 12.9698, "lon": 77.7499, "pay_min": 11000, "pay_max": 14000, "skills": ["hotel_helper"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Hotel Helper", "employer": "Koramangala Lodge Helpers Pool", "area": "Koramangala", "lat": 12.9352, "lon": 77.6245, "pay_min": 11000, "pay_max": 14000, "skills": ["hotel_helper"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Tailor", "employer": "Electronic City Stitch Studio", "area": "Electronic City", "lat": 12.8452, "lon": 77.6602, "pay_min": 12000, "pay_max": 15500, "skills": ["tailoring"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Housekeeping Staff", "employer": "Electronic City Home Cleaning Co-op", "area": "Electronic City", "lat": 12.8452, "lon": 77.6602, "pay_min": 11000, "pay_max": 14000, "skills": ["housekeeping"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Cook", "employer": "Electronic City Meals Kitchen Co.", "area": "Electronic City", "lat": 12.8452, "lon": 77.6602, "pay_min": 13000, "pay_max": 16000, "skills": ["cook"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Delivery Associate", "employer": "Electronic City Parcel Hub", "area": "Electronic City", "lat": 12.8452, "lon": 77.6602, "pay_min": 13000, "pay_max": 16500, "skills": ["delivery"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Two-Wheeler Rider", "employer": "Yelahanka Bike Courier Co-op", "area": "Yelahanka", "lat": 13.1007, "lon": 77.5963, "pay_min": 13000, "pay_max": 17000, "skills": ["two_wheeler"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Hotel Helper", "employer": "Yelahanka Lodge Helpers Pool", "area": "Yelahanka", "lat": 13.1007, "lon": 77.5963, "pay_min": 11000, "pay_max": 14000, "skills": ["hotel_helper"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Car Driver", "employer": "Yelahanka Car Driver Services", "area": "Yelahanka", "lat": 13.1007, "lon": 77.5963, "pay_min": 15000, "pay_max": 19000, "skills": ["driver_car"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Housekeeping Staff", "employer": "Yelahanka Home Cleaning Co-op", "area": "Yelahanka", "lat": 13.1007, "lon": 77.5963, "pay_min": 11000, "pay_max": 14000, "skills": ["housekeeping"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Cook", "employer": "Yelahanka Meals Kitchen Co.", "area": "Yelahanka", "lat": 13.1007, "lon": 77.5963, "pay_min": 13000, "pay_max": 16000, "skills": ["cook"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Delivery Associate", "employer": "Yelahanka Parcel Hub", "area": "Yelahanka", "lat": 13.1007, "lon": 77.5963, "pay_min": 13000, "pay_max": 16500, "skills": ["delivery"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Two-Wheeler Rider", "employer": "Marathahalli Bike Courier Co-op", "area": "Marathahalli", "lat": 12.9591, "lon": 77.6971, "pay_min": 13000, "pay_max": 17000, "skills": ["two_wheeler"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Hotel Helper", "employer": "Marathahalli Lodge Helpers Pool", "area": "Marathahalli", "lat": 12.9591, "lon": 77.6971, "pay_min": 11000, "pay_max": 14000, "skills": ["hotel_helper"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Car Driver", "employer": "Marathahalli Car Driver Services", "area": "Marathahalli", "lat": 12.9591, "lon": 77.6971, "pay_min": 15000, "pay_max": 19000, "skills": ["driver_car"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Tailor", "employer": "Marathahalli Stitch Studio", "area": "Marathahalli", "lat": 12.9591, "lon": 77.6971, "pay_min": 12000, "pay_max": 15500, "skills": ["tailoring"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Security Guard", "employer": "Marathahalli Apartment Guard Services", "area": "Marathahalli", "lat": 12.9591, "lon": 77.6971, "pay_min": 13000, "pay_max": 16000, "skills": ["security_guard"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Housekeeping Staff", "employer": "Marathahalli Home Cleaning Co-op", "area": "Marathahalli", "lat": 12.9591, "lon": 77.6971, "pay_min": 11000, "pay_max": 14000, "skills": ["housekeeping"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Delivery Associate", "employer": "Marathahalli Parcel Hub", "area": "Marathahalli", "lat": 12.9591, "lon": 77.6971, "pay_min": 13000, "pay_max": 16500, "skills": ["delivery"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Car Driver", "employer": "HSR Layout Car Driver Services", "area": "HSR Layout", "lat": 12.9116, "lon": 77.6474, "pay_min": 15000, "pay_max": 19000, "skills": ["driver_car"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Security Guard", "employer": "HSR Layout Apartment Guard Services", "area": "HSR Layout", "lat": 12.9116, "lon": 77.6474, "pay_min": 13000, "pay_max": 16000, "skills": ["security_guard"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Housekeeping Staff", "employer": "HSR Layout Home Cleaning Co-op", "area": "HSR Layout", "lat": 12.9116, "lon": 77.6474, "pay_min": 11000, "pay_max": 14000, "skills": ["housekeeping"], "languages": ["kannada", "hindi"], "type": "job"},
+    # Keep a Whitefield cook's nearby jobs first and food-safety training worth suggesting:
+    # one more single-skill cook job and one food-safety cook job in Hoodi.
+    {"title": "Cook", "employer": "Hoodi Meals Kitchen Co.", "area": "Hoodi", "lat": 12.9916, "lon": 77.7164, "pay_min": 13000, "pay_max": 16000, "skills": ["cook"], "languages": ["kannada", "hindi"], "type": "job"},
+    {"title": "Head Cook (Food Safety Trained)", "employer": "Hoodi Meals Kitchen Co.", "area": "Hoodi", "lat": 12.9916, "lon": 77.7164, "pay_min": 19000, "pay_max": 23000, "skills": ["cook", "food_handler"], "languages": ["kannada", "hindi"], "type": "job"},
 ]
 # fmt: on
 
@@ -156,7 +199,7 @@ POSTED_AT = "2026-01-01T00:00:00+00:00"  # fixed, so every seed and snapshot is 
 
 def build_seed_rows() -> list[dict[str, Any]]:
     """
-    Return the 80 seed jobs in the shape get_all_jobs() returns
+    Return all seed jobs in the shape get_all_jobs() returns
     (skills_required and languages as lists). Same output on every call.
     """
     rng = random.Random(42)

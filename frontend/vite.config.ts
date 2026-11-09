@@ -9,6 +9,9 @@ export default defineConfig({
   ],
   server: {
     port: 5173,
+    // Lets the dev server answer through a Cloudflare quick tunnel (https://*.trycloudflare.com)
+    // for testing on a phone. Only that domain is added; other unknown hosts stay blocked.
+    allowedHosts: ['.trycloudflare.com'],
     proxy: {
       '/api': {
         target: 'http://localhost:8000',

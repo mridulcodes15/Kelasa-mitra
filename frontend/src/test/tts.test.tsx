@@ -79,7 +79,7 @@ describe('read-aloud on screen', () => {
     useAppStore.setState({ lang: 'kn', followUpQuestion: QUESTION });
     render(<Landing />);
     expect(screen.getByText(new RegExp(QUESTION))).toBeTruthy();
-    await new Promise((r) => setTimeout(r, 20));
+    await new Promise((r) => { setTimeout(r, 20); });
     expect(synth.speak).not.toHaveBeenCalled();
   });
 
@@ -95,7 +95,7 @@ describe('read-aloud on screen', () => {
     const synth = installSpeech(['kn-IN']);
     useAppStore.setState({ lang: 'kn', followUpQuestion: QUESTION, ttsMuted: true });
     render(<Landing />);
-    await new Promise((r) => setTimeout(r, 20));
+    await new Promise((r) => { setTimeout(r, 20); });
     expect(synth.speak).not.toHaveBeenCalled();
   });
 

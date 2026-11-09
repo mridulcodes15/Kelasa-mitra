@@ -52,7 +52,7 @@ export function Landing() {
     if (isListening) {
       stopListening();
       const finalText = accumulatedRef.current.trim();
-      if (finalText) runExtraction(finalText);
+      if (finalText) void runExtraction(finalText); // errors are shown by runExtraction
     } else {
       // An answer to a follow-up adds to what the worker already said.
       accumulatedRef.current = followUpQuestion ? transcript : '';
@@ -65,7 +65,7 @@ export function Landing() {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const text = transcript.trim();
-      if (text) runExtraction(text);
+      if (text) void runExtraction(text);
     },
     [transcript, runExtraction],
   );
@@ -75,7 +75,7 @@ export function Landing() {
     (areaName: string) => {
       const text = `${transcript.trim()} ${areaName}`.trim();
       setTranscript(text + ' ');
-      runExtraction(text);
+      void runExtraction(text);
     },
     [transcript, setTranscript, runExtraction],
   );
@@ -246,7 +246,7 @@ export function Landing() {
         {savedProfile && !transcript.trim() && !isExtracting && (
           <button
             type="button"
-            onClick={() => runSavedProfile(savedProfile)}
+            onClick={() => void runSavedProfile(savedProfile)}
             className="mt-4 w-full max-w-sm mx-auto block bg-[#0d6e6e] text-white font-semibold py-4 rounded-2xl text-base
               hover:bg-[#0f9d9d] active:scale-[0.98] transition-all touch-target"
           >

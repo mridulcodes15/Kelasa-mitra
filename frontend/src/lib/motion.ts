@@ -47,12 +47,11 @@ export function useSkipAnimationsWhenReduced(): boolean {
  * prefers-reduced-motion; callers keep the real value in the accessibility tree either way.
  */
 export function useCountUp(target: number, durationMs = 600): number {
-  const [shown, setShown] = useState(() => (prefersReducedMotion() ? target : 0));
+  const instant = prefersReducedMotion() || typeof window.requestAnimationFrame !== 'function';
+  // The count belongs to one target: a new target starts again from 0 without an extra render.
+  const [count, setCount] = useState({ target, shown: 0 });
   useEffect(() => {
-    if (prefersReducedMotion() || typeof window.requestAnimationFrame !== 'function') {
-      setShown(target);
-      return;
-    }
+    if (instant) return;
     let frame = 0;
     // Time from the first frame's own timestamp: frame clocks need not match performance.now().
     let start: number | null = null;
@@ -60,14 +59,14 @@ export function useCountUp(target: number, durationMs = 600): number {
       start ??= now;
       const progress = Math.max(0, Math.min(1, (now - start) / durationMs));
       const eased = 1 - (1 - progress) ** 3;
-      setShown(Math.round(target * eased));
+      setCount({ target, shown: Math.round(target * eased) });
       if (progress < 1) frame = window.requestAnimationFrame(tick);
     };
-    setShown(0);
     frame = window.requestAnimationFrame(tick);
     return () => window.cancelAnimationFrame(frame);
-  }, [target, durationMs]);
-  return shown;
+  }, [target, durationMs, instant]);
+  if (instant) return target;
+  return count.target === target ? count.shown : 0;
 }
 
 /** Delay (s) for the i-th card of a list entering; capped so content never waits long. */

@@ -65,7 +65,7 @@ export function ProfileCard({ profile, lang, isLoading }: ProfileCardProps) {
 
   const rows: ProfileRow[] = [];
 
-  if (profile.experience_years != null) {
+  if (profile.experience_years !== null) {
     rows.push({
       icon: '📅',
       label: t(lang, 'expLabel'),

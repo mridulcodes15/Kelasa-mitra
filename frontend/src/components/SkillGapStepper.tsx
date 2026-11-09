@@ -110,11 +110,11 @@ export function SkillGapStepper({ gap, lang, defaultOpen = false, index = 0 }: S
               </div>
             )}
             <ol className="mt-3">
-              {gap.learning_path.map((step, index) => {
+              {gap.learning_path.map((step, stepIndex) => {
                 const isDone = done.has(step.step);
                 return (
                   <li key={step.step} className="relative pb-2 last:pb-0">
-                    {index < gap.learning_path.length - 1 && (
+                    {stepIndex < gap.learning_path.length - 1 && (
                       <span aria-hidden="true" className="absolute left-[23px] top-10 bottom-0 w-0.5 bg-stone-200" />
                     )}
                     {/* Tap (or Enter/Space) marks a step done; tap again to undo. Kept for this visit only. */}

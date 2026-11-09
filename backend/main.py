@@ -2,6 +2,9 @@
 from __future__ import annotations
 
 import logging
+import os
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -15,30 +18,43 @@ logging.basicConfig(level=logging.INFO)
 from routers import profile_router, matches_router, skill_gap_router, agent_router  # noqa: E402 (after dotenv load)
 from db.seed_jobs import seed_jobs  # noqa: E402
 
+# The frontend calls the API through the Vite proxy (same origin), so CORS is only needed
+# when a page on another origin calls the API directly. Allow only known origins, never "*".
+DEFAULT_CORS_ORIGINS = ("http://localhost:5173", "http://127.0.0.1:5173")
+
+
+def cors_origins() -> list[str]:
+    """Origins from CORS_ALLOWED_ORIGINS (comma-separated), else the local Vite dev server."""
+    configured = [o.strip() for o in os.getenv("CORS_ALLOWED_ORIGINS", "").split(",") if o.strip()]
+    return [o for o in configured if o != "*"] or list(DEFAULT_CORS_ORIGINS)
+
+
+@asynccontextmanager
+async def lifespan(_: FastAPI) -> AsyncIterator[None]:
+    n = seed_jobs()
+    if n:
+        logging.getLogger(__name__).info("Seeded %d jobs.", n)
+    yield
+
+
 app = FastAPI(
     title="Kelasa Mitra API",
     description="Voice-first job-matching for Bengaluru blue-collar workers",
     version="0.1.0",
+    lifespan=lifespan,
 )
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=cors_origins(),
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
 )
 
 app.include_router(profile_router)
 app.include_router(matches_router)
 app.include_router(skill_gap_router)
 app.include_router(agent_router)
-
-
-@app.on_event("startup")
-def _startup() -> None:
-    n = seed_jobs()
-    if n:
-        logging.getLogger(__name__).info("Seeded %d jobs.", n)
 
 
 @app.get("/health")

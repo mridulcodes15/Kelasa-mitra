@@ -29,7 +29,9 @@ export function useSpeech(
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const statusRef = useRef<SpeechStatus>('idle');
   const onFinalRef = useRef(onFinalResult);
-  onFinalRef.current = onFinalResult;
+  useEffect(() => {
+    onFinalRef.current = onFinalResult;
+  }, [onFinalResult]);
 
   const SpeechRecognitionCtor =
     typeof window !== 'undefined'

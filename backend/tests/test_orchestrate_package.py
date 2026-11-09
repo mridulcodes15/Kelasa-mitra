@@ -76,7 +76,7 @@ def test_built_package_in_repo_is_up_to_date(package):
 
 def test_seed_ids_are_deterministic():
     ids = [row["id"] for row in build_seed_rows()]
-    assert ids == [f"job-{i:03d}" for i in range(1, len(ids) + 1)] and len(ids) == 94
+    assert ids == [f"job-{i:03d}" for i in range(1, len(ids) + 1)] and len(ids) == 130
     assert build_seed_rows() == build_seed_rows()
 
 

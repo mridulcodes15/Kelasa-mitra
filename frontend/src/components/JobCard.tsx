@@ -3,7 +3,8 @@ import type { JobMatch } from '../lib/types';
 import { useAppStore } from '../store/appStore';
 import { t } from '../lib/i18n';
 import { MatchRing } from './MatchRing';
-import { SWIPE_THRESHOLD, dragFeedback, peekStyle, tiltFor } from '../lib/deck';
+import { SWIPE_THRESHOLD, peekStyle, tiltFor } from '../lib/deck';
+import { DragFeedback } from './DragFeedback';
 import { jobIcon, skillName } from '../lib/skills';
 import { prefersReducedMotion, staggerDelay } from '../lib/motion';
 
@@ -44,10 +45,6 @@ export function JobCard({ match, onSave, onSkip, isTop, depth = isTop ? 0 : 1 }:
   const x = useMotionValue(0);
   // The top card tilts while dragged, and tints green (save) or grey (skip) up to the threshold.
   const rotate = useTransform(x, (v) => tiltFor(v, reduced));
-  const saveTint = useTransform(x, (v) => dragFeedback(v).save);
-  const skipTint = useTransform(x, (v) => dragFeedback(v).skip);
-  const saveStamp = useTransform(x, (v) => (dragFeedback(v).decision === 'save' ? 1 : 0));
-  const skipStamp = useTransform(x, (v) => (dragFeedback(v).decision === 'skip' ? 1 : 0));
   const peek = peekStyle(depth);
 
   function handleDragEnd(_: unknown, info: { offset: { x: number } }) {
@@ -88,23 +85,7 @@ export function JobCard({ match, onSave, onSkip, isTop, depth = isTop ? 0 : 1 }:
       inert={!isTop}
       aria-hidden={!isTop || undefined}
     >
-      {isTop && (
-        <>
-          {/* Drag feedback: decoration only; the buttons and arrow keys do the same thing. */}
-          <motion.div aria-hidden="true" data-tint="save" style={{ opacity: saveTint }}
-            className="pointer-events-none absolute inset-0 bg-green-500" />
-          <motion.div aria-hidden="true" data-tint="skip" style={{ opacity: skipTint }}
-            className="pointer-events-none absolute inset-0 bg-stone-500" />
-          <motion.span aria-hidden="true" style={{ opacity: saveStamp }}
-            className="pointer-events-none absolute top-5 left-5 z-10 rotate-[-12deg] rounded-xl border-4 border-green-700 bg-white/90 px-3 py-1 text-lg font-extrabold text-green-700">
-            {t(lang, 'save')}
-          </motion.span>
-          <motion.span aria-hidden="true" style={{ opacity: skipStamp }}
-            className="pointer-events-none absolute top-5 right-5 z-10 rotate-[12deg] rounded-xl border-4 border-stone-600 bg-white/90 px-3 py-1 text-lg font-extrabold text-stone-700">
-            {t(lang, 'skip')}
-          </motion.span>
-        </>
-      )}
+      {isTop && <DragFeedback x={x} />}
 
       {/* Top row: icon, title, match ring */}
       <div className="flex items-start gap-3">

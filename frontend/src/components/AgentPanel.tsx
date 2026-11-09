@@ -1,12 +1,6 @@
 import { useAppStore } from '../store/appStore';
-import { t, type StringKey } from '../lib/i18n';
-
-/** The agent's three tool calls, in order. Labels only: the app gets no live progress. */
-export const AGENT_STEPS: { tool: string; label: StringKey }[] = [
-  { tool: 'extract_profile', label: 'agentStepProfile' },
-  { tool: 'find_matches', label: 'agentStepJobs' },
-  { tool: 'skill_gap', label: 'agentStepSkills' },
-];
+import { t } from '../lib/i18n';
+import { AGENT_STEPS } from '../lib/agentSteps';
 
 interface AgentPanelProps {
   /** Text already on screen (e.g. the follow-up card); an identical agent reply is not repeated. */
@@ -18,7 +12,7 @@ interface AgentPanelProps {
  * answered instead. Job and skill-gap cards never come from this text.
  */
 export function AgentPanel({ hideReplyEqualTo }: AgentPanelProps) {
-  const { lang, agentReply, isAskingAgent } = useAppStore();
+  const { lang, agentReply, isAskingAgent, askedQuestions } = useAppStore();
 
   if (isAskingAgent) {
     return (
@@ -53,6 +47,9 @@ export function AgentPanel({ hideReplyEqualTo }: AgentPanelProps) {
 
   const reply = agentReply.reply?.trim();
   if (!reply || reply === hideReplyEqualTo?.trim()) return null;
+  // A follow-up question the app already asked is either on screen or already answered (the
+  // worker may be looking at jobs): never show it again here.
+  if (askedQuestions.includes(reply)) return null;
 
   return (
     <section

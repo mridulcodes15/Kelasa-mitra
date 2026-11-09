@@ -1,7 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { act, render, screen, within } from '@testing-library/react';
-import { AGENT_STEPS, AgentPanel } from '../components/AgentPanel';
+import { AgentPanel } from '../components/AgentPanel';
+import { AGENT_STEPS } from '../lib/agentSteps';
 import { strings } from '../lib/i18n';
 import { useAppStore } from '../store/appStore';
 

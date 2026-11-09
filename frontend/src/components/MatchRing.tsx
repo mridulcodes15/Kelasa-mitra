@@ -50,7 +50,7 @@ export function MatchRing({ score, size = 80 }: MatchRingProps) {
       { duration: FILL_MS, easing: 'cubic-bezier(0.4,0,0.2,1)', fill: 'forwards' },
     );
     return () => animation.cancel();
-  }, [score, circumference, offset]);
+  }, [circumference, offset]);
 
   return (
     <motion.div

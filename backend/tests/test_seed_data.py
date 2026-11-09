@@ -1,4 +1,4 @@
-"""Seed data must stay synthetic: no real employers, and a fresh seed gives 94 jittered jobs."""
+"""Seed data must stay synthetic: no real employers, and a fresh seed gives 130 jittered jobs."""
 from __future__ import annotations
 
 import re
@@ -49,8 +49,8 @@ def test_no_seed_employer_matches_a_real_name():
     assert offenders == {}
 
 
-def test_seed_has_exactly_94_jobs():
-    assert len(_SEED) == 94
+def test_seed_has_exactly_130_jobs():
+    assert len(_SEED) == 130
 
 
 @pytest.fixture
@@ -69,10 +69,10 @@ def _rows(engine):
 
 
 def test_fresh_seed_gives_all_rows_with_jittered_coordinates(temp_engine):
-    assert seed_jobs() == 94
+    assert seed_jobs() == 130
     rows = _rows(temp_engine)
-    assert len(rows) == 94
-    assert len({r["lat"] for r in rows}) >= 70
+    assert len(rows) == 130
+    assert len({r["lat"] for r in rows}) >= 100
     assert all(r["is_synthetic"] for r in rows)
 
 

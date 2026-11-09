@@ -8,6 +8,7 @@ import json
 import os
 import sys
 from pathlib import Path
+from collections import Counter
 from typing import Any
 
 import pytest
@@ -50,6 +51,48 @@ def test_cook_in_whitefield_sees_kitchen_jobs_nearby_first():
     assert all("cook" in m.job.skills_required for m in matches[:3])
     east = {"Whitefield", "Hoodi", "Marathahalli", "KR Puram"}
     assert sum(m.job.area in east for m in matches[:5]) >= 4
+
+
+# ── 1b. Every area chip x common skill gets a near job that uses the skill ────
+
+AREAS = {a["id"]: a for a in json.loads((BACKEND / "data" / "areas.json").read_text(encoding="utf-8"))}
+CHIP_AREAS = ["whitefield", "koramangala", "jayanagar", "electronic_city",
+              "yelahanka", "marathahalli", "hsr_layout", "hoodi"]  # frontend/src/lib/areaChips.ts
+COVERAGE_KM = 5.0
+
+
+def _common_skills(n: int = 8) -> list[str]:
+    """The n skills found most often in the sample inputs (samples.json + eval_samples.json).
+    Ties: more often in the 13 demo samples first, then alphabetical."""
+    evals = json.loads((BACKEND / "tests" / "eval_samples.json").read_text(encoding="utf-8"))["samples"]
+    demo: Counter[str] = Counter()
+    for s in SAMPLES:
+        demo.update(extract_profile(s["input"], ui_language=s["ui_language"]).skills)
+    both = Counter(demo)
+    for s in evals:
+        both.update(extract_profile(s["input"], ui_language=s["language"]).skills)
+    return sorted(both, key=lambda k: (-both[k], -demo[k], k))[:n]
+
+
+def test_common_skills_are_the_expected_eight():
+    assert _common_skills() == ["two_wheeler", "hotel_helper", "driver_car", "tailoring",
+                                "housekeeping", "security_guard", "cook", "delivery"]
+
+
+@pytest.mark.parametrize("skill", _common_skills())
+@pytest.mark.parametrize("area_id", CHIP_AREAS)
+def test_area_chip_and_common_skill_coverage(area_id, skill):
+    area = AREAS[area_id]
+    profile = WorkerProfile(skills=[skill], languages=[], detected_language="en",
+                            area=AreaLocation(id=area_id, name=area["name"], lat=area["lat"], lon=area["lon"]))
+    top = rank_jobs(profile, JOBS)[0]
+    assert skill in top.job.skills_required, f"{area_id}/{skill}: {top.job.title} ({top.job.area})"
+    assert top.distance_km <= COVERAGE_KM, f"{area_id}/{skill}: {top.job.title} is {top.distance_km} km away"
+
+
+def test_cook_in_jayanagar_is_not_sent_to_whitefield():
+    top = rank_jobs(extract_profile("I am a cook in Jayanagar", ui_language="en"), JOBS)[0]
+    assert "cook" in top.job.skills_required and top.distance_km <= COVERAGE_KM
 
 
 def test_added_jobs_are_synthetic_and_in_bengaluru():

@@ -28,7 +28,6 @@ import functools
 import json
 import logging
 import os
-import re
 from pathlib import Path
 from typing import Any
 
@@ -77,17 +76,21 @@ def _build_prompt(text: str, skill_ids: list[str], area_lookup: list[dict[str, A
     )
 
 
+def _strip_code_fence(raw: str) -> str:
+    """Remove a Markdown code fence (``` or ```json) around the model's JSON, if any."""
+    text = raw.strip()
+    if text.startswith("```"):
+        text = text.removeprefix("```").removeprefix("json")
+    return text.removesuffix("```").strip()
+
+
 def _parse_llm_json(raw: str) -> dict[str, Any] | None:
-    raw = raw.strip()
-    raw = re.sub(r"^```(?:json)?\s*", "", raw)
-    raw = re.sub(r"\s*```$", "", raw)
+    """The model's JSON object, or None when the output is not a JSON object."""
     try:
-        data = json.loads(raw)
-        if isinstance(data, dict):
-            return data
+        data = json.loads(_strip_code_fence(raw))
     except json.JSONDecodeError:
-        pass
-    return None
+        return None  # malformed output: the caller falls back to the rules
+    return data if isinstance(data, dict) else None
 
 
 def _validate_llm_output(parsed: Any, text: str, detected_language: str,

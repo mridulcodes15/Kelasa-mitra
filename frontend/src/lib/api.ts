@@ -2,30 +2,30 @@ import type { AgentChatResponse, WorkerProfile, MatchResponse, SkillGapResponse 
 
 const BASE = '/api';
 
-export async function extractProfile(text: string, uiLanguage?: string): Promise<WorkerProfile> {
-  const res = await fetch(`${BASE}/profile/extract-profile`, {
+/** POST JSON to our backend and return the JSON reply; a non-2xx reply throws `${failure}: status — body`. */
+async function postJson<T>(path: string, body: unknown, failure: string): Promise<T> {
+  const res = await fetch(`${BASE}${path}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text, ui_language: uiLanguage ?? null }),
+    body: JSON.stringify(body),
   });
   if (!res.ok) {
     const msg = await res.text().catch(() => 'Unknown error');
-    throw new Error(`Profile extraction failed: ${res.status} — ${msg}`);
+    throw new Error(`${failure}: ${res.status} — ${msg}`);
   }
-  return res.json() as Promise<WorkerProfile>;
+  return (await res.json()) as T;
 }
 
-export async function fetchMatches(profile: WorkerProfile): Promise<MatchResponse> {
-  const res = await fetch(`${BASE}/matches`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ profile }),
-  });
-  if (!res.ok) {
-    const msg = await res.text().catch(() => 'Unknown error');
-    throw new Error(`Match fetch failed: ${res.status} — ${msg}`);
-  }
-  return res.json() as Promise<MatchResponse>;
+export function extractProfile(text: string, uiLanguage?: string): Promise<WorkerProfile> {
+  return postJson('/profile/extract-profile', { text, ui_language: uiLanguage ?? null }, 'Profile extraction failed');
+}
+
+export function fetchMatches(profile: WorkerProfile): Promise<MatchResponse> {
+  return postJson('/matches', { profile }, 'Match fetch failed');
+}
+
+export function fetchSkillGap(profile: WorkerProfile): Promise<SkillGapResponse> {
+  return postJson('/skill-gap', { profile }, 'Skill gap fetch failed');
 }
 
 /**
@@ -34,27 +34,8 @@ export async function fetchMatches(profile: WorkerProfile): Promise<MatchRespons
  */
 export async function agentChat(text: string, uiLanguage: string): Promise<AgentChatResponse> {
   try {
-    const res = await fetch(`${BASE}/agent/chat`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, ui_language: uiLanguage }),
-    });
-    if (!res.ok) throw new Error(String(res.status));
-    return (await res.json()) as AgentChatResponse;
+    return await postJson<AgentChatResponse>('/agent/chat', { text, ui_language: uiLanguage }, 'Agent chat failed');
   } catch {
     return { source: 'rules', reply: null, reason: 'backend_unreachable', thread_id: null };
   }
-}
-
-export async function fetchSkillGap(profile: WorkerProfile): Promise<SkillGapResponse> {
-  const res = await fetch(`${BASE}/skill-gap`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ profile }),
-  });
-  if (!res.ok) {
-    const msg = await res.text().catch(() => 'Unknown error');
-    throw new Error(`Skill gap fetch failed: ${res.status} — ${msg}`);
-  }
-  return res.json() as Promise<SkillGapResponse>;
 }

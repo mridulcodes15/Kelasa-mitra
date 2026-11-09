@@ -28,6 +28,8 @@ interface AppState {
 
   followUpQuestion: string | null;
   setFollowUpQuestion: (q: string | null) => void;
+  /** Every follow-up question asked this visit; an agent reply repeating one is not shown. */
+  askedQuestions: string[];
 
   isFetchingMatches: boolean;
   setIsFetchingMatches: (v: boolean) => void;
@@ -110,7 +112,13 @@ export const useAppStore = create<AppState>((set, get) => ({
   setMatches: (matches) => set({ matches }),
 
   followUpQuestion: null,
-  setFollowUpQuestion: (followUpQuestion) => set({ followUpQuestion }),
+  setFollowUpQuestion: (followUpQuestion) => set((s) => ({
+    followUpQuestion,
+    askedQuestions: followUpQuestion && !s.askedQuestions.includes(followUpQuestion.trim())
+      ? [...s.askedQuestions, followUpQuestion.trim()]
+      : s.askedQuestions,
+  })),
+  askedQuestions: [],
 
   isFetchingMatches: false,
   setIsFetchingMatches: (isFetchingMatches) => set({ isFetchingMatches }),
@@ -166,7 +174,7 @@ export const useAppStore = create<AppState>((set, get) => ({
     set({
       saveOnDevice: false, savedProfile: null, storageBlocked: !removed, dataDeleted: removed,
       profile: null, transcript: '', matches: [], followUpQuestion: null, skillGap: null,
-      skillGapFailed: false, agentReply: null, extractError: null, screen: 'landing',
+      skillGapFailed: false, agentReply: null, extractError: null, screen: 'landing', askedQuestions: [],
     });
   },
 }));

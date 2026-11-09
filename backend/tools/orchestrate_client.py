@@ -27,7 +27,9 @@ from __future__ import annotations
 import base64
 import binascii
 import json
+import logging
 import os
+import re
 import threading
 import time
 from dataclasses import dataclass
@@ -35,6 +37,8 @@ from typing import Any, Callable, Optional
 from urllib.parse import urlparse
 
 import httpx
+
+logger = logging.getLogger(__name__)
 
 IBM_IAM = "ibm_iam"
 MCSP = "mcsp"
@@ -90,8 +94,18 @@ class AgentReply:
     response_keys: list[str]
 
 
+_AGENT_ID = re.compile(r"[A-Za-z0-9_-]{1,128}")
+
+
+def is_https_url(url: str) -> bool:
+    """True for an absolute https:// URL with a host. The API key and tokens are sent to these
+    URLs, so plain http (or a typo such as a missing scheme) must never be used."""
+    parsed = urlparse(url)
+    return parsed.scheme == "https" and bool(parsed.hostname)
+
+
 def load_settings() -> Optional[AgentSettings]:
-    """Settings from the environment, or None when any required value is missing."""
+    """Settings from the environment, or None when a value is missing or unsafe to use."""
     url = os.getenv("ORCHESTRATE_INSTANCE_URL", "").strip().rstrip("/")
     key = os.getenv("ORCHESTRATE_API_KEY", "").strip()
     agent = os.getenv("ORCHESTRATE_AGENT_ID", "").strip()
@@ -99,6 +113,13 @@ def load_settings() -> Optional[AgentSettings]:
         return None
     auth = os.getenv("ORCHESTRATE_AUTH_TYPE", "").strip().lower()
     iam = os.getenv("ORCHESTRATE_IAM_URL", "").strip().rstrip("/")
+    # Names only in the log, never values.
+    if not is_https_url(url) or (iam and not is_https_url(iam)):
+        logger.warning("ORCHESTRATE_INSTANCE_URL / ORCHESTRATE_IAM_URL must be https:// URLs; agent disabled.")
+        return None
+    if not _AGENT_ID.fullmatch(agent):  # it is placed in the request path
+        logger.warning("ORCHESTRATE_AGENT_ID has unexpected characters; agent disabled.")
+        return None
     return AgentSettings(instance_url=url, api_key=key, agent_id=agent,
                          auth_type=auth if auth in AUTH_TYPES else "", iam_url=iam)
 

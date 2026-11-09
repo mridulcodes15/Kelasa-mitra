@@ -162,8 +162,10 @@ _WORD_NUMBERS: dict[str, float] = {
     "छह": 6, "सात": 7, "आठ": 8, "नौ": 9, "दस": 10,
 }
 
+# (?<![\d.]) starts a match only at the beginning of a number, so a long run of digits is
+# scanned once instead of once per digit (that was quadratic: 20,000 digits took 18 s).
 _EXP_PATTERN = re.compile(
-    r"(\d+(?:\.\d+)?)\s*(?:साल|year|years|ವರ್ಷ|yrs|yr)\b",
+    r"(?<![\d.])(\d+(?:\.\d+)?)\s*(?:साल|year|years|ವರ್ಷ|yrs|yr)\b",
     re.IGNORECASE | re.UNICODE,
 )
 
@@ -178,9 +180,11 @@ def _parse_experience(text: str) -> float | None:
     lower = text.lower()
     for word, val in _WORD_NUMBERS.items():
         if word.lower() in lower:
-            # check it's near an experience keyword
+            # check it's near an experience keyword: up to three whole words in between. Each
+            # word must end in whitespace; with an optional \s* a long word could be split in
+            # many ways (cubic backtracking: 800 letters took 5.7 s).
             pat = re.compile(
-                rf"{re.escape(word.lower())}\s*(?:\w+\s*){{0,3}}(?:साल|year|years|ವರ್ಷ|yrs|yr)\b",
+                rf"{re.escape(word.lower())}\s*(?:\w+\s+){{0,3}}(?:साल|year|years|ವರ್ಷ|yrs|yr)\b",
                 re.IGNORECASE | re.UNICODE,
             )
             if pat.search(lower):

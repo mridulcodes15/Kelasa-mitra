@@ -1895,5 +1895,726 @@
   "type": "job",
   "posted_at": "2026-01-01T00:00:00+00:00",
   "is_synthetic": true
+ },
+ {
+  "id": "job-095",
+  "title": "Two-Wheeler Rider",
+  "employer": "Whitefield Bike Courier Co-op",
+  "area": "Whitefield",
+  "lat": 12.964843,
+  "lon": 77.749078,
+  "pay_min": 13000,
+  "pay_max": 17000,
+  "skills_required": [
+   "two_wheeler"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-096",
+  "title": "Car Driver",
+  "employer": "Whitefield Car Driver Services",
+  "area": "Whitefield",
+  "lat": 12.96855,
+  "lon": 77.746357,
+  "pay_min": 15000,
+  "pay_max": 19000,
+  "skills_required": [
+   "driver_car"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-097",
+  "title": "Tailor",
+  "employer": "Whitefield Stitch Studio",
+  "area": "Whitefield",
+  "lat": 12.965797,
+  "lon": 77.756672,
+  "pay_min": 12000,
+  "pay_max": 15500,
+  "skills_required": [
+   "tailoring"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-098",
+  "title": "Housekeeping Staff",
+  "employer": "Whitefield Home Cleaning Co-op",
+  "area": "Whitefield",
+  "lat": 12.96889,
+  "lon": 77.755682,
+  "pay_min": 11000,
+  "pay_max": 14000,
+  "skills_required": [
+   "housekeeping"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-099",
+  "title": "Delivery Associate",
+  "employer": "Whitefield Parcel Hub",
+  "area": "Whitefield",
+  "lat": 12.970605,
+  "lon": 77.742709,
+  "pay_min": 13000,
+  "pay_max": 16500,
+  "skills_required": [
+   "delivery"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-100",
+  "title": "Two-Wheeler Rider",
+  "employer": "Koramangala Bike Courier Co-op",
+  "area": "Koramangala",
+  "lat": 12.943189,
+  "lon": 77.629876,
+  "pay_min": 13000,
+  "pay_max": 17000,
+  "skills_required": [
+   "two_wheeler"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-101",
+  "title": "Tailor",
+  "employer": "Koramangala Stitch Studio",
+  "area": "Koramangala",
+  "lat": 12.942704,
+  "lon": 77.631322,
+  "pay_min": 12000,
+  "pay_max": 15500,
+  "skills_required": [
+   "tailoring"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-102",
+  "title": "Cook",
+  "employer": "Koramangala Meals Kitchen Co.",
+  "area": "Koramangala",
+  "lat": 12.940779,
+  "lon": 77.619161,
+  "pay_min": 13000,
+  "pay_max": 16000,
+  "skills_required": [
+   "cook"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-103",
+  "title": "Delivery Associate",
+  "employer": "Koramangala Parcel Hub",
+  "area": "Koramangala",
+  "lat": 12.93497,
+  "lon": 77.61992,
+  "pay_min": 13000,
+  "pay_max": 16500,
+  "skills_required": [
+   "delivery"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-104",
+  "title": "Housekeeping Staff",
+  "employer": "Jayanagar Home Cleaning Co-op",
+  "area": "Jayanagar",
+  "lat": 12.923417,
+  "lon": 77.586738,
+  "pay_min": 11000,
+  "pay_max": 14000,
+  "skills_required": [
+   "housekeeping"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-105",
+  "title": "Two-Wheeler Rider",
+  "employer": "Electronic City Bike Courier Co-op",
+  "area": "Electronic City",
+  "lat": 12.843264,
+  "lon": 77.667965,
+  "pay_min": 13000,
+  "pay_max": 17000,
+  "skills_required": [
+   "two_wheeler"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-106",
+  "title": "Hotel Helper",
+  "employer": "Electronic City Lodge Helpers Pool",
+  "area": "Electronic City",
+  "lat": 12.841443,
+  "lon": 77.664745,
+  "pay_min": 11000,
+  "pay_max": 14000,
+  "skills_required": [
+   "hotel_helper"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-107",
+  "title": "Hotel Helper",
+  "employer": "Whitefield Lodge Helpers Pool",
+  "area": "Whitefield",
+  "lat": 12.96908,
+  "lon": 77.748668,
+  "pay_min": 11000,
+  "pay_max": 14000,
+  "skills_required": [
+   "hotel_helper"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-108",
+  "title": "Hotel Helper",
+  "employer": "Koramangala Lodge Helpers Pool",
+  "area": "Koramangala",
+  "lat": 12.942517,
+  "lon": 77.632427,
+  "pay_min": 11000,
+  "pay_max": 14000,
+  "skills_required": [
+   "hotel_helper"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-109",
+  "title": "Tailor",
+  "employer": "Electronic City Stitch Studio",
+  "area": "Electronic City",
+  "lat": 12.846092,
+  "lon": 77.663695,
+  "pay_min": 12000,
+  "pay_max": 15500,
+  "skills_required": [
+   "tailoring"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-110",
+  "title": "Housekeeping Staff",
+  "employer": "Electronic City Home Cleaning Co-op",
+  "area": "Electronic City",
+  "lat": 12.839677,
+  "lon": 77.656947,
+  "pay_min": 11000,
+  "pay_max": 14000,
+  "skills_required": [
+   "housekeeping"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-111",
+  "title": "Cook",
+  "employer": "Electronic City Meals Kitchen Co.",
+  "area": "Electronic City",
+  "lat": 12.852699,
+  "lon": 77.661467,
+  "pay_min": 13000,
+  "pay_max": 16000,
+  "skills_required": [
+   "cook"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-112",
+  "title": "Delivery Associate",
+  "employer": "Electronic City Parcel Hub",
+  "area": "Electronic City",
+  "lat": 12.845875,
+  "lon": 77.664168,
+  "pay_min": 13000,
+  "pay_max": 16500,
+  "skills_required": [
+   "delivery"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-113",
+  "title": "Two-Wheeler Rider",
+  "employer": "Yelahanka Bike Courier Co-op",
+  "area": "Yelahanka",
+  "lat": 13.093615,
+  "lon": 77.597647,
+  "pay_min": 13000,
+  "pay_max": 17000,
+  "skills_required": [
+   "two_wheeler"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-114",
+  "title": "Hotel Helper",
+  "employer": "Yelahanka Lodge Helpers Pool",
+  "area": "Yelahanka",
+  "lat": 13.100746,
+  "lon": 77.601944,
+  "pay_min": 11000,
+  "pay_max": 14000,
+  "skills_required": [
+   "hotel_helper"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-115",
+  "title": "Car Driver",
+  "employer": "Yelahanka Car Driver Services",
+  "area": "Yelahanka",
+  "lat": 13.095219,
+  "lon": 77.603672,
+  "pay_min": 15000,
+  "pay_max": 19000,
+  "skills_required": [
+   "driver_car"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-116",
+  "title": "Housekeeping Staff",
+  "employer": "Yelahanka Home Cleaning Co-op",
+  "area": "Yelahanka",
+  "lat": 13.093982,
+  "lon": 77.591273,
+  "pay_min": 11000,
+  "pay_max": 14000,
+  "skills_required": [
+   "housekeeping"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-117",
+  "title": "Cook",
+  "employer": "Yelahanka Meals Kitchen Co.",
+  "area": "Yelahanka",
+  "lat": 13.102221,
+  "lon": 77.599103,
+  "pay_min": 13000,
+  "pay_max": 16000,
+  "skills_required": [
+   "cook"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-118",
+  "title": "Delivery Associate",
+  "employer": "Yelahanka Parcel Hub",
+  "area": "Yelahanka",
+  "lat": 13.096463,
+  "lon": 77.590218,
+  "pay_min": 13000,
+  "pay_max": 16500,
+  "skills_required": [
+   "delivery"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-119",
+  "title": "Two-Wheeler Rider",
+  "employer": "Marathahalli Bike Courier Co-op",
+  "area": "Marathahalli",
+  "lat": 12.965345,
+  "lon": 77.693039,
+  "pay_min": 13000,
+  "pay_max": 17000,
+  "skills_required": [
+   "two_wheeler"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-120",
+  "title": "Hotel Helper",
+  "employer": "Marathahalli Lodge Helpers Pool",
+  "area": "Marathahalli",
+  "lat": 12.960612,
+  "lon": 77.69901,
+  "pay_min": 11000,
+  "pay_max": 14000,
+  "skills_required": [
+   "hotel_helper"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-121",
+  "title": "Car Driver",
+  "employer": "Marathahalli Car Driver Services",
+  "area": "Marathahalli",
+  "lat": 12.957808,
+  "lon": 77.698439,
+  "pay_min": 15000,
+  "pay_max": 19000,
+  "skills_required": [
+   "driver_car"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-122",
+  "title": "Tailor",
+  "employer": "Marathahalli Stitch Studio",
+  "area": "Marathahalli",
+  "lat": 12.959465,
+  "lon": 77.704055,
+  "pay_min": 12000,
+  "pay_max": 15500,
+  "skills_required": [
+   "tailoring"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-123",
+  "title": "Security Guard",
+  "employer": "Marathahalli Apartment Guard Services",
+  "area": "Marathahalli",
+  "lat": 12.954368,
+  "lon": 77.700559,
+  "pay_min": 13000,
+  "pay_max": 16000,
+  "skills_required": [
+   "security_guard"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-124",
+  "title": "Housekeeping Staff",
+  "employer": "Marathahalli Home Cleaning Co-op",
+  "area": "Marathahalli",
+  "lat": 12.954919,
+  "lon": 77.695433,
+  "pay_min": 11000,
+  "pay_max": 14000,
+  "skills_required": [
+   "housekeeping"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-125",
+  "title": "Delivery Associate",
+  "employer": "Marathahalli Parcel Hub",
+  "area": "Marathahalli",
+  "lat": 12.961847,
+  "lon": 77.6939,
+  "pay_min": 13000,
+  "pay_max": 16500,
+  "skills_required": [
+   "delivery"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-126",
+  "title": "Car Driver",
+  "employer": "HSR Layout Car Driver Services",
+  "area": "HSR Layout",
+  "lat": 12.908659,
+  "lon": 77.65143,
+  "pay_min": 15000,
+  "pay_max": 19000,
+  "skills_required": [
+   "driver_car"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-127",
+  "title": "Security Guard",
+  "employer": "HSR Layout Apartment Guard Services",
+  "area": "HSR Layout",
+  "lat": 12.904761,
+  "lon": 77.646733,
+  "pay_min": 13000,
+  "pay_max": 16000,
+  "skills_required": [
+   "security_guard"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-128",
+  "title": "Housekeeping Staff",
+  "employer": "HSR Layout Home Cleaning Co-op",
+  "area": "HSR Layout",
+  "lat": 12.919575,
+  "lon": 77.655338,
+  "pay_min": 11000,
+  "pay_max": 14000,
+  "skills_required": [
+   "housekeeping"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-129",
+  "title": "Cook",
+  "employer": "Hoodi Meals Kitchen Co.",
+  "area": "Hoodi",
+  "lat": 12.984772,
+  "lon": 77.71181,
+  "pay_min": 13000,
+  "pay_max": 16000,
+  "skills_required": [
+   "cook"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
+ },
+ {
+  "id": "job-130",
+  "title": "Head Cook (Food Safety Trained)",
+  "employer": "Hoodi Meals Kitchen Co.",
+  "area": "Hoodi",
+  "lat": 12.987843,
+  "lon": 77.723332,
+  "pay_min": 19000,
+  "pay_max": 23000,
+  "skills_required": [
+   "cook",
+   "food_handler"
+  ],
+  "languages": [
+   "kannada",
+   "hindi"
+  ],
+  "type": "job",
+  "posted_at": "2026-01-01T00:00:00+00:00",
+  "is_synthetic": true
  }
 ]

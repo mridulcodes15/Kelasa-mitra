@@ -21,11 +21,14 @@ export function Jobs() {
   // Each save starts a new short burst (none under reduced motion).
   const [burst, setBurst] = useState(0);
 
-  // Sync deck when matches change (e.g. after re-extraction)
-  useEffect(() => {
+  // A new set of matches (e.g. after re-extraction) starts a fresh deck. Adjusting state while
+  // rendering avoids an effect that would first paint the old deck.
+  const [deckFor, setDeckFor] = useState(matches);
+  if (deckFor !== matches) {
+    setDeckFor(matches);
     setDeck([...matches]);
     setSavedCount(0);
-  }, [matches]);
+  }
 
   const handleSkip = useCallback(() => {
     setDeck((prev) => prev.slice(1));
