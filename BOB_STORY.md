@@ -84,7 +84,7 @@ UNVERIFIED.
 
 ## Demo clip
 
-- TODO:### Screenshots
+- TODO: *Screenshots*
 
 **1. Bob's task list during Phase 3 work (photo of the screen, 7 Nov 2026).** Green items are finished; the rest were still pending when the credits ran out.
 
