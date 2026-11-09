@@ -1,119 +1,91 @@
 # ಕೆಲಸ ಮಿತ್ರ — Kelasa Mitra
 
-**IBM Bobathon: Build for Bengaluru** | Theme: *More Opportunity, Greater Together*
+**Built by:** Mridul Paradkar, Smt. Indira Gandhi College of Engineering, 3rd year, CSE (AI & ML)
+**Entry:** IBM Bobathon: Build for Bengaluru · Student category · Theme: *More Opportunity, Greater Together* · Solo
 
-> *Work Friend* — a voice-first job-matching companion for blue-collar and gig
-> workers in Bengaluru.  
-> Workers speak or type in Kannada, Hindi, or English. The app extracts their
-> profile, ranks nearby jobs, and explains each match in their own language.
+*Kelasa Mitra* means "work friend" in Kannada. A blue-collar or gig worker in Bengaluru speaks or
+types one sentence about their work in Kannada, Hindi or English, and gets nearby jobs with a
+reason for each match, plus the one skill that would open the most new jobs near them. The
+prompts, match reasons and skill suggestions are in their own language; job titles and
+employer names stay in English. All jobs are synthetic sample data.
 
----
+## Why I built this
 
-## The Problem
+A friend of my uncle moved to Hyderabad for work. He was a good driver, but he and his family knew only Marathi and Hindi, most people around him spoke neither, and he was not comfortable in English. He had to ask people here and there just to find a job, and it took a long time. He did eventually get one, but he struggled far more than his skills should have made necessary. His problem was language, not ability.
 
-Blue-collar and gig workers in Bengaluru — hotel staff, delivery riders,
-construction workers, domestic help — are effectively locked out of most digital
-job portals. Those portals assume English literacy, a desktop browser, and the
-patience to fill in forms. Most of these workers have none of those.
-
----
-
-## What It Does
-
-1. **Speak or type** your work history in Kannada, Hindi, or English.
-2. The app extracts a structured profile: skills, years of experience, your
-   area in Bengaluru, and the languages you speak.
-3. Nearby jobs from a seeded dataset are ranked by skill fit and distance, with
-   a plain-language reason for each match — *"Matched because you have hotel
-   experience and live 2.4 km away."*
-4. A skill gap screen shows which one skill unlocks the most new jobs near you,
-   with a 3-step learning path and approximate cost.
-5. Every response is in the worker's chosen language.
+Many people who move to a new city face the same thing: the person is skilled, but the job portals, forms and instructions are in a language they cannot comfortably use. Bengaluru draws workers from many places, so I built Kelasa Mitra for it. A person can just say what work they do, in Kannada, Hindi or English, and see jobs near them, with the reason each one fits explained in that same language. It is a prototype and it uses sample data.
 
 ---
 
-## IBM Technology Used
+## 1. The problem
 
-| Product | How it is used | Status |
-|---------|---------------|--------|
-| **IBM Bob** | Built every file in this project — code, tests, data, docs | Active throughout |
-| **IBM watsonx Orchestrate** | Agentic layer: decides when to call each tool, asks follow-up questions when the profile is incomplete | **Pending access** — integration planned, not yet live |
+**Who.** Hotel and kitchen staff, drivers and delivery riders, security guards, tailors,
+domestic workers and other blue-collar workers in Bengaluru, many of whom are more comfortable
+speaking Kannada or Hindi than filling in English forms.
 
-### IBM Bob
-
-Every line of code in this repository was written with IBM Bob in Agent mode.
-Bob read the existing files before editing, kept the changes minimal and
-targeted, ran the tests after each change, and caught issues (stale DB, missing
-router registration, unused scaffold files) before they became problems.
-
-The project plan in `PLAN.md` and this README were also written with Bob.
-
-### IBM watsonx Orchestrate
-
-Orchestrate is the intended agentic layer. The three FastAPI endpoints
-(`/api/profile/extract-profile`, `/api/matches`, `/api/skill-gap`) are
-registered as HTTP tools via the app's OpenAPI spec. The Orchestrate agent:
-
-- Calls `extract-profile` when the worker submits text.
-- Asks a follow-up question if the profile is missing an area or skills.
-- Calls `matches` once the profile is complete.
-- Calls `skill-gap` when the worker asks what to learn next.
-
-**The app works without Orchestrate.** The React frontend calls the FastAPI
-endpoints directly if the agent is unavailable. All 40 tests pass with no
-external API keys at all.
-
-> ⚠ Orchestrate access is not yet confirmed. This section will be updated once
-> integration is live. Do not treat it as demonstrated until then.
+**What needs to improve.** Most job portals assume English literacy, typing on a form, and the
+patience to search by category. A worker who can say "I cook, 2 years, I live in Whitefield" in
+their own language should be able to find work near home without that. Distance matters (travel
+time and cost), and so does knowing which single skill would open more and better-paid work.
 
 ---
 
-## Features (current state)
+## 2. The prototype
 
-| Feature | Status |
-|---------|--------|
-| Voice input (Kannada / Hindi / English) via Web Speech API | ✅ Done |
-| Text fallback for browsers without mic | ✅ Done |
-| Language picker (KN / HI / EN) — drives UI strings + `detected_language` | ✅ Done |
-| Profile extraction from free-form text | ✅ Done |
-| Kannada agglutinative inflection handling (ಹೆಲ್ಪರ್ ಇದ್ದೇನೆ, ಡ್ರೈವರ್ ಆಗಿದ್ದೆ) | ✅ Done |
-| 80 synthetic Bengaluru jobs, 8 categories, ±1.5 km coordinate jitter | ✅ Done |
-| Job ranking: skill fit + haversine distance + language bonus | ✅ Done |
-| Swipeable job cards with animated SVG score ring | ✅ Done |
-| Match reasons in EN / KN / HI (template-built, not LLM-generated) | ✅ Done |
-| Follow-up question when profile is incomplete | ✅ Done |
-| Skill gap tool: top-3 missing skills + jobs each unlocks | ✅ Written, router not wired |
-| Skill gap frontend page + stepper component | ❌ Not yet built |
-| TTS readback via SpeechSynthesisUtterance | ❌ Pending |
-| IBM watsonx Orchestrate integration | ❌ Pending access |
-| PWA manifest + service worker | ❌ Pending |
+### What works today
 
----
+- **Speak or type** in Kannada, Hindi or English. The language picker sets the speech language
+  (`kn-IN`, `hi-IN`, `en-IN`) and the reply language; changing it while the mic is on restarts
+  recognition in the new language. Words appear live as the browser hears them; a decorative
+  waveform shows that the mic is on.
+- **Profile extraction** (skills, years of experience, area, spoken languages) by deterministic
+  rules that handle common Kannada and Hindi word endings. Groq can be switched on as an optional
+  extractor; its output is validated and it never supplies numbers.
+- **Follow-up question** when the area or skills are missing, with 8 tappable area chips
+  (Whitefield, Koramangala, Jayanagar, Electronic City, Yelahanka, Marathahalli, HSR Layout,
+  Hoodi). Naming only the city ("Bangalore") counts as no area and gets its own question.
+- **Ranked job cards** with a match score, approximate distance (`~2.4 km`), pay, matched and
+  missing skills, and a template-written reason in the worker's language. Swipe, buttons or
+  arrow keys to skip or save.
+- **Skill gap**: up to 3 skills that would unlock the most nearby jobs, with the job count, the
+  pay difference computed from the sample jobs, and a short learning path that can be ticked off.
+- **IBM watsonx Orchestrate agent panel**: the same sentence is sent to the
+  `kelasa_mitra_agent`, which calls our three tools; its reply is shown above the cards. If the
+  agent is not configured or does not answer, a banner says the built-in rules answered; the
+  cards always come from the deterministic endpoints.
+- **Read-aloud** of the follow-up question and the top match reason (browser speech synthesis,
+  mute toggle), a **switch-language nudge** when the words are clearly in another language,
+  **optional save on this device** with **Delete my data**, and a phone-width layout that
+  respects `prefers-reduced-motion` with 48 px touch targets.
 
-## Quick Start
+### Run it on Windows
 
-### Backend
+You need Python 3.11 and Node.js. There are two Pythons in this project, used for different
+things:
+
+| Step | Which Python |
+|---|---|
+| Backend server, tests, `backend/scripts/*`, `orchestrate/build_kelasa_tools.py` | Normal Python with `backend/requirements.txt` installed (not the Orchestrate venv) |
+| `orchestrate ...` CLI commands (import tools and agent) | `orchestrate\.venv` with `ibm-watsonx-orchestrate==2.19.1` |
+
+If a prompt starts with `(.venv)`, run `deactivate` (or open a new terminal) before starting the
+backend: the Orchestrate venv has no FastAPI or uvicorn.
+
+**Terminal 1, backend** (from the repo root):
 
 ```bash
 cd backend
-pip install -r requirements.txt
-
-# Optional: configure Groq (leave blank to use the rule-based fallback)
-cp .env.example .env
-# Edit .env and set GROQ_API_KEY
-
-# Delete stale DB on first run (re-seeds with 80 jittered jobs)
-# Windows: del db\kelasa_mitra.db db\kelasa_mitra.db-shm db\kelasa_mitra.db-wal
-# macOS/Linux: rm -f db/kelasa_mitra.db db/kelasa_mitra.db-shm db/kelasa_mitra.db-wal
-
+python -m pip install -r requirements.txt
+copy .env.example .env
 python -m uvicorn main:app --reload --port 8000
 ```
 
-API: `http://localhost:8000`  
-Swagger: `http://localhost:8000/docs`  
-OpenAPI spec (for Orchestrate tool import): `http://localhost:8000/openapi.json`
+Wait for `Application startup complete.` The first start seeds `backend/db/kelasa_mitra.db`
+with the 130 sample jobs. Seeding is skipped when the table already has rows, so after the
+sample jobs change, stop the backend and delete the old database first:
+`del db\kelasa_mitra.db`.
 
-### Frontend
+**Terminal 2, frontend:**
 
 ```bash
 cd frontend
@@ -121,191 +93,179 @@ npm install
 npm run dev
 ```
 
-App: `http://localhost:5173`
+Open `http://localhost:5173` (use `localhost`, not `127.0.0.1`). Vite proxies `/api` to the
+backend on port 8000, so no CORS setting is needed. To test on a phone, a Cloudflare quick
+tunnel to port 5173 works (`*.trycloudflare.com` is allowed in `vite.config.ts`); the tunnel URL
+is public while it runs. Without speech recognition (e.g. Firefox), type instead.
 
-### Run Tests
+### Orchestrate agent (optional for running, required for the contest demo)
+
+```bash
+python -m venv orchestrate\.venv
+orchestrate\.venv\Scripts\python -m pip install ibm-watsonx-orchestrate==2.19.1
+```
+
+Rebuild the tool package after any change to the backend logic or sample jobs (normal Python):
+
+```bash
+python backend\scripts\export_jobs_snapshot.py
+python orchestrate\build_kelasa_tools.py
+```
+
+Then, with the venv active (`orchestrate\.venv\Scripts\Activate.ps1`), add your environment
+once with `orchestrate env add -n <name> -u <instance URL>` and `orchestrate env activate <name>`,
+and import:
+
+```bash
+orchestrate tools import -k python -p orchestrate\kelasa_tools -f orchestrate\kelasa_tools\kelasa_mitra_tools.py -r orchestrate\kelasa_tools\requirements.txt
+orchestrate agents import -f orchestrate\agents\kelasa_agent.yaml
+```
+
+Put the `ORCHESTRATE_*` values in `backend\.env`, then check the agent with normal Python
+(`deactivate` first). The first tool call after an import can take over a minute, so run it twice:
+
+```bash
+python backend\scripts\agent_warmup.py
+```
+
+### Tests
 
 ```bash
 cd backend
-python -m pytest tests/ -v
-# Expected: 40 passed
+python -m pytest tests/ -q
 ```
+
+```bash
+cd frontend
+npm test
+npx tsc --noEmit -p tsconfig.app.json
+npm run build
+```
+
+Measured on 2026-11-09: **573 backend tests passed**, **191 frontend tests passed** (20 files),
+`tsc` exit 0, build OK (JS 440.72 kB, 140.73 kB gzip). Use `-p tsconfig.app.json`: plain
+`tsc --noEmit` checks nothing here because the root `tsconfig.json` has `files: []`.
+
+### Environment variables (`backend/.env`, see `.env.example`)
+
+| Variable | Needed | Purpose |
+|---|---|---|
+| `GROQ_API_KEY` | No | Turns on Groq extraction. Empty = rules only, no network. |
+| `GROQ_MODEL` | No | Groq model id (default `llama-3.3-70b-versatile`). |
+| `ORCHESTRATE_INSTANCE_URL` | For the agent | Orchestrate instance URL; must be `https://`. |
+| `ORCHESTRATE_API_KEY` | For the agent | Kept on the server; never sent to the browser. |
+| `ORCHESTRATE_AGENT_ID` | For the agent | From `orchestrate agents list -k native`. |
+| `ORCHESTRATE_AUTH_TYPE` | No | `ibm_iam`, `mcsp`, `mcsp_v1`, `mcsp_v2`; empty = inferred like the ADK. |
+| `ORCHESTRATE_IAM_URL` | No | Token service base URL; must be `https://` if set. |
+| `CORS_ALLOWED_ORIGINS` | No | Extra origins allowed to call the API directly; `*` is ignored. |
+
+If any `ORCHESTRATE_*` value is missing or not https, the agent stays off and the app uses the
+rules. Never commit `.env`.
 
 ---
 
-## Environment Variables (`backend/.env`)
+## 3. The Bob story
 
-| Variable | Required | Default | Description |
-|----------|----------|---------|-------------|
-| `GROQ_API_KEY` | No | *(empty)* | Groq cloud API key — get one free at `console.groq.com` |
-| `GROQ_MODEL` | No | `llama-3.3-70b-versatile` | Groq model ID |
+IBM Bob planned and built the first version on 2026-11-07: the plan, Phases 1 and 2 (profile
+extraction, 80 sample jobs, ranking, swipeable cards), the switch from Gemini to watsonx.ai and
+then to Groq, an audit, a first rewrite of these docs and the Orchestrate ADK install. That
+evening the free trial's 50 Bobcoins ran out. Bob's work is preserved in commit `a8117a6`
+("Bob baseline before Claude Code") and in [`docs/bob/`](docs/bob/), because Bob's panel keeps
+no history.
 
-If `GROQ_API_KEY` is empty, the app runs in **rule-based offline mode**. All 40 tests pass without any key.
+The rest was built with **Claude Code**, a second AI coding tool: bug fixes, Phase 3, the
+Orchestrate tool package and agent, the evaluation, accessibility fixes, read-aloud, area chips,
+save-on-device, the design upgrade, language handling, 36 extra demo jobs, a security and
+reliability pass, and a favicon. The owner reviewed, tested and committed every change.
 
----
-
-## Project Structure
-
-```
-kelasa-mitra/
-├── PLAN.md                    # Full project plan, architecture, Orchestrate integration
-├── README.md                  # This file
-│
-├── backend/
-│   ├── main.py                # FastAPI app (skill_gap_router not yet wired)
-│   ├── tools/
-│   │   ├── fallback.py        # Rule-based extractor, Kannada/Hindi inflection-aware
-│   │   ├── provider.py        # Groq provider + LRU cache + graceful offline fallback
-│   │   ├── profile_extractor.py
-│   │   ├── job_ranker.py      # Scoring, ranking, template reasons in EN/KN/HI
-│   │   └── skill_gap.py       # Skill gap analysis (written, router not wired yet)
-│   ├── models/
-│   │   ├── worker.py          # WorkerProfile, AreaLocation
-│   │   ├── job.py             # Job, JobMatch, MatchResponse
-│   │   └── skill_gap.py       # SkillGapItem, SkillGapResponse, LearningStep
-│   ├── db/
-│   │   ├── database.py        # SQLAlchemy Core, SQLite WAL
-│   │   └── seed_jobs.py       # 80 synthetic jobs + ±1.5 km jitter
-│   ├── routers/
-│   │   ├── profile.py         # POST /api/profile/extract-profile
-│   │   ├── matches.py         # POST /api/matches
-│   │   └── skill_gap.py       # POST /api/skill-gap (written, not in main.py yet)
-│   ├── data/
-│   │   ├── skills.json        # 40 skills with EN/KN/HI synonyms
-│   │   ├── areas.json         # 30 Bengaluru areas with lat/lon
-│   │   └── learning_paths.json # 35 skills × 3-step learning paths
-│   └── tests/
-│       ├── test_profile.py    # 17 tests
-│       └── test_matches.py    # 23 tests
-│
-└── frontend/src/
-    ├── pages/
-    │   ├── Landing.tsx        # Mic orb, language picker, profile card
-    │   └── Jobs.tsx           # Swipeable cards, follow-up question UI
-    ├── components/
-    │   ├── MicButton.tsx      # Pulsing teal mic orb
-    │   ├── ProfileCard.tsx
-    │   ├── JobCard.tsx        # Draggable card with score ring and reason
-    │   ├── MatchRing.tsx      # Animated SVG score ring
-    │   └── LanguagePicker.tsx
-    ├── hooks/
-    │   ├── useSpeech.ts       # Web Speech API wrapper
-    │   └── useProfile.ts      # extract + fetchMatches pipeline
-    ├── store/appStore.ts      # Zustand global state
-    └── lib/
-        ├── api.ts             # extractProfile(), fetchMatches()
-        ├── i18n.ts            # UI strings in EN/KN/HI
-        └── types.ts           # TypeScript types
-```
+Full dated timeline, including Bob's mistakes and how they were caught: [BOB_STORY.md](BOB_STORY.md).
 
 ---
 
-## API Reference
+## 4. The impact
 
-### `POST /api/profile/extract-profile`
+**One measurable outcome, with its limits.** On a 15-input benchmark (5 each in English, Kannada
+and Hindi), **42 of the 45 top-3 job suggestions require a skill the worker mentioned**
+(English 15/15, Kannada 15/15, Hindi 12/15), skill recall is 97%, and the whole pipeline behind
+one message (extraction, ranking, skill gap) takes a median of **17.8 ms** on one laptop
+([docs/eval_results.md](docs/eval_results.md)).
 
-```json
-{
-  "text": "ನಾನು ಹೋಟೆಲ್‌ನಲ್ಲಿ ಎರಡು ವರ್ಷ ಹೆಲ್ಪರ್ ಆಗಿ ಕೆಲಸ ಮಾಡಿದ್ದೇನೆ",
-  "ui_language": "kn"
-}
-```
+What that number does **not** show:
 
-Response:
-```json
-{
-  "skills": ["hotel_helper"],
-  "experience_years": 2,
-  "area": { "id": "whitefield", "name": "Whitefield", "lat": 12.9698, "lon": 77.7499 },
-  "languages": ["kannada"],
-  "detected_language": "kn",
-  "raw_input": "..."
-}
-```
+- the 15 inputs are synthetic, written by an AI tool, with no real workers;
+- the expected labels were drafted by the same tool that built the extractor and can see its
+  synonym list, and all 15 are still marked "DRAFT, owner to review"; the Kannada and Hindi
+  inputs have not been reviewed by a native speaker; the score is likely optimistic;
+- timing is rules only (no Groq, no network, no agent round trip, which was not measured);
+- it is a prototype benchmark, **not a field study**; no time saved against a job portal form
+  has been measured.
 
-### `POST /api/matches`
-
-```json
-{ "profile": { "...WorkerProfile fields..." } }
-```
-
-Response:
-```json
-{
-  "matches": [
-    {
-      "job": { "title": "Hotel Room Attendant", "pay_min": 12000, "pay_max": 16000, "..." },
-      "score": 87,
-      "distance_km": 2.4,
-      "matched_skills": ["hotel_helper"],
-      "missing_skills": ["housekeeping"],
-      "reason": "ನಿಮ್ಮ ಹೋಟೆಲ್ ಅನುಭವ ಮತ್ತು 2.4 ಕಿಮೀ ದೂರದಿಂದಾಗಿ ಈ ಕೆಲಸ ಸೂಕ್ತ.",
-      "follow_up_question": null
-    }
-  ]
-}
-```
-
-### `POST /api/skill-gap` *(written, not yet wired)*
-
-```json
-{ "profile": { "...WorkerProfile fields..." } }
-```
-
-Response:
-```json
-{
-  "gaps": [
-    {
-      "skill_id": "driving_licence",
-      "label_en": "Driving Licence",
-      "jobs_unlocked": 12,
-      "avg_pay_uplift_inr": 3500,
-      "explanation": "Learning Driving Licence could unlock 12 more jobs near you, paying about ₹3,500 more per month.",
-      "learning_path": [
-        { "step": 1, "action": "Apply for LMV learner licence at RTO", "weeks": 1, "approx_cost_inr": 200 }
-      ]
-    }
-  ],
-  "is_synthetic": true
-}
-```
+The skill-gap pay differences (e.g. a Whitefield cook is told food-safety training could pay about
+₹4,283 more a month) are computed from the sample jobs, whose pay ranges were designed for the
+demo; they are not market data.
 
 ---
 
-## Limitations
+## 5. IBM products
 
-| Limitation | Details |
-|-----------|---------|
-| **Sample data only** | All 80 jobs have `"is_synthetic": true`. The UI displays a "Sample data — for demonstration only" label on every job card. No real employers are listed. |
-| **Rule-based by design** | Match scores, skill gap numbers, and match reasons are computed entirely from the seed data by deterministic Python code. The LLM (when configured) is used only for free-form text understanding, not for generating numbers. |
-| **Coordinates are approximate** | Job coordinates are area-centre values ± up to 1.5 km random jitter. Distance figures shown to workers are estimates, not precise addresses. |
-| **Bengaluru only** | The 30 area look-up table and all seed jobs are Bengaluru-specific. |
-| **Web Speech API** | Voice input requires Chrome on Android or Safari on iOS. Firefox does not support the Web Speech API. A text input fallback is always available. |
-| **Kannada TTS** | `SpeechSynthesisUtterance` Kannada voice availability depends on the device OS. The app gracefully falls back to no TTS if the voice is absent. |
+| Product | What it did here | Verified | Not verified |
+|---|---|---|---|
+| **IBM Bob** | Planning and the first build (Phases 1–2, Groq swap, audit, first docs, Orchestrate ADK install) on 2026-11-07, until the 50 trial Bobcoins ran out. | Bob's outputs in `docs/bob/`, baseline commit `a8117a6`. | Bob's own statements in those files (e.g. test results) were not re-run at the time; see BOB_STORY.md for the ones later found wrong. |
+| **IBM watsonx Orchestrate** | The agent layer: `kelasa_mitra_agent` (`orchestrate/agents/kelasa_agent.yaml`) calls three Python tools, `extract_profile`, `find_matches` and `skill_gap` (`orchestrate/kelasa_tools/`). The app asks it through `POST /api/agent/chat`, which keeps the API key on the server. | 2026-11-09, by the owner: the console trace showed `extract_profile`, `find_matches` and `skill_gap` called in order for "I cook, 2 years, I live in Whitefield"; `agent_warmup.py` got HTTP 200 replies; the app's agent panel showed the tools' text. | Whether the agent's final wording always stays in the picker language; agent response time; why it once repeated an already answered question (the panel now hides such replies); the trial end date. |
 
 ---
 
-## Privacy
+## 6. Limitations
 
-- No worker data is stored. Profile extraction is stateless — the profile JSON is computed per request and never written to a database.
-- No audio is transmitted to the server. The Web Speech API runs entirely in the browser; only the resulting transcript text is sent to the backend.
-- All job data is synthetic. No real employer names, phone numbers, or addresses are stored or shown.
+- **Synthetic data only.** All 130 jobs and their employers are invented (`is_synthetic: true`,
+  "Sample data" label on every card). 36 jobs were added on 2026-11-09 so that every area chip
+  and the 8 most common skills in the sample inputs have a matching job within 5 km: demo
+  coverage, not real supply.
+- **No directions or contact.** There is no real workplace or employer to contact or navigate to.
+- **English in places.** Job titles, employer and area names, learning-path steps, and "years"
+  and language names on the profile card stay in English in Kannada and Hindi.
+- **Kannada and Hindi text is not reviewed** by a native speaker
+  ([docs/TEMPLATES_TO_REVIEW.md](docs/TEMPLATES_TO_REVIEW.md)).
+- **Speech.** Chrome's Web Speech API sends the audio to the browser vendor's speech service to
+  turn it into text. Our app never receives or stores audio, only the text, but Chrome does
+  process the audio. Speech recognition and read-aloud in Kannada and Hindi have **not** been
+  tested on a real phone; voice availability depends on the device. Firefox has no speech
+  recognition; typing always works.
+- **Skill suggestions are data-driven**, counting which skills unlock the most nearby sample
+  jobs; they are not tailored to a worker's trade, so a cook may be shown an unrelated skill.
+- **Learning paths** were hand-written; weeks and costs are rough estimates with no source
+  ([docs/learning_paths_changes.md](docs/learning_paths_changes.md)).
+- **Distances are approximate**: job coordinates are area centres with up to about 1.2 km of
+  random offset.
+- **Groq quality is unmeasured**: the provider comparison ran without a key, so it compares the
+  rules with themselves ([docs/provider_comparison.md](docs/provider_comparison.md)).
+- **Not a PWA**: there is no manifest or service worker. No employer view.
 
 ---
 
-## Built with IBM Bob
+## 7. Privacy
 
-This project was built as a solo student submission for IBM Bobathon: Build for Bengaluru 2026. Every file — Python backend, React frontend, test suite, seed data, and documentation — was created with IBM Bob in Agent mode.
-
-Bob was used to:
-- Design the architecture and write the project plan.
-- Scaffold and implement all backend tools, models, routers, and tests.
-- Build the React frontend with animated components and Framer Motion.
-- Run `pytest` and `tsc --noEmit` after each change to catch regressions immediately.
-- Audit the project for stale files, DB inconsistencies, and doc mismatches.
-- Write this README.
+- **No accounts, by design.** No login or sign-up: the users are workers who should not need an
+  email or password, nothing about them is kept on the server, and the contest asks for no
+  personal data.
+- **Nothing is stored server-side.** Each request is computed and forgotten. The profile is sent
+  to our backend to find jobs; the backend does not write it anywhere.
+- **Optional save on this device.** Off by default. If ticked, only the profile (skills,
+  experience, area, languages, with the worker's words blanked) is kept in this browser's
+  localStorage. **Delete my data** removes it and clears the visit.
+- **No audio** reaches or is stored by our app (see Speech above). When `GROQ_API_KEY` is set,
+  the typed or spoken text is sent to Groq for extraction.
+- **No personal data** is asked for: no phone number, ID, photo or exact address; areas are
+  neighbourhood names. No children's or biometric data.
+- **Security**: CORS allows only the local dev server or configured origins, input text is
+  limited to 2000 characters, and Orchestrate URLs must be https.
 
 ---
 
-*IBM Bobathon Build for Bengaluru — 2026. Solo student submission.*
+## Credits
+
+Built by a solo student for IBM Bobathon: Build for Bengaluru 2026. **IBM Bob** produced the plan
+and the first build (2026-11-07); **Claude Code** (Anthropic), a second AI coding tool, was used
+for the rest after Bob's trial credits ran out. Neither tool wrote every line; the owner directed,
+reviewed, tested and committed all of it. Project plan: [PLAN.md](PLAN.md). Submission checklist:
+[docs/SUBMISSION_CHECKLIST.md](docs/SUBMISSION_CHECKLIST.md).
