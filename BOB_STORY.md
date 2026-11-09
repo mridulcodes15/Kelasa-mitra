@@ -84,6 +84,5 @@ UNVERIFIED.
 
 ## Demo clip
 
-- TODO: owner to add a short screen recording of the Bob panel (or screenshots in
-  `docs/bob/screenshots/`).
+- TODO: screenshots in `docs/bob/screenshots/`.
 - TODO: owner to add the demo video link (app + Orchestrate trace).
