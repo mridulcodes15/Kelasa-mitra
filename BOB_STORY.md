@@ -42,12 +42,28 @@ except file and commit timestamps.
 | `a01f53e` | 2026-11-09 03:23 | Listening waveform and live words, agent thinking state, tappable learning steps. |
 | `5ff5924` | 2026-11-09 15:13 | Language handling: speech language follows the picker mid-session, picker language on every endpoint, switch-language nudge. |
 | `44170dc` | 2026-11-09 16:08 | 36 more demo jobs, favicon, hide repeated agent questions, security and reliability fixes. |
+| `94b1e98` | 2026-11-09 16:59 | The owner added the author line and "Why I built this" to the README. |
+| `3a48a93` | 2026-11-09 17:00 | The owner added the MIT LICENSE. |
+| `f113bce` | 2026-11-09 17:09 | Docs stage: PLAN rewritten, BOB_STORY and the submission checklist added, `docs/bob/` evidence added. |
+| `c194084` | 2026-11-09 21:31 | Language-first welcome flow (splash, three language cards, "Language: …" chip, "Listening in: …", no-speech hint); the ಕ app mark from Noto Sans Kannada (OFL, credited in NOTICE); fix for duplicated words from Android Chrome's partial results; search on the final transcript; "not recognised" message with 10 skill chips; Hindi/Kannada spelling normalisation, variants and one-letter tolerance; per-IP rate limits and a public demo note; Dockerfile and FastAPI serving the built frontend. |
+| (uncommitted) | 2026-11-09 | Final docs pass: README, PLAN, BOB_STORY, the submission checklist and the frontend README brought in line with the code. |
 
 On 2026-11-09 the owner verified the Orchestrate agent end to end: the console trace showed
 `extract_profile`, `find_matches` and `skill_gap` called in order for "I cook, 2 years, I live in
 Whitefield", `agent_warmup.py` got HTTP 200 replies, and the app's agent panel showed the tools'
 text. On a real Android phone (plain http), typing Kannada under the English picker showed the
 switch-language nudge and it switched correctly.
+
+Later the same day, testing on that phone found two bugs that were then fixed: Android Chrome's
+partial results filled the text box with repeated words, and a Hindi sentence with
+"इलेक्ट्रिशियन" matched no skill because the speech engine wrote a short i vowel sign where the
+synonym list had a long one. Over plain http with a Chrome flag, the owner saw the welcome screen,
+finger tracing across the language cards, the language chip and the switch-language nudge work,
+Hindi speech produce Devanagari text, and English speech work. The owner built and ran the Docker
+image locally (rules only, and with keys via `--env-file`), deployed it on Render's free web
+service from branch `main`, and that evening the live site showed the Orchestrate agent panel
+with the tools' text. Speech over the live https link and Kannada speech on a phone are
+UNVERIFIED.
 
 ---
 
