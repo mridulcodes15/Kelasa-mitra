@@ -3,10 +3,11 @@ from __future__ import annotations
 
 from typing import Optional
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field
 
 from tools.profile_extractor import extract_profile
+from tools.rate_limit import EXTRACT_LIMITER, rate_limited
 from models.worker import WorkerProfile
 
 router = APIRouter(prefix="/api/profile", tags=["profile"])
@@ -20,7 +21,8 @@ class ExtractRequest(BaseModel):
     ui_language: Optional[str] = None  # "en" | "kn" | "hi" — set by frontend language picker
 
 
-@router.post("/extract-profile", response_model=WorkerProfile)
+@router.post("/extract-profile", response_model=WorkerProfile,
+             dependencies=[Depends(rate_limited(EXTRACT_LIMITER))])
 def extract_profile_endpoint(req: ExtractRequest) -> WorkerProfile:
     """
     Extract a structured worker profile from free-form text.

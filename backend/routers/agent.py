@@ -13,12 +13,13 @@ from __future__ import annotations
 import logging
 from typing import Literal, Optional
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field
 
 from tools.follow_up import follow_up_for
 from tools.orchestrate_client import AgentUnavailable, get_client
 from tools.profile_extractor import extract_profile
+from tools.rate_limit import AGENT_LIMITER, rate_limited
 
 router = APIRouter(prefix="/api/agent", tags=["agent"])
 logger = logging.getLogger(__name__)
@@ -38,7 +39,8 @@ class AgentChatResponse(BaseModel):
     thread_id: Optional[str] = None
 
 
-@router.post("/chat", response_model=AgentChatResponse)
+@router.post("/chat", response_model=AgentChatResponse,
+             dependencies=[Depends(rate_limited(AGENT_LIMITER))])
 def agent_chat(req: AgentChatRequest) -> AgentChatResponse:
     language = req.ui_language if req.ui_language in SUPPORTED else "en"
     client = get_client()

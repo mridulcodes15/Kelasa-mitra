@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { AnimatePresence, MotionConfig, motion } from 'framer-motion';
 import { useAppStore } from './store/appStore';
 import { Landing } from './pages/Landing';
+import { Welcome } from './pages/Welcome';
 import { Jobs } from './pages/Jobs';
 import { useSkipAnimationsWhenReduced } from './lib/motion';
 
@@ -21,7 +22,17 @@ export default function App() {
       <div className="app-backdrop min-h-screen">
       <div data-testid="app-column" className="app-column relative mx-auto w-full page-min-h bg-[#fdf8f0]">
       <AnimatePresence mode="wait">
-        {screen === 'landing' ? (
+        {screen === 'welcome' ? (
+          <motion.div
+            key="welcome"
+            initial={false}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Welcome />
+          </motion.div>
+        ) : screen === 'landing' ? (
           <motion.div
             key="landing"
             initial={{ opacity: 0, x: -30 }}

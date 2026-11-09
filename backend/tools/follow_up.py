@@ -23,6 +23,13 @@ _FOLLOW_UP: dict[str, dict[str, str]] = {
         "kn": "ಬೆಂಗಳೂರು ದೊಡ್ಡ ನಗರ. ನೀವು ಯಾವ ಪ್ರದೇಶದಲ್ಲಿ ವಾಸಿಸುತ್ತೀರಿ? (ಉದಾ: ವೈಟ್‌ಫೀಲ್ಡ್, ಕೋರಮಂಗಲ, ಜಯನಗರ)",
         "hi": "बेंगलुरु बड़ा शहर है। आप किस इलाके में रहते हैं? (जैसे व्हाइटफील्ड, कोरमंगला, जयनगर)",
     },
+    # The worker said something, but no skill in the demo's list was found in it (e.g. "teacher").
+    # Do not repeat the generic question; the app shows the demo's skills as chips under it.
+    "unknown_work": {
+        "en": "I did not recognise that kind of work yet. This demo covers jobs like these - tap one or say it again.",
+        "kn": "ಆ ರೀತಿಯ ಕೆಲಸವನ್ನು ನಾನು ಇನ್ನೂ ಗುರುತಿಸಲಿಲ್ಲ. ಈ ಡೆಮೊ ಇಂತಹ ಕೆಲಸಗಳನ್ನು ಒಳಗೊಂಡಿದೆ - ಒಂದನ್ನು ಒತ್ತಿ ಅಥವಾ ಮತ್ತೆ ಹೇಳಿ.",
+        "hi": "मैं इस तरह के काम को अभी नहीं पहचान पाया। यह डेमो ऐसे कामों के लिए है - किसी एक पर टैप करें या फिर से बोलें।",
+    },
     "no_skills": {
         "en": "What kind of work have you done? (e.g. cooking, security, delivery, tailoring)",
         "kn": "ನೀವು ಯಾವ ರೀತಿಯ ಕೆಲಸ ಮಾಡಿದ್ದೀರಿ? (ಉದಾ: ಅಡುಗೆ, ಸೆಕ್ಯೂರಿಟಿ, ಡೆಲಿವರಿ, ಹೊಲಿಗೆ)",
@@ -56,5 +63,6 @@ def follow_up_for(profile: WorkerProfile) -> str | None:
         reason = "city_only" if mentions_city_only_name(profile.raw_input) else "no_area"
         return follow_up(reason, lang)
     if not profile.skills:
-        return follow_up("no_skills", lang)
+        reason = "unknown_work" if profile.raw_input.strip() else "no_skills"
+        return follow_up(reason, lang)
     return None

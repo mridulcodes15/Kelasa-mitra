@@ -3,7 +3,8 @@ import type { LangCode } from '../lib/types';
 import type { AgentChatResponse, WorkerProfile, JobMatch, SkillGapResponse } from '../lib/types';
 import { deleteSavedProfile, loadSavedProfile, saveProfile } from '../lib/savedProfile';
 
-export type AppScreen = 'landing' | 'jobs';
+// 'welcome' (choose a language) is shown first on every visit and never again in that visit.
+export type AppScreen = 'welcome' | 'landing' | 'jobs';
 
 interface AppState {
   lang: LangCode;
@@ -57,6 +58,14 @@ interface AppState {
 
   screen: AppScreen;
   setScreen: (s: AppScreen) => void;
+
+  /** True once a language was chosen this visit: coming back to the cards skips the splash. */
+  welcomeSeen: boolean;
+  setWelcomeSeen: (v: boolean) => void;
+
+  /** Set when the worker picks a language on the welcome screen; the mic gets focus once. */
+  focusMicOnArrival: boolean;
+  setFocusMicOnArrival: (v: boolean) => void;
 
   // Optional "Save my profile on this device" (localStorage, profile JSON only).
   saveOnDevice: boolean;
@@ -144,8 +153,14 @@ export const useAppStore = create<AppState>((set, get) => ({
     set({ ttsMuted });
   },
 
-  screen: 'landing',
+  screen: 'welcome',
   setScreen: (screen) => set({ screen }),
+
+  welcomeSeen: false,
+  setWelcomeSeen: (welcomeSeen) => set({ welcomeSeen }),
+
+  focusMicOnArrival: false,
+  setFocusMicOnArrival: (focusMicOnArrival) => set({ focusMicOnArrival }),
 
   saveOnDevice: startingSavedProfile !== null,
   savedProfile: startingSavedProfile,

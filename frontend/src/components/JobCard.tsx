@@ -5,6 +5,7 @@ import { t } from '../lib/i18n';
 import { MatchRing } from './MatchRing';
 import { SWIPE_THRESHOLD, peekStyle, tiltFor } from '../lib/deck';
 import { DragFeedback } from './DragFeedback';
+import { DemoNote } from './DemoNote';
 import { jobIcon, skillName } from '../lib/skills';
 import { prefersReducedMotion, staggerDelay } from '../lib/motion';
 
@@ -133,7 +134,10 @@ export function JobCard({ match, onSave, onSkip, isTop, depth = isTop ? 0 : 1 }:
 
       {/* Sample data tag */}
       {job.is_synthetic && (
-        <p className="text-xs text-[#5a6475] italic">{t(lang, 'sampleData')}</p>
+        <div>
+          <p className="text-xs text-[#5a6475] italic">{t(lang, 'sampleData')}</p>
+          <DemoNote className="mt-0.5" />
+        </div>
       )}
 
       {/* Action buttons (accessibility) */}

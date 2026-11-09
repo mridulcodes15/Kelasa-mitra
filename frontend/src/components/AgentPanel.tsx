@@ -5,13 +5,18 @@ import { AGENT_STEPS } from '../lib/agentSteps';
 interface AgentPanelProps {
   /** Text already on screen (e.g. the follow-up card); an identical agent reply is not repeated. */
   hideReplyEqualTo?: string | null;
+  /**
+   * The rules' "not recognised" card is on screen with its skill chips. The agent's own text
+   * would ask the same thing in other words (often the old generic question), so it is not shown.
+   */
+  preferRulesMessage?: boolean;
 }
 
 /**
  * Shows the IBM watsonx Orchestrate agent's reply, or a banner when the built-in rules
  * answered instead. Job and skill-gap cards never come from this text.
  */
-export function AgentPanel({ hideReplyEqualTo }: AgentPanelProps) {
+export function AgentPanel({ hideReplyEqualTo, preferRulesMessage = false }: AgentPanelProps) {
   const { lang, agentReply, isAskingAgent, askedQuestions } = useAppStore();
 
   if (isAskingAgent) {
@@ -46,7 +51,7 @@ export function AgentPanel({ hideReplyEqualTo }: AgentPanelProps) {
   }
 
   const reply = agentReply.reply?.trim();
-  if (!reply || reply === hideReplyEqualTo?.trim()) return null;
+  if (!reply || reply === hideReplyEqualTo?.trim() || preferRulesMessage) return null;
   // A follow-up question the app already asked is either on screen or already answered (the
   // worker may be looking at jobs): never show it again here.
   if (askedQuestions.includes(reply)) return null;

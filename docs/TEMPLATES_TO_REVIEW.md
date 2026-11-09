@@ -34,6 +34,7 @@ Reviewed by: TODO  |  Date: TODO
 |---|---|---|---|---|
 | no_area | Where in Bengaluru do you live? (e.g. Whitefield, Koramangala, Jayanagar) | ನೀವು ಬೆಂಗಳೂರಿನ ಯಾವ ಭಾಗದಲ್ಲಿ ವಾಸಿಸುತ್ತೀರಿ? (ಉದಾ: ವೈಟ್‌ಫೀಲ್ಡ್, ಕೋರಮಂಗಲ, ಜಯನಗರ) | आप बेंगलुरु के किस इलाके में रहते हैं? (जैसे व्हाइटफील्ड, कोरमंगला, जयनगर) | |
 | city_only | Bengaluru is a big city. Which area do you live in? (e.g. Whitefield, Koramangala, Jayanagar) | ಬೆಂಗಳೂರು ದೊಡ್ಡ ನಗರ. ನೀವು ಯಾವ ಪ್ರದೇಶದಲ್ಲಿ ವಾಸಿಸುತ್ತೀರಿ? (ಉದಾ: ವೈಟ್‌ಫೀಲ್ಡ್, ಕೋರಮಂಗಲ, ಜಯನಗರ) | बेंगलुरु बड़ा शहर है। आप किस इलाके में रहते हैं? (जैसे व्हाइटफील्ड, कोरमंगला, जयनगर) | |
+| unknown_work | I did not recognise that kind of work yet. This demo covers jobs like these - tap one or say it again. | ಆ ರೀತಿಯ ಕೆಲಸವನ್ನು ನಾನು ಇನ್ನೂ ಗುರುತಿಸಲಿಲ್ಲ. ಈ ಡೆಮೊ ಇಂತಹ ಕೆಲಸಗಳನ್ನು ಒಳಗೊಂಡಿದೆ - ಒಂದನ್ನು ಒತ್ತಿ ಅಥವಾ ಮತ್ತೆ ಹೇಳಿ. | मैं इस तरह के काम को अभी नहीं पहचान पाया। यह डेमो ऐसे कामों के लिए है - किसी एक पर टैप करें या फिर से बोलें। | |
 | no_skills | What kind of work have you done? (e.g. cooking, security, delivery, tailoring) | ನೀವು ಯಾವ ರೀತಿಯ ಕೆಲಸ ಮಾಡಿದ್ದೀರಿ? (ಉದಾ: ಅಡುಗೆ, ಸೆಕ್ಯೂರಿಟಿ, ಡೆಲಿವರಿ, ಹೊಲಿಗೆ) | आपने किस तरह का काम किया है? (जैसे खाना बनाना, सुरक्षा, डिलीवरी, सिलाई) | |
 
 ## 4. Screen text (`frontend/src/lib/i18n.ts`)
@@ -120,6 +121,15 @@ Reviewed by: TODO  |  Date: TODO
 | stepsComplete | All steps done. Well done! | ಎಲ್ಲಾ ಹಂತಗಳು ಮುಗಿದಿವೆ. ಶಭಾಷ್! | सभी चरण पूरे हुए। शाबाश! | |
 | switchLangPrompt | Looks like English. Switch to English? | ಇದು ಕನ್ನಡದಂತೆ ಕಾಣುತ್ತಿದೆ. ಕನ್ನಡಕ್ಕೆ ಬದಲಿಸುವುದೇ? | यह हिंदी जैसा लग रहा है। हिंदी पर बदलें? | |
 | notNow | Not now | ಈಗ ಬೇಡ | अभी नहीं | |
+| demoNote | Public demo: please do not enter personal details such as your name, phone number or address. | ಇದು ಸಾರ್ವಜನಿಕ ಡೆಮೊ: ನಿಮ್ಮ ಹೆಸರು, ಫೋನ್ ಸಂಖ್ಯೆ ಅಥವಾ ವಿಳಾಸದಂತಹ ವೈಯಕ್ತಿಕ ಮಾಹಿತಿಯನ್ನು ನಮೂದಿಸಬೇಡಿ. | यह सार्वजनिक डेमो है: अपना नाम, फ़ोन नंबर या पता जैसी निजी जानकारी न लिखें। | |
+| tooManyRequests | Too many requests. Please wait a minute and try again. | ತುಂಬಾ ವಿನಂತಿಗಳು ಬಂದಿವೆ. ದಯವಿಟ್ಟು ಒಂದು ನಿಮಿಷ ಕಾಯ್ದು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | बहुत ज़्यादा अनुरोध आए हैं। कृपया एक मिनट रुककर फिर कोशिश करें। | |
+| chooseLanguage | Choose your language | ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ | भाषा चुनें | |
+| languageName | English | ಕನ್ನಡ | हिन्दी | |
+| listeningIn | Listening in: {language} | ಆಲಿಸುತ್ತಿರುವ ಭಾಷೆ: {language} | इस भाषा में सुन रहे हैं: {language} | |
+| noSpeechHint | Didn’t catch that. Speaking another language? Tap one, then speak again. | ಕೇಳಿಸಲಿಲ್ಲ. ಬೇರೆ ಭಾಷೆಯಲ್ಲಿ ಮಾತನಾಡುತ್ತಿದ್ದೀರಾ? ಒಂದನ್ನು ಒತ್ತಿ, ಮತ್ತೆ ಮಾತನಾಡಿ. | सुनाई नहीं दिया। क्या आप दूसरी भाषा में बोल रहे हैं? एक भाषा चुनें, फिर से बोलें। | |
+| languageChip | Language: {language} | ಭಾಷೆ: {language} | भाषा: {language} | |
+| changeLanguage | Change language | ಭಾಷೆ ಬದಲಿಸಿ | भाषा बदलें | |
+| skillChipsLabel | Jobs in this demo: | ಈ ಡೆಮೊದ ಕೆಲಸಗಳು: | इस डेमो के काम: | |
 
 ## 5. Skill names in match reasons (`backend/tools/job_ranker.py`)
 

@@ -84,6 +84,15 @@ const en = {
   stepsComplete: 'All steps done. Well done!',
   switchLangPrompt: 'Looks like English. Switch to English?',
   notNow: 'Not now',
+  demoNote: 'Public demo: please do not enter personal details such as your name, phone number or address.',
+  tooManyRequests: 'Too many requests. Please wait a minute and try again.',
+  chooseLanguage: 'Choose your language',
+  languageName: 'English',
+  listeningIn: 'Listening in: {language}',
+  noSpeechHint: 'Didn’t catch that. Speaking another language? Tap one, then speak again.',
+  languageChip: 'Language: {language}',
+  changeLanguage: 'Change language',
+  skillChipsLabel: 'Jobs in this demo:',
 };
 
 export type StringKey = keyof typeof en;
@@ -171,6 +180,15 @@ export const strings: Record<LangCode, Record<StringKey, string>> = {
     stepsComplete: 'ಎಲ್ಲಾ ಹಂತಗಳು ಮುಗಿದಿವೆ. ಶಭಾಷ್!',
     switchLangPrompt: 'ಇದು ಕನ್ನಡದಂತೆ ಕಾಣುತ್ತಿದೆ. ಕನ್ನಡಕ್ಕೆ ಬದಲಿಸುವುದೇ?',
     notNow: 'ಈಗ ಬೇಡ',
+    demoNote: 'ಇದು ಸಾರ್ವಜನಿಕ ಡೆಮೊ: ನಿಮ್ಮ ಹೆಸರು, ಫೋನ್ ಸಂಖ್ಯೆ ಅಥವಾ ವಿಳಾಸದಂತಹ ವೈಯಕ್ತಿಕ ಮಾಹಿತಿಯನ್ನು ನಮೂದಿಸಬೇಡಿ.',
+    tooManyRequests: 'ತುಂಬಾ ವಿನಂತಿಗಳು ಬಂದಿವೆ. ದಯವಿಟ್ಟು ಒಂದು ನಿಮಿಷ ಕಾಯ್ದು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.',
+    chooseLanguage: 'ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ',
+    languageName: 'ಕನ್ನಡ',
+    listeningIn: 'ಆಲಿಸುತ್ತಿರುವ ಭಾಷೆ: {language}',
+    noSpeechHint: 'ಕೇಳಿಸಲಿಲ್ಲ. ಬೇರೆ ಭಾಷೆಯಲ್ಲಿ ಮಾತನಾಡುತ್ತಿದ್ದೀರಾ? ಒಂದನ್ನು ಒತ್ತಿ, ಮತ್ತೆ ಮಾತನಾಡಿ.',
+    languageChip: 'ಭಾಷೆ: {language}',
+    changeLanguage: 'ಭಾಷೆ ಬದಲಿಸಿ',
+    skillChipsLabel: 'ಈ ಡೆಮೊದ ಕೆಲಸಗಳು:',
   },
   hi: {
     appName: 'केलस मित्र',
@@ -253,6 +271,15 @@ export const strings: Record<LangCode, Record<StringKey, string>> = {
     stepsComplete: 'सभी चरण पूरे हुए। शाबाश!',
     switchLangPrompt: 'यह हिंदी जैसा लग रहा है। हिंदी पर बदलें?',
     notNow: 'अभी नहीं',
+    demoNote: 'यह सार्वजनिक डेमो है: अपना नाम, फ़ोन नंबर या पता जैसी निजी जानकारी न लिखें।',
+    tooManyRequests: 'बहुत ज़्यादा अनुरोध आए हैं। कृपया एक मिनट रुककर फिर कोशिश करें।',
+    chooseLanguage: 'भाषा चुनें',
+    languageName: 'हिन्दी',
+    listeningIn: 'इस भाषा में सुन रहे हैं: {language}',
+    noSpeechHint: 'सुनाई नहीं दिया। क्या आप दूसरी भाषा में बोल रहे हैं? एक भाषा चुनें, फिर से बोलें।',
+    languageChip: 'भाषा: {language}',
+    changeLanguage: 'भाषा बदलें',
+    skillChipsLabel: 'इस डेमो के काम:',
   },
 };
 

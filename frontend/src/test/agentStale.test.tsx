@@ -72,6 +72,7 @@ async function onJobsScreen() {
 // Framer Motion's exit animations need real frames; skip them so the screen change is immediate.
 function instantMotion() {
   stubMatchMedia(true);
+  useAppStore.setState({ screen: 'landing' }); // past the welcome screen
 }
 
 /** Like fakeBackend, but the agent repeats the old question even after the worker answered. */

@@ -2,6 +2,16 @@ import type { AgentChatResponse, WorkerProfile, MatchResponse, SkillGapResponse 
 
 const BASE = '/api';
 
+/** A failed request to our backend, with its HTTP status. */
+export class ApiError extends Error {
+  readonly status: number;
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
+  }
+}
+
 /** POST JSON to our backend and return the JSON reply; a non-2xx reply throws `${failure}: status — body`. */
 async function postJson<T>(path: string, body: unknown, failure: string): Promise<T> {
   const res = await fetch(`${BASE}${path}`, {
@@ -11,7 +21,7 @@ async function postJson<T>(path: string, body: unknown, failure: string): Promis
   });
   if (!res.ok) {
     const msg = await res.text().catch(() => 'Unknown error');
-    throw new Error(`${failure}: ${res.status} — ${msg}`);
+    throw new ApiError(`${failure}: ${res.status} — ${msg}`, res.status);
   }
   return (await res.json()) as T;
 }

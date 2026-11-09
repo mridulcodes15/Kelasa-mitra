@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Landing } from '../pages/Landing';
@@ -34,6 +34,9 @@ function stubApi() {
 }
 
 describe('follow-up question', () => {
+  // These tests render the mic screen directly: start past the welcome screen.
+  beforeEach(() => useAppStore.setState({ screen: 'landing' }));
+
   it('appears on screen and focuses the mic', async () => {
     vi.stubGlobal('SpeechRecognition', FakeRecognition);
     stubApi();

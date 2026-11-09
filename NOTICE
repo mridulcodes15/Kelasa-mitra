@@ -1,0 +1,11 @@
+Kelasa Mitra: third-party notices
+
+The project itself is under the MIT License (see LICENSE). The following part is not.
+
+App mark (frontend/public/favicon.svg, frontend/src/lib/brand.ts)
+  The Kannada letter ಕ (U+0C95) in the app mark is an outline converted from the font
+  Noto Sans Kannada Condensed Bold, version 2.006.
+  Copyright 2022 The Noto Project Authors (https://github.com/notofonts/kannada)
+  Licensed under the SIL Open Font License, Version 1.1: see OFL.txt in this folder,
+  also available at https://openfontlicense.org
+  The font file itself is not part of the app or its Docker image.

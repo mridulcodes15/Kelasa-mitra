@@ -1,0 +1,275 @@
+{
+ "sample-1": {
+  "skills": [
+   "hotel_helper",
+   "two_wheeler"
+  ],
+  "area": "whitefield",
+  "experience_years": 2.0,
+  "languages": []
+ },
+ "sample-2": {
+  "skills": [
+   "hotel_helper",
+   "two_wheeler"
+  ],
+  "area": "whitefield",
+  "experience_years": 2.0,
+  "languages": [
+   "kannada"
+  ]
+ },
+ "sample-3": {
+  "skills": [
+   "driver_car"
+  ],
+  "area": "electronic_city",
+  "experience_years": 3.0,
+  "languages": [
+   "hindi"
+  ]
+ },
+ "sample-4": {
+  "skills": [
+   "tailoring"
+  ],
+  "area": "yelahanka",
+  "experience_years": 5.0,
+  "languages": [
+   "kannada",
+   "hindi"
+  ]
+ },
+ "sample-5": {
+  "skills": [
+   "cook"
+  ],
+  "area": "marathahalli",
+  "experience_years": 2.0,
+  "languages": [
+   "hindi"
+  ]
+ },
+ "sample-6": {
+  "skills": [
+   "security_guard"
+  ],
+  "area": "jayanagar",
+  "experience_years": 6.0,
+  "languages": [
+   "kannada"
+  ]
+ },
+ "sample-7": {
+  "skills": [
+   "electrician"
+  ],
+  "area": "hsr_layout",
+  "experience_years": 4.0,
+  "languages": []
+ },
+ "sample-8": {
+  "skills": [
+   "housekeeping"
+  ],
+  "area": "btm_layout",
+  "experience_years": 3.0,
+  "languages": [
+   "kannada"
+  ]
+ },
+ "sample-9": {
+  "skills": [
+   "delivery",
+   "two_wheeler"
+  ],
+  "area": "whitefield",
+  "experience_years": 1.0,
+  "languages": []
+ },
+ "sample-10": {
+  "skills": [
+   "plumber"
+  ],
+  "area": "koramangala",
+  "experience_years": 5.0,
+  "languages": [
+   "hindi"
+  ]
+ },
+ "sample-11": {
+  "skills": [
+   "hotel_helper"
+  ],
+  "area": "koramangala",
+  "experience_years": 4.0,
+  "languages": [
+   "kannada"
+  ]
+ },
+ "sample-12": {
+  "skills": [
+   "driver_car"
+  ],
+  "area": "jayanagar",
+  "experience_years": 5.0,
+  "languages": [
+   "kannada"
+  ]
+ },
+ "sample-13": {
+  "skills": [
+   "tailoring"
+  ],
+  "area": "yelahanka",
+  "experience_years": 3.0,
+  "languages": [
+   "hindi"
+  ]
+ },
+ "eval-en-1": {
+  "skills": [
+   "housekeeping"
+  ],
+  "area": "indiranagar",
+  "experience_years": 4.0,
+  "languages": []
+ },
+ "eval-en-2": {
+  "skills": [
+   "security_guard"
+  ],
+  "area": "electronic_city",
+  "experience_years": 6.0,
+  "languages": [
+   "kannada",
+   "hindi"
+  ]
+ },
+ "eval-en-3": {
+  "skills": [
+   "driving_licence"
+  ],
+  "area": "yeshwanthpur",
+  "experience_years": null,
+  "languages": []
+ },
+ "eval-en-4": {
+  "skills": [
+   "warehouse"
+  ],
+  "area": "peenya",
+  "experience_years": 2.0,
+  "languages": []
+ },
+ "eval-en-5": {
+  "skills": [
+   "tailoring"
+  ],
+  "area": "malleshwaram",
+  "experience_years": null,
+  "languages": []
+ },
+ "eval-kn-1": {
+  "skills": [
+   "electrician"
+  ],
+  "area": "hebbal",
+  "experience_years": 3.0,
+  "languages": [
+   "kannada"
+  ]
+ },
+ "eval-kn-2": {
+  "skills": [
+   "plumber"
+  ],
+  "area": "btm_layout",
+  "experience_years": null,
+  "languages": [
+   "kannada"
+  ]
+ },
+ "eval-kn-3": {
+  "skills": [
+   "two_wheeler",
+   "delivery"
+  ],
+  "area": "koramangala",
+  "experience_years": null,
+  "languages": [
+   "kannada"
+  ]
+ },
+ "eval-kn-4": {
+  "skills": [
+   "cook"
+  ],
+  "area": "jayanagar",
+  "experience_years": 5.0,
+  "languages": [
+   "kannada"
+  ]
+ },
+ "eval-kn-5": {
+  "skills": [
+   "warehouse"
+  ],
+  "area": "whitefield",
+  "experience_years": null,
+  "languages": [
+   "kannada"
+  ]
+ },
+ "eval-hi-1": {
+  "skills": [
+   "driving_licence",
+   "driver_car"
+  ],
+  "area": "kr_puram",
+  "experience_years": null,
+  "languages": [
+   "hindi"
+  ]
+ },
+ "eval-hi-2": {
+  "skills": [
+   "housekeeping"
+  ],
+  "area": "hsr_layout",
+  "experience_years": 4.0,
+  "languages": [
+   "hindi"
+  ]
+ },
+ "eval-hi-3": {
+  "skills": [
+   "security_guard"
+  ],
+  "area": "marathahalli",
+  "experience_years": null,
+  "languages": [
+   "hindi"
+  ]
+ },
+ "eval-hi-4": {
+  "skills": [
+   "welder"
+  ],
+  "area": "peenya",
+  "experience_years": 3.0,
+  "languages": [
+   "hindi"
+  ]
+ },
+ "eval-hi-5": {
+  "skills": [
+   "painting"
+  ],
+  "area": "rajajinagar",
+  "experience_years": 2.0,
+  "languages": [
+   "hindi"
+  ]
+ }
+}

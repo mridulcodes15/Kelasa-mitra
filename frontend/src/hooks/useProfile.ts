@@ -1,10 +1,14 @@
 import { useCallback } from 'react';
 import { useAppStore } from '../store/appStore';
-import { agentChat, extractProfile, fetchMatches, fetchSkillGap } from '../lib/api';
+import { ApiError, agentChat, extractProfile, fetchMatches, fetchSkillGap } from '../lib/api';
+import { t } from '../lib/i18n';
 import type { WorkerProfile } from '../lib/types';
 
 // Only the latest request may update the agent panel.
 let agentRequestId = 0;
+// Only the latest search may show a profile, jobs or a follow-up question: an older, slower
+// search must never put its "not recognised" card next to newer text.
+let searchId = 0;
 
 export function useProfile() {
   const {
@@ -30,7 +34,8 @@ export function useProfile() {
 
   /** Matches, then skill gap, for a profile; asks the follow-up question when one is due. */
   const findJobsFor = useCallback(
-    async (found: WorkerProfile) => {
+    async (found: WorkerProfile, id: number) => {
+      const current = () => id === searchId;
       // Reasons, follow-up questions and skill-gap text come back in profile.detected_language,
       // so it always carries the picker's language (a saved profile may hold an older one).
       const result: WorkerProfile = { ...found, detected_language: lang };
@@ -38,6 +43,7 @@ export function useProfile() {
       let hasMatches = false;
       try {
         const matchResp = await fetchMatches(result);
+        if (!current()) return;
         if (matchResp.follow_up_question) {
           setFollowUpQuestion(matchResp.follow_up_question);
         } else {
@@ -50,17 +56,18 @@ export function useProfile() {
       } catch {
         // match failure is non-fatal; profile is still shown
       } finally {
-        setIsFetchingMatches(false);
+        if (current()) setIsFetchingMatches(false);
       }
 
       if (hasMatches) {
         setIsFetchingSkillGap(true);
         try {
-          setSkillGap(await fetchSkillGap(result));
+          const gap = await fetchSkillGap(result);
+          if (current()) setSkillGap(gap);
         } catch {
-          setSkillGapFailed(true); // job matches stay on screen
+          if (current()) setSkillGapFailed(true); // job matches stay on screen
         } finally {
-          setIsFetchingSkillGap(false);
+          if (current()) setIsFetchingSkillGap(false);
         }
       }
     },
@@ -79,19 +86,25 @@ export function useProfile() {
   const runExtraction = useCallback(
     async (text: string) => {
       if (!text.trim()) return;
-      // The agent runs alongside the deterministic pipeline; cards never wait for it.
+      const id = ++searchId;
+      // A new search clears the last answer first: the follow-up card (and its chips) and the
+      // agent's previous reply. The agent runs alongside; cards never wait for it.
+      resetResults();
       void askAgent(text);
       setIsExtracting(true);
-      resetResults();
       try {
         const result = await extractProfile(text, lang);
+        if (id !== searchId) return;
         setProfile(result);
         rememberProfile(result); // only if the worker chose to save on this device
-        await findJobsFor(result);
+        await findJobsFor(result, id);
       } catch (err) {
-        setExtractError(err instanceof Error ? err.message : 'Unknown error');
+        if (id !== searchId) return;
+        // A public demo limits requests per visitor; say so in the worker's language.
+        if (err instanceof ApiError && err.status === 429) setExtractError(t(lang, 'tooManyRequests'));
+        else setExtractError(err instanceof Error ? err.message : 'Unknown error');
       } finally {
-        setIsExtracting(false);
+        if (id === searchId) setIsExtracting(false);
       }
     },
     [askAgent, findJobsFor, lang, rememberProfile, resetResults, setExtractError, setIsExtracting,
@@ -101,10 +114,11 @@ export function useProfile() {
   /** Find jobs for a profile saved on this device. There is no text, so the agent is not asked. */
   const runSavedProfile = useCallback(
     async (saved: WorkerProfile) => {
+      const id = ++searchId;
       resetResults();
       setAgentReply(null);
       setProfile(saved);
-      await findJobsFor(saved);
+      await findJobsFor(saved, id);
     },
     [findJobsFor, resetResults, setAgentReply, setProfile],
   );

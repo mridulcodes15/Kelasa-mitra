@@ -37,6 +37,35 @@ with open(_DATA / "skills.json", encoding="utf-8") as f:
 with open(_DATA / "areas.json", encoding="utf-8") as f:
     _AREAS: list[dict[str, Any]] = json.load(f)
 
+
+# ── spelling normalisation (matching only) ──────────────────────────────────
+# Speech engines spell English loanwords in Devanagari and Kannada script in several ways
+# ("इलेक्ट्रिशियन" / "इलेक्ट्रीशियन", "प्लम्बर" / "प्लंबर"). Both the worker's text and every
+# synonym are folded the same way before matching. What the worker sees is never changed.
+
+_ZERO_WIDTH = dict.fromkeys(map(ord, "\u200c\u200d"), None)  # ZWNJ, ZWJ
+_FOLD = str.maketrans({
+    # Devanagari: nukta dropped (NFC already splits क़ into क + nukta), chandrabindu to
+    # anusvara, long vowels to short (signs and independent letters).
+    "\u093c": None, "\u0901": "\u0902",
+    "\u0940": "\u093f", "\u0942": "\u0941", "\u0908": "\u0907", "\u090a": "\u0909",
+    # Kannada: nukta dropped, long vowels to short (i, u, e, o; signs and letters).
+    "\u0cbc": None,
+    "\u0cc0": "\u0cbf", "\u0cc2": "\u0cc1", "\u0cc7": "\u0cc6", "\u0ccb": "\u0cca",
+    "\u0c88": "\u0c87", "\u0c8a": "\u0c89", "\u0c8f": "\u0c8e", "\u0c93": "\u0c92",
+})
+# A nasal consonant + virama before a consonant is the same sound as an anusvara: म्ब = ंब.
+_DEVA_NASAL = re.compile("[\u0919\u091e\u0923\u0928\u092e]\u094d(?=[\u0915-\u0939])")
+_KN_NASAL = re.compile("[\u0c99\u0c9e\u0ca3\u0ca8\u0cae]\u0ccd(?=[\u0c95-\u0cb9])")
+
+
+def normalize_for_match(text: str) -> str:
+    """Lowercase and fold spelling variants so equivalent spellings compare equal."""
+    folded = unicodedata.normalize("NFC", text).lower().translate(_ZERO_WIDTH)
+    folded = _DEVA_NASAL.sub("\u0902", folded)
+    folded = _KN_NASAL.sub("\u0c82", folded)
+    return folded.translate(_FOLD)
+
 # ── inflection suffix tables ─────────────────────────────────────────────────
 
 # Kannada common postpositional / copula / verbal suffixes
@@ -124,16 +153,62 @@ for skill in _SKILLS:
             key = syn.lower().strip()
             if key in _AMBIGUOUS_TERMS:
                 continue
-            _SKILL_MAP[key] = skill["id"]
+            _SKILL_MAP[normalize_for_match(key)] = skill["id"]
             for stem in _stems_for(key, is_kn=is_kn, is_hi=is_hi):
-                _STEM_MAP[stem] = skill["id"]
+                _STEM_MAP[normalize_for_match(stem)] = skill["id"]
 
 # build a flat (lowercase alias → area dict) mapping
 _AREA_MAP: dict[str, dict[str, Any]] = {}
 for area in _AREAS:
     for alias in area["aliases"]:
-        _AREA_MAP[alias.lower().strip()] = area
-    _AREA_MAP[area["name"].lower().strip()] = area
+        _AREA_MAP[normalize_for_match(alias.strip())] = area
+    _AREA_MAP[normalize_for_match(area["name"].strip())] = area
+
+
+# ── conservative fuzzy matching (one-letter spelling variants) ──────────────
+# Only for loanword skills, only for Devanagari or Kannada words of at least 6 code points
+# after normalisation, and only when exactly one skill has a word within one edit.
+_FUZZY_SKILLS = {"electrician", "driver_car", "plumber", "delivery", "security_guard",
+                 "housekeeping", "hotel_helper", "two_wheeler", "tailoring", "cook"}
+_FUZZY_MIN_LEN = 6
+_WORD = re.compile(r"[^\s\d.,;:!?()\"'\-]+")
+
+
+def _within_one_edit(a: str, b: str) -> bool:
+    """True if a and b differ by at most one insertion, deletion or substitution."""
+    if a == b:
+        return True
+    if abs(len(a) - len(b)) > 1:
+        return False
+    if len(a) > len(b):
+        a, b = b, a
+    i = 0
+    while i < len(a) and a[i] == b[i]:
+        i += 1
+    return a[i + 1:] == b[i + 1:] if len(a) == len(b) else a[i:] == b[i + 1:]
+
+
+_FUZZY_WORDS: dict[str, set[str]] = {}
+for _skill in _SKILLS:
+    if _skill["id"] not in _FUZZY_SKILLS:
+        continue
+    for _syn in _skill["synonyms_kn"] + _skill["synonyms_hi"]:
+        for _w in _WORD.findall(normalize_for_match(_syn)):
+            if len(_w) >= _FUZZY_MIN_LEN and not _w.isascii():
+                _FUZZY_WORDS.setdefault(_w, set()).add(_skill["id"])
+
+
+def _fuzzy_skills(normalised_text: str) -> list[str]:
+    found: list[str] = []
+    for word in _WORD.findall(normalised_text):
+        if len(word) < _FUZZY_MIN_LEN or word.isascii():
+            continue
+        near = {s for target, skills in _FUZZY_WORDS.items() if _within_one_edit(word, target) for s in skills}
+        if len(near) == 1:
+            skill = next(iter(near))
+            if skill not in found:
+                found.append(skill)
+    return found
 
 
 def _area_result(area: dict[str, Any]) -> dict[str, Any]:
@@ -143,7 +218,7 @@ def _area_result(area: dict[str, Any]) -> dict[str, Any]:
 def lookup_area(name: str) -> dict[str, Any] | None:
     """Resolve an area name, alias or id to its entry. Coordinates come only from areas.json."""
     key = name.lower().strip()
-    area = _AREA_MAP.get(key) or next((a for a in _AREAS if a["id"] == key), None)
+    area = _AREA_MAP.get(normalize_for_match(key)) or next((a for a in _AREAS if a["id"] == key), None)
     return _area_result(area) if area else None
 
 
@@ -224,7 +299,7 @@ def extract_profile_fallback(text: str, detected_language: str) -> dict[str, Any
     Returns a dict matching the WorkerProfile schema (without raw_input /
     detected_language — those are added by the caller).
     """
-    lower = text.lower()
+    lower = normalize_for_match(text)  # matching only; the worker's text is unchanged
 
     # ── skills ────────────────────────────────────────────────────────────────
     found_skills: list[str] = []
@@ -236,6 +311,10 @@ def extract_profile_fallback(text: str, detected_language: str) -> dict[str, Any
     for stem in sorted(_STEM_MAP.keys(), key=len, reverse=True):
         skill_id = _STEM_MAP[stem]
         if skill_id not in found_skills and _term_in_text(stem, lower):
+            found_skills.append(skill_id)
+    # Pass 3: one-letter spelling variants of loanword skills (see _fuzzy_skills)
+    for skill_id in _fuzzy_skills(lower):
+        if skill_id not in found_skills:
             found_skills.append(skill_id)
 
     # ── area ──────────────────────────────────────────────────────────────────

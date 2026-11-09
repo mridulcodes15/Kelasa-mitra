@@ -1,0 +1,29 @@
+# Secrets: never in the image
+**/.env
+**/.env.*
+!backend/.env.example
+
+# Virtual environments and dependencies (installed inside the image)
+**/.venv
+**/venv
+orchestrate/.venv
+**/node_modules
+
+# Local databases (the container seeds its own)
+**/*.db
+**/*.db-shm
+**/*.db-wal
+
+# Not needed to run the app
+design
+.git
+.claude
+.bob
+docs/bob
+orchestrate
+frontend/dist
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+DOCS_TODO.md
+CLAUDE.md

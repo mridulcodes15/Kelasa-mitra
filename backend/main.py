@@ -8,8 +8,9 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 
 load_dotenv(Path(__file__).parent / ".env")
 
@@ -60,3 +61,34 @@ app.include_router(agent_router)
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
+
+
+# ── Built frontend (single-service deployment) ───────────────────────────────
+# When frontend/dist exists (after `npm run build`, or in the Docker image), the same server
+# also serves the app, so the page and /api share one origin and CORS is not needed. In
+# development the folder is usually absent and Vite serves the app with its /api proxy.
+
+DEFAULT_FRONTEND_DIST = Path(__file__).resolve().parent.parent / "frontend" / "dist"
+
+
+def mount_frontend(target: FastAPI, dist: Path) -> bool:
+    """Serve files from `dist`, and index.html for any other non-API GET path. Registered last,
+    so every API route, /health and the API docs still match first."""
+    root = dist.resolve()
+    if not (root / "index.html").is_file():
+        return False
+
+    @target.get("/{path:path}", include_in_schema=False)
+    def frontend(path: str) -> FileResponse:
+        if path == "api" or path.startswith("api/"):
+            raise HTTPException(status_code=404, detail="Not Found")  # unknown API path: no HTML
+        candidate = (root / path).resolve()
+        if path and candidate.is_file() and candidate.is_relative_to(root):
+            return FileResponse(candidate)
+        return FileResponse(root / "index.html")
+
+    return True
+
+
+if mount_frontend(app, Path(os.getenv("FRONTEND_DIST", "") or DEFAULT_FRONTEND_DIST)):
+    logging.getLogger(__name__).info("Serving the built frontend.")

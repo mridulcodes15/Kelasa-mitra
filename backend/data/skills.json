@@ -5,9 +5,10 @@
     "label_kn": "ಹೋಟೆಲ್ ಹೆಲ್ಪರ್",
     "label_hi": "होटल हेल्पर",
     "synonyms_en": ["hotel helper", "helper in hotel", "helper in a hotel", "hotel boy", "hotel staff", "hotel worker", "hospitality helper", "room helper"],
-    "synonyms_kn": ["ಹೋಟೆಲ್ ಹೆಲ್ಪರ್", "ಹೋಟೆಲ್ ಬಾಯ್", "ಹೋಟೆಲ್ ಕೆಲಸ", "ಹೋಟೆಲ್ ಸಿಬ್ಬಂದಿ", "ಹೆಲ್ಪರ್ ಆಗಿ", "ಹೆಲ್ಪರ್ ಕೆಲಸ"],
-    "synonyms_hi": ["होटल हेल्पर", "होटल बॉय", "होटल में काम", "होटल स्टाफ"],
-    "category": "hospitality"
+    "synonyms_kn": ["ಹೋಟೆಲ್ ಹೆಲ್ಪರ್", "ಹೋಟೆಲ್ ಬಾಯ್", "ಹೋಟೆಲ್ ಕೆಲಸ", "ಹೋಟೆಲ್ ಸಿಬ್ಬಂದಿ", "ಹೆಲ್ಪರ್ ಆಗಿ", "ಹೆಲ್ಪರ್ ಕೆಲಸ", "ಹೋಟಲ್ ಹೆಲ್ಪರ್"],
+    "synonyms_hi": ["होटल हेल्पर", "होटल बॉय", "होटल में काम", "होटल स्टाफ", "होटल हैल्पर", "होटेल हेल्पर"],
+    "category": "hospitality",
+    "spelling_variants_note": "Some Hindi and Kannada synonyms are plausible speech-engine spellings of the English loanword (added 2026-11-09), not verified against real speech."
   },
   {
     "id": "cook",
@@ -17,7 +18,8 @@
     "synonyms_en": ["cook", "cooking", "chef", "canteen cook", "kitchen work", "food preparation", "khana banana"],
     "synonyms_kn": ["ಅಡುಗೆ", "ಅಡುಗೆಯವರು", "ಕುಕ್", "ಊಟ ತಯಾರಿ", "ಅಡಿಗೆ"],
     "synonyms_hi": ["रसोइया", "खाना बनाना", "खाना पकाना", "कुक", "खाना बनाने"],
-    "category": "hospitality"
+    "category": "hospitality",
+    "spelling_variants_note": "Some Hindi and Kannada synonyms are plausible speech-engine spellings of the English loanword (added 2026-11-09), not verified against real speech."
   },
   {
     "id": "housekeeping",
@@ -25,9 +27,10 @@
     "label_kn": "ಹೌಸ್‌ಕೀಪಿಂಗ್",
     "label_hi": "हाउसकीपिंग",
     "synonyms_en": ["housekeeping", "cleaning", "room cleaning", "hotel cleaning", "sweeping", "mopping", "sanitizing", "domestic work", "maid", "domestic helper"],
-    "synonyms_kn": ["ಹೌಸ್‌ಕೀಪಿಂಗ್", "ಸ್ವಚ್ಛತೆ", "ಶುಚಿಗೊಳಿಸುವಿಕೆ", "ಕ್ಲೀನಿಂಗ್", "ಮನೆಗೆಲಸ"],
-    "synonyms_hi": ["हाउसकीपिंग", "सफाई", "सफाई काम", "घर साफ करना", "झाड़ू पोछा"],
-    "category": "domestic"
+    "synonyms_kn": ["ಹೌಸ್‌ಕೀಪಿಂಗ್", "ಸ್ವಚ್ಛತೆ", "ಶುಚಿಗೊಳಿಸುವಿಕೆ", "ಕ್ಲೀನಿಂಗ್", "ಮನೆಗೆಲಸ", "ಹೌಸ್ ಕೀಪಿಂಗ್"],
+    "synonyms_hi": ["हाउसकीपिंग", "सफाई", "सफाई काम", "घर साफ करना", "झाड़ू पोछा", "हाउस कीपिंग"],
+    "category": "domestic",
+    "spelling_variants_note": "Some Hindi and Kannada synonyms are plausible speech-engine spellings of the English loanword (added 2026-11-09), not verified against real speech."
   },
   {
     "id": "security_guard",
@@ -35,9 +38,10 @@
     "label_kn": "ಸೆಕ್ಯೂರಿಟಿ ಗಾರ್ಡ್",
     "label_hi": "सुरक्षा गार्ड",
     "synonyms_en": ["security guard", "security", "watchman", "guard", "bouncer", "night guard", "security staff"],
-    "synonyms_kn": ["ಸೆಕ್ಯೂರಿಟಿ ಗಾರ್ಡ್", "ಕಾವಲುಗಾರ", "ಸೆಕ್ಯೂರಿಟಿ", "ರಕ್ಷಣೆ"],
-    "synonyms_hi": ["सुरक्षा गार्ड", "सिक्योरिटी गार्ड", "चौकीदार", "सिक्योरिटी"],
-    "category": "security"
+    "synonyms_kn": ["ಸೆಕ್ಯೂರಿಟಿ ಗಾರ್ಡ್", "ಕಾವಲುಗಾರ", "ಸೆಕ್ಯೂರಿಟಿ", "ರಕ್ಷಣೆ", "ಸೆಕ್ಯೂರಿಟಿ ಗಾರ್ಡು"],
+    "synonyms_hi": ["सुरक्षा गार्ड", "सिक्योरिटी गार्ड", "चौकीदार", "सिक्योरिटी", "सिक्युरिटी गार्ड", "सेक्युरिटी गार्ड", "सेक्योरिटी गार्ड"],
+    "category": "security",
+    "spelling_variants_note": "Some Hindi and Kannada synonyms are plausible speech-engine spellings of the English loanword (added 2026-11-09), not verified against real speech."
   },
   {
     "id": "driver_car",
@@ -45,9 +49,10 @@
     "label_kn": "ಕಾರ್ ಡ್ರೈವರ್",
     "label_hi": "कार ड्राइवर",
     "synonyms_en": ["driver", "car driver", "cab driver", "taxi driver", "personal driver", "car driving", "lmv", "light motor vehicle"],
-    "synonyms_kn": ["ಡ್ರೈವರ್", "ಕಾರ್ ಡ್ರೈವರ್", "ಟ್ಯಾಕ್ಸಿ ಚಾಲಕ", "ಕಾರ್ ಓಡಿಸು"],
-    "synonyms_hi": ["ड्राइवर", "कार ड्राइवर", "टैक्सी ड्राइवर", "कार चलाना", "गाड़ी चलाना"],
-    "category": "transport"
+    "synonyms_kn": ["ಡ್ರೈವರ್", "ಕಾರ್ ಡ್ರೈವರ್", "ಟ್ಯಾಕ್ಸಿ ಚಾಲಕ", "ಕಾರ್ ಓಡಿಸು", "ಡ್ರೈವರು", "ಡ್ರಯ್ವರ್"],
+    "synonyms_hi": ["ड्राइवर", "कार ड्राइवर", "टैक्सी ड्राइवर", "कार चलाना", "गाड़ी चलाना", "ड्रायवर"],
+    "category": "transport",
+    "spelling_variants_note": "Some Hindi and Kannada synonyms are plausible speech-engine spellings of the English loanword (added 2026-11-09), not verified against real speech."
   },
   {
     "id": "two_wheeler",
@@ -55,9 +60,10 @@
     "label_kn": "ಎರಡು ಚಕ್ರದ ವಾಹನ",
     "label_hi": "दोपहिया वाहन",
     "synonyms_en": ["two-wheeler", "bike rider", "bike", "motorcycle", "scooter", "two wheeler", "motorbike", "bike riding"],
-    "synonyms_kn": ["ಬೈಕ್", "ಬೈಕ್ ಓಡಿಸು", "ಎರಡು ಚಕ್ರ", "ಸ್ಕೂಟರ್", "ಮೋಟಾರ್‌ಬೈಕ್"],
-    "synonyms_hi": ["बाइक", "दोपहिया", "बाइक चलाना", "स्कूटर", "मोटरबाइक"],
-    "category": "transport"
+    "synonyms_kn": ["ಬೈಕ್", "ಬೈಕ್ ಓಡಿಸು", "ಎರಡು ಚಕ್ರ", "ಸ್ಕೂಟರ್", "ಮೋಟಾರ್‌ಬೈಕ್", "ಟೂ ವೀಲರ್", "ಟೂವೀಲರ್"],
+    "synonyms_hi": ["बाइक", "दोपहिया", "बाइक चलाना", "स्कूटर", "मोटरबाइक", "टू व्हीलर", "टूव्हीलर"],
+    "category": "transport",
+    "spelling_variants_note": "Some Hindi and Kannada synonyms are plausible speech-engine spellings of the English loanword (added 2026-11-09), not verified against real speech."
   },
   {
     "id": "delivery",
@@ -65,9 +71,10 @@
     "label_kn": "ಡೆಲಿವರಿ",
     "label_hi": "डिलीवरी",
     "synonyms_en": ["delivery", "delivery boy", "delivery agent", "swiggy", "zomato", "courier", "parcel delivery", "food delivery", "last mile"],
-    "synonyms_kn": ["ಡೆಲಿವರಿ", "ಡೆಲಿವರಿ ಬಾಯ್", "ಸ್ವಿಗ್ಗಿ", "ಜೊಮ್ಯಾಟೋ", "ಕೊರಿಯರ್"],
-    "synonyms_hi": ["डिलीवरी", "डिलीवरी बॉय", "डिलीवरी एजेंट", "कूरियर"],
-    "category": "transport"
+    "synonyms_kn": ["ಡೆಲಿವರಿ", "ಡೆಲಿವರಿ ಬಾಯ್", "ಸ್ವಿಗ್ಗಿ", "ಜೊಮ್ಯಾಟೋ", "ಕೊರಿಯರ್", "ಡಿಲಿವರಿ"],
+    "synonyms_hi": ["डिलीवरी", "डिलीवरी बॉय", "डिलीवरी एजेंट", "कूरियर", "डेलिवरी"],
+    "category": "transport",
+    "spelling_variants_note": "Some Hindi and Kannada synonyms are plausible speech-engine spellings of the English loanword (added 2026-11-09), not verified against real speech."
   },
   {
     "id": "electrician",
@@ -75,9 +82,10 @@
     "label_kn": "ಎಲೆಕ್ಟ್ರಿಷಿಯನ್",
     "label_hi": "इलेक्ट्रीशियन",
     "synonyms_en": ["electrician", "electrical work", "wiring", "electrical repair", "electrical fitter"],
-    "synonyms_kn": ["ಎಲೆಕ್ಟ್ರಿಷಿಯನ್", "ವಿದ್ಯುತ್ ಕೆಲಸ", "ವೈರಿಂಗ್", "ಎಲೆಕ್ಟ್ರಿಕಲ್"],
-    "synonyms_hi": ["इलेक्ट्रीशियन", "बिजली का काम", "वायरिंग", "इलेक्ट्रिकल काम"],
-    "category": "technical"
+    "synonyms_kn": ["ಎಲೆಕ್ಟ್ರಿಷಿಯನ್", "ವಿದ್ಯುತ್ ಕೆಲಸ", "ವೈರಿಂಗ್", "ಎಲೆಕ್ಟ್ರಿಕಲ್", "ಎಲೆಕ್ಟ್ರಿಶಿಯನ್", "ಎಲೆಕ್ಟ್ರೀಷನ್"],
+    "synonyms_hi": ["इलेक्ट्रीशियन", "बिजली का काम", "वायरिंग", "इलेक्ट्रिकल काम", "इलेक्ट्रीशन"],
+    "category": "technical",
+    "spelling_variants_note": "Some Hindi and Kannada synonyms are plausible speech-engine spellings of the English loanword (added 2026-11-09), not verified against real speech."
   },
   {
     "id": "plumber",
@@ -85,9 +93,10 @@
     "label_kn": "ಪ್ಲಂಬರ್",
     "label_hi": "प्लंबर",
     "synonyms_en": ["plumber", "plumbing", "pipe fitting", "pipe repair", "sanitary work"],
-    "synonyms_kn": ["ಪ್ಲಂಬರ್", "ಪ್ಲಂಬಿಂಗ್", "ಪೈಪ್ ಕೆಲಸ", "ನಲ್ಲಿ ದುರಸ್ತಿ"],
+    "synonyms_kn": ["ಪ್ಲಂಬರ್", "ಪ್ಲಂಬಿಂಗ್", "ಪೈಪ್ ಕೆಲಸ", "ನಲ್ಲಿ ದುರಸ್ತಿ", "ಪ್ಲಂಬರು"],
     "synonyms_hi": ["प्लंबर", "प्लंबिंग", "पाइप का काम", "नल ठीक करना"],
-    "category": "technical"
+    "category": "technical",
+    "spelling_variants_note": "Some Hindi and Kannada synonyms are plausible speech-engine spellings of the English loanword (added 2026-11-09), not verified against real speech."
   },
   {
     "id": "tailoring",
@@ -95,9 +104,10 @@
     "label_kn": "ಹೊಲಿಗೆ",
     "label_hi": "सिलाई",
     "synonyms_en": ["tailoring", "tailor", "stitching", "sewing", "stitch clothes", "garment", "cutting and stitching"],
-    "synonyms_kn": ["ಹೊಲಿಗೆ", "ಟೇಲರ್", "ಬಟ್ಟೆ ಹೊಲಿಯು", "ಹೊಲಿದು", "ಸ್ಟಿಚ್ಚಿಂಗ್"],
-    "synonyms_hi": ["सिलाई", "दर्जी", "कपड़े सीना", "सिलाई काम", "टेलरिंग"],
-    "category": "garment"
+    "synonyms_kn": ["ಹೊಲಿಗೆ", "ಟೇಲರ್", "ಬಟ್ಟೆ ಹೊಲಿಯು", "ಹೊಲಿದು", "ಸ್ಟಿಚ್ಚಿಂಗ್", "ಟೈಲರ್", "ಟೇಲರಿಂಗ್"],
+    "synonyms_hi": ["सिलाई", "दर्जी", "कपड़े सीना", "सिलाई काम", "टेलरिंग", "टेलर"],
+    "category": "garment",
+    "spelling_variants_note": "Some Hindi and Kannada synonyms are plausible speech-engine spellings of the English loanword (added 2026-11-09), not verified against real speech."
   },
   {
     "id": "construction_helper",
@@ -134,7 +144,7 @@
     "label_en": "Retail Sales",
     "label_kn": "ರಿಟೇಲ್ ಮಾರಾಟ",
     "label_hi": "खुदरा बिक्री",
-    "synonyms_en": ["retail", "sales", "shop assistant", "store assistant", "sales boy", "sales girl", "shopkeeper", "store staff"],
+    "synonyms_en": ["retail", "sales", "shop assistant", "store assistant", "sales boy", "sales girl", "store staff"],
     "synonyms_kn": ["ರಿಟೇಲ್", "ಮಾರಾಟ", "ಅಂಗಡಿ ಕೆಲಸ", "ಸೇಲ್ಸ್"],
     "synonyms_hi": ["रिटेल", "बिक्री", "दुकान में काम", "सेल्समैन", "शॉप असिस्टेंट"],
     "category": "retail"
@@ -314,9 +324,9 @@
     "label_en": "Farm Worker",
     "label_kn": "ಕೃಷಿ ಕಾರ್ಮಿಕ",
     "label_hi": "खेत मजदूर",
-    "synonyms_en": ["farm", "farmer", "agriculture", "farm worker", "cultivation", "harvest"],
-    "synonyms_kn": ["ಕೃಷಿ", "ಕೃಷಿ ಕಾರ್ಮಿಕ", "ರೈತ", "ಹೊಲ ಕೆಲಸ"],
-    "synonyms_hi": ["खेती", "खेत मजदूर", "किसान", "कृषि"],
+    "synonyms_en": ["farm", "agriculture", "farm worker", "cultivation", "harvest"],
+    "synonyms_kn": ["ಕೃಷಿ", "ಕೃಷಿ ಕಾರ್ಮಿಕ", "ಹೊಲ ಕೆಲಸ"],
+    "synonyms_hi": ["खेती", "खेत मजदूर", "कृषि"],
     "category": "agriculture"
   },
   {
