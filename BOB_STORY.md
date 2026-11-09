@@ -84,5 +84,5 @@ UNVERIFIED.
 
 ## Demo clip
 
-- TODO: screenshots in `docs/bob/screenshots/`.
+- TODO: screenshots in [`docs/bob/screenshots/`](docs/bob/docs/bob/screenshots/).
 - TODO: owner to add the demo video link (app + Orchestrate trace).
