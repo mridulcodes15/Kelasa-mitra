@@ -84,5 +84,14 @@ UNVERIFIED.
 
 ## Demo clip
 
-- TODO: screenshots in [`docs/bob/screenshots/`](docs/bob/docs/bob/screenshots/).
+- TODO:### Screenshots
+
+**1. Bob's task list during Phase 3 work (photo of the screen, 7 Nov 2026).** Green items are finished; the rest were still pending when the credits ran out.
+
+![Bob's task list during Phase 3 work](docs/bob/screenshots/01-bob-todo-list.png)
+
+**2. Bob panel in VS Code showing the files changed and the "Time to go beyond the trial" message.**
+
+![Bob panel showing files changed and the trial-ended message](docs/bob/screenshots/02-bob-trial-ended.png)
+
 - TODO: owner to add the demo video link (app + Orchestrate trace).
