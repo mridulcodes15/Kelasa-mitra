@@ -26,7 +26,7 @@ import { skillName } from '../lib/skills';
 export function Landing() {
   const {
     lang, setLang, followUpQuestion, savedProfile, dataDeleted, storageBlocked, focusMicOnArrival, setFocusMicOnArrival,
-    setScreen,
+    setScreen, savedJobs,
   } = useAppStore();
   useReadAloud(followUpQuestion);
   const {
@@ -342,7 +342,7 @@ export function Landing() {
           </button>
         )}
 
-        {((profile && !isExtracting) || savedProfile || dataDeleted || storageBlocked) && <SaveOnDevice />}
+        {((profile && !isExtracting) || savedProfile || savedJobs.length > 0 || dataDeleted || storageBlocked) && <SaveOnDevice />}
       </section>
     </main>
   );

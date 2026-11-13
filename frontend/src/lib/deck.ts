@@ -40,3 +40,14 @@ export function dragFeedback(x: number): DragFeedback {
 export function peekStyle(depth: number): { scale: number; y: number } {
   return { scale: 1 - depth * 0.05, y: depth * 14 };
 }
+
+/**
+ * End of a drag on the top card: right past the threshold saves, left past it skips, anything
+ * shorter does neither (the card snaps back). Returns what happened.
+ */
+export function endSwipe(offsetX: number, onSave: () => void, onSkip: () => void): 'save' | 'skip' | null {
+  const { decision } = dragFeedback(offsetX);
+  if (decision === 'save') onSave();
+  else if (decision === 'skip') onSkip();
+  return decision;
+}

@@ -98,13 +98,14 @@ describe('useSpeech callback', () => {
 // ── Jobs deck resets for new matches without an effect ───────────────────────
 
 describe('Jobs deck', () => {
-  it('starts a fresh deck and saved count when new matches arrive', async () => {
+  it('starts a fresh deck when new matches arrive, keeping the saved list and its count', async () => {
     useAppStore.setState({ matches: [jobMatch(1, 'a'), jobMatch(1, 'b')], profile });
     render(<Jobs />);
     act(() => screen.getByRole('button', { name: 'Save this job' }).click());
     expect(screen.getByText('Saved: 1')).toBeTruthy();
     act(() => useAppStore.setState({ matches: [jobMatch(1, 'c'), jobMatch(1, 'd'), jobMatch(1, 'e')] }));
-    expect(screen.queryByText('Saved: 1')).toBeNull();
+    // The saved list is kept in this browser, so the counter (which always matches it) stays.
+    expect(screen.getByText('Saved: 1')).toBeTruthy();
     expect(screen.getByText('Jobs found: 3')).toBeTruthy();
     // The old cards leave through AnimatePresence; the new deck has three.
     await waitFor(() => expect(document.querySelectorAll('[data-depth]')).toHaveLength(3));

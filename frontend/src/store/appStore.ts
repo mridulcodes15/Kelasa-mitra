@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import type { LangCode } from '../lib/types';
 import type { AgentChatResponse, WorkerProfile, JobMatch, SkillGapResponse } from '../lib/types';
 import { deleteSavedProfile, loadSavedProfile, saveProfile } from '../lib/savedProfile';
+import { loadSavedJobs, storeSavedJobs, type SavedJob } from '../lib/savedJobs';
 
 // 'welcome' (choose a language) is shown first on every visit and never again in that visit.
 export type AppScreen = 'welcome' | 'landing' | 'jobs';
@@ -78,6 +79,14 @@ interface AppState {
   rememberProfile: (p: WorkerProfile) => void;
   /** Remove the saved copy and forget everything about this visit. */
   deleteMyData: () => void;
+
+  // "Saved jobs" shortlist, kept in this browser only (lib/savedJobs.ts).
+  savedJobs: SavedJob[];
+  /** True when the browser refused to store the list: it lasts for this visit only. */
+  savedJobsBlocked: boolean;
+  /** Add a job (a job already in the list is not added again). */
+  addSavedJob: (job: SavedJob) => void;
+  removeSavedJob: (id: string) => void;
 }
 
 const TTS_KEY = 'kelasa-mitra-tts-muted';
@@ -99,6 +108,7 @@ function writeMuted(muted: boolean): void {
 }
 
 const startingSavedProfile = loadSavedProfile();
+const startingSavedJobs = loadSavedJobs();
 
 export const useAppStore = create<AppState>((set, get) => ({
   lang: 'en',
@@ -186,10 +196,26 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
   deleteMyData: () => {
     const removed = deleteSavedProfile();
+    const jobsRemoved = storeSavedJobs([]);
     set({
-      saveOnDevice: false, savedProfile: null, storageBlocked: !removed, dataDeleted: removed,
+      savedJobs: [], savedJobsBlocked: false,
+      saveOnDevice: false, savedProfile: null, storageBlocked: !removed || !jobsRemoved,
+      dataDeleted: removed && jobsRemoved,
       profile: null, transcript: '', matches: [], followUpQuestion: null, skillGap: null,
       skillGapFailed: false, agentReply: null, extractError: null, screen: 'landing', askedQuestions: [],
     });
+  },
+
+  savedJobs: startingSavedJobs,
+  savedJobsBlocked: false,
+  addSavedJob: (job) => {
+    const { savedJobs } = get();
+    if (savedJobs.some((j) => j.id === job.id)) return;
+    const next = [...savedJobs, job];
+    set({ savedJobs: next, savedJobsBlocked: !storeSavedJobs(next) });
+  },
+  removeSavedJob: (id) => {
+    const next = get().savedJobs.filter((j) => j.id !== id);
+    set({ savedJobs: next, savedJobsBlocked: !storeSavedJobs(next) });
   },
 }));

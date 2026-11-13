@@ -7,6 +7,7 @@ import { prefersReducedMotion } from '../lib/motion';
 import { BrandMark } from '../components/BrandMark';
 import type { LangCode } from '../lib/types';
 import { FADE_MS, LANGUAGE_CHOICES, SELECT_MS, SPLASH_EXIT, SPLASH_MS } from '../lib/welcome';
+import { HIGHLIGHT_SPRING, LIFT_SPRING, itemAt } from '../lib/trace';
 
 /**
  * First screen of every visit: the worker picks the language before the mic appears,
@@ -22,16 +23,9 @@ type Phase = 'splash' | 'fading' | 'cards';
 
 const HEADING_ORDER: LangCode[] = ['en', 'hi', 'kn'];
 
-/** The language card under a pointer. While the pointer is captured, the event target is the
- * group, so the position is used; tests (no layout) fall back to the event target. */
+/** The language card under a pointer (shared trace pattern, lib/trace.ts). */
 function cardAt(e: PointerEvent<HTMLElement>): LangCode | null {
-  let el: Element | null = null;
-  if (typeof document.elementFromPoint === 'function' && Number.isFinite(e.clientX)) {
-    el = document.elementFromPoint(e.clientX, e.clientY);
-  }
-  const target = (el ?? e.target) as Element | null;
-  const card = target?.closest?.('[data-lang-card]');
-  return (card?.getAttribute('data-lang-card') as LangCode | undefined) ?? null;
+  return itemAt(e, 'data-lang-card') as LangCode | null;
 }
 
 export function Welcome() {
@@ -191,7 +185,7 @@ export function Welcome() {
                 }}
                 transition={isChosen
                   ? { duration: SELECT_MS / 1000, ease: 'easeInOut' }
-                  : { type: 'spring', stiffness: 380, damping: 28 }}
+                  : LIFT_SPRING}
                 className={[
                   'relative w-full min-h-[96px] rounded-3xl border-2 shadow-sm overflow-hidden',
                   'px-6 py-4 text-left flex items-center gap-3',
@@ -207,7 +201,7 @@ export function Welcome() {
                     aria-hidden="true"
                     data-lang-highlight
                     className="absolute inset-0 bg-[#0d6e6e]"
-                    transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                    transition={HIGHLIGHT_SPRING}
                   />
                 )}
                 <span className="relative flex-1 flex flex-col">

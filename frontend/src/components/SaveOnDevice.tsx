@@ -6,8 +6,9 @@ import { t } from '../lib/i18n';
  * Saving stores only the profile JSON in this browser (see lib/savedProfile.ts).
  */
 export function SaveOnDevice() {
-  const { lang, profile, saveOnDevice, savedProfile, storageBlocked, dataDeleted, setSaveOnDevice, deleteMyData } =
-    useAppStore();
+  const {
+    lang, profile, saveOnDevice, savedProfile, savedJobs, storageBlocked, dataDeleted, setSaveOnDevice, deleteMyData,
+  } = useAppStore();
 
   return (
     <div className="w-full max-w-sm mx-auto mt-4 bg-white rounded-3xl shadow-md p-5">
@@ -24,7 +25,8 @@ export function SaveOnDevice() {
       )}
       <p className="text-xs text-[#5a6475] mt-1">🔒 {t(lang, 'saveOnDeviceNote')}</p>
 
-      {savedProfile && (
+      {/* Deletes the saved profile and the saved jobs, and clears the visit */}
+      {(savedProfile || savedJobs.length > 0) && (
         <button
           type="button"
           onClick={deleteMyData}

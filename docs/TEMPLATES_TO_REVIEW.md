@@ -107,7 +107,7 @@ Reviewed by: TODO  |  Date: TODO
 | saveOnDevice | Save my profile on this device | ನನ್ನ ಪ್ರೊಫೈಲ್ ಅನ್ನು ಈ ಸಾಧನದಲ್ಲಿ ಉಳಿಸಿ | मेरी प्रोफ़ाइल इस डिवाइस पर सहेजें | |
 | saveOnDeviceNote | Saved only in this browser on this device, never on our server. Your voice and typed words are not saved. | ಈ ಸಾಧನದ ಈ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಮಾತ್ರ ಉಳಿಸಲಾಗುತ್ತದೆ, ನಮ್ಮ ಸರ್ವರ್‌ನಲ್ಲಿ ಎಂದಿಗೂ ಇಲ್ಲ. ನಿಮ್ಮ ಧ್ವನಿ ಮತ್ತು ಬರೆದ ಪದಗಳನ್ನು ಉಳಿಸುವುದಿಲ್ಲ. | सिर्फ़ इस डिवाइस के इसी ब्राउज़र में सहेजी जाती है, हमारे सर्वर पर कभी नहीं। आपकी आवाज़ और लिखे शब्द नहीं सहेजे जाते। | |
 | deleteMyData | Delete my data | ನನ್ನ ಮಾಹಿತಿಯನ್ನು ಅಳಿಸಿ | मेरा डेटा मिटाएँ | |
-| dataDeleted | Your saved profile was deleted from this device. | ಉಳಿಸಿದ ಪ್ರೊಫೈಲ್ ಅನ್ನು ಈ ಸಾಧನದಿಂದ ಅಳಿಸಲಾಗಿದೆ. | सहेजी गई प्रोफ़ाइल इस डिवाइस से मिटा दी गई। | |
+| dataDeleted | Your saved profile and saved jobs were deleted from this device. | ಉಳಿಸಿದ ಪ್ರೊಫೈಲ್ ಮತ್ತು ಉಳಿಸಿದ ಕೆಲಸಗಳನ್ನು ಈ ಸಾಧನದಿಂದ ಅಳಿಸಲಾಗಿದೆ. | सहेजी गई प्रोफ़ाइल और सहेजे गए काम इस डिवाइस से मिटा दिए गए। | not reviewed (new 2026-11-14) |
 | storageBlocked | This browser is blocking storage, so your profile cannot be saved. It will be forgotten when you close the page. | ಈ ಬ್ರೌಸರ್ ಸಂಗ್ರಹಣೆಯನ್ನು ತಡೆಯುತ್ತಿದೆ, ಆದ್ದರಿಂದ ಪ್ರೊಫೈಲ್ ಉಳಿಸಲು ಆಗುವುದಿಲ್ಲ. ಪುಟ ಮುಚ್ಚಿದಾಗ ಅದು ಮರೆತುಹೋಗುತ್ತದೆ. | यह ब्राउज़र स्टोरेज रोक रहा है, इसलिए प्रोफ़ाइल सहेजी नहीं जा सकती। पेज बंद करने पर यह भूल जाएगी। | |
 | useSavedProfile | Find jobs with my saved profile → | ಉಳಿಸಿದ ಪ್ರೊಫೈಲ್‌ನಿಂದ ಕೆಲಸ ಹುಡುಕಿ → | सहेजी गई प्रोफ़ाइल से काम खोजें → | |
 | skillsYouHave | Your skills | ನಿಮ್ಮ ಕೌಶಲ್ಯಗಳು | आपके कौशल | |
@@ -130,6 +130,14 @@ Reviewed by: TODO  |  Date: TODO
 | languageChip | Language: {language} | ಭಾಷೆ: {language} | भाषा: {language} | |
 | changeLanguage | Change language | ಭಾಷೆ ಬದಲಿಸಿ | भाषा बदलें | |
 | skillChipsLabel | Jobs in this demo: | ಈ ಡೆಮೊದ ಕೆಲಸಗಳು: | इस डेमो के काम: | |
+| savedJobsButton | Saved jobs ({n}) | ಉಳಿಸಿದ ಕೆಲಸಗಳು ({n}) | सहेजे गए काम ({n}) | not reviewed (new 2026-11-14) |
+| savedJobsHeading | Saved jobs ({n}) | ಉಳಿಸಿದ ಕೆಲಸಗಳು ({n}) | सहेजे गए काम ({n}) | not reviewed (new 2026-11-14) |
+| savedJobsEmpty | No saved jobs yet. Swipe a job right or tap Save to keep it here. | ಇನ್ನೂ ಯಾವುದೇ ಕೆಲಸ ಉಳಿಸಿಲ್ಲ. ಇಲ್ಲಿ ಇಡಲು ಕೆಲಸವನ್ನು ಬಲಕ್ಕೆ ಸರಿಸಿ ಅಥವಾ ಉಳಿಸಿ ಒತ್ತಿ. | अभी कोई काम सहेजा नहीं गया। किसी काम को यहाँ रखने के लिए उसे दाईं ओर खिसकाएँ या सहेजें दबाएँ। | not reviewed (new 2026-11-14) |
+| savedJobsPrivacy | Saved only in this browser on this device, never on our server. | ಈ ಸಾಧನದ ಈ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಮಾತ್ರ ಉಳಿಸಲಾಗಿದೆ, ನಮ್ಮ ಸರ್ವರ್‌ನಲ್ಲಿ ಎಂದಿಗೂ ಇಲ್ಲ. | केवल इस डिवाइस के इस ब्राउज़र में सहेजा गया, हमारे सर्वर पर कभी नहीं। | not reviewed (new 2026-11-14) |
+| savedJobsBlocked | This browser is not letting us save. Your saved jobs stay only until you close this page. | ಈ ಬ್ರೌಸರ್ ಉಳಿಸಲು ಬಿಡುತ್ತಿಲ್ಲ. ಈ ಪುಟ ಮುಚ್ಚುವವರೆಗೆ ಮಾತ್ರ ನಿಮ್ಮ ಉಳಿಸಿದ ಕೆಲಸಗಳು ಇರುತ್ತವೆ. | यह ब्राउज़र सहेजने नहीं दे रहा। आपके सहेजे गए काम यह पेज बंद करने तक ही रहेंगे। | not reviewed (new 2026-11-14) |
+| removeSaved | Remove | ತೆಗೆದುಹಾಕಿ | हटाएँ | not reviewed (new 2026-11-14) |
+| removeSavedAria | Remove {title} from saved jobs | {title} ಅನ್ನು ಉಳಿಸಿದ ಕೆಲಸಗಳಿಂದ ತೆಗೆದುಹಾಕಿ | {title} को सहेजे गए कामों से हटाएँ | not reviewed (new 2026-11-14) |
+| backToSearch | Back to Search | ಹುಡುಕಾಟಕ್ಕೆ ಹಿಂತಿರುಗಿ | खोज पर वापस जाएँ | not reviewed (new 2026-11-14) |
 
 ## 5. Skill names in match reasons (`backend/tools/job_ranker.py`)
 

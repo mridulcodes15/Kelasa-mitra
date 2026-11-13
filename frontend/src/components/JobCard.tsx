@@ -3,7 +3,7 @@ import type { JobMatch } from '../lib/types';
 import { useAppStore } from '../store/appStore';
 import { t } from '../lib/i18n';
 import { MatchRing } from './MatchRing';
-import { SWIPE_THRESHOLD, peekStyle, tiltFor } from '../lib/deck';
+import { endSwipe, peekStyle, tiltFor } from '../lib/deck';
 import { DragFeedback } from './DragFeedback';
 import { DemoNote } from './DemoNote';
 import { jobIcon, skillName } from '../lib/skills';
@@ -49,12 +49,8 @@ export function JobCard({ match, onSave, onSkip, isTop, depth = isTop ? 0 : 1 }:
   const peek = peekStyle(depth);
 
   function handleDragEnd(_: unknown, info: { offset: { x: number } }) {
-    if (info.offset.x >= SWIPE_THRESHOLD) {
-      onSave();
-    } else if (info.offset.x <= -SWIPE_THRESHOLD) {
-      onSkip();
-    } else {
-      // snap back
+    // Right saves, left skips; a short drag snaps back.
+    if (!endSwipe(info.offset.x, onSave, onSkip)) {
       animate(x, 0, { type: 'spring', stiffness: 300, damping: 30 });
     }
   }

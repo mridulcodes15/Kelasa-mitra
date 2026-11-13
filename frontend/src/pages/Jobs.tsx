@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAppStore } from '../store/appStore';
 import { JobCard } from '../components/JobCard';
@@ -11,13 +11,21 @@ import { useReadAloud } from '../hooks/useReadAloud';
 import { t } from '../lib/i18n';
 import type { JobMatch } from '../lib/types';
 import { CARD_HEIGHT, VISIBLE_CARDS, peekStyle } from '../lib/deck';
+import { toSavedJob } from '../lib/savedJobs';
+import { TraceButton } from '../components/TraceButton';
+import { SavedJobsList } from '../components/SavedJobsList';
 
 export function Jobs() {
-  const { lang, matches, isFetchingMatches, setScreen, profile } = useAppStore();
+  const { lang, matches, isFetchingMatches, setScreen, profile, savedJobs, addSavedJob } = useAppStore();
+  const savedCount = savedJobs.length; // the counter always matches the saved list
   // Read the best match's reason once, when a new set of matches arrives.
   useReadAloud(isFetchingMatches ? null : matches[0]?.reason);
   const [deck, setDeck] = useState<JobMatch[]>([...matches]);
-  const [savedCount, setSavedCount] = useState(0);
+  // The saved list is shown in place of the deck; the deck state stays here, untouched.
+  const [view, setView] = useState<'deck' | 'saved'>('deck');
+  const savedButtonRef = useRef<HTMLButtonElement>(null);
+  const savedHeadingRef = useRef<HTMLHeadingElement>(null);
+  const returning = useRef(false);
   // Each save starts a new short burst (none under reduced motion).
   const [burst, setBurst] = useState(0);
 
@@ -27,28 +35,40 @@ export function Jobs() {
   if (deckFor !== matches) {
     setDeckFor(matches);
     setDeck([...matches]);
-    setSavedCount(0);
   }
 
   const handleSkip = useCallback(() => {
     setDeck((prev) => prev.slice(1));
   }, []);
 
+  // Swipe right, the Save button and → all save the top card (kept in this browser only).
   const handleSave = useCallback(() => {
-    setSavedCount((c) => c + 1);
+    const top = deck[0];
+    if (!top) return; // nothing left to save
+    addSavedJob(toSavedJob(top, lang));
     if (!prefersReducedMotion()) setBurst((b) => b + 1);
     setDeck((prev) => prev.slice(1));
-  }, []);
+  }, [addSavedJob, deck, lang]);
 
-  // Keyboard navigation
+  // Keyboard navigation (deck only; never while the saved list is open)
   useEffect(() => {
+    if (view !== 'deck') return;
     function onKey(e: KeyboardEvent) {
       if (e.key === 'ArrowRight') handleSave();
       if (e.key === 'ArrowLeft') handleSkip();
     }
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [handleSave, handleSkip]);
+  }, [handleSave, handleSkip, view]);
+
+  // Move focus with the view: the list heading (reads the count), or back to the button.
+  useEffect(() => {
+    if (view === 'saved') savedHeadingRef.current?.focus();
+    else if (returning.current) {
+      returning.current = false;
+      savedButtonRef.current?.focus();
+    }
+  }, [view]);
 
   const areaName = profile?.area?.name ?? '';
   const jobCount = matches.length;
@@ -58,6 +78,19 @@ export function Jobs() {
       <div className="page-min-h bg-[#fdf8f0] flex items-center justify-center">
         <p className="text-[#5a6475] animate-pulse motion-reduce:animate-none">{t(lang, 'findingJobs')}</p>
       </div>
+    );
+  }
+
+  if (view === 'saved') {
+    return (
+      <main className="page-min-h bg-[#fdf8f0] flex flex-col pt-5 pb-8 gap-4">
+        <SavedJobsList ref={savedHeadingRef} />
+        <div className="px-4">
+          <TraceButton id="back-to-search" onClick={() => { returning.current = true; setView('deck'); }}>
+            {t(lang, 'backToSearch')}
+          </TraceButton>
+        </div>
+      </main>
     );
   }
 
@@ -149,6 +182,13 @@ export function Jobs() {
           </button>
         </motion.div>
       )}
+
+      {/* Saved jobs: below the deck and its Skip/Save buttons, always visible here */}
+      <div className={`px-4 ${deck.length > 0 ? 'mt-14' : 'mt-2'} mb-2`}>
+        <TraceButton id="saved-jobs" ref={savedButtonRef} onClick={() => setView('saved')}>
+          {t(lang, 'savedJobsButton', { n: savedCount })}
+        </TraceButton>
+      </div>
 
       <SkillGapSection />
     </main>
