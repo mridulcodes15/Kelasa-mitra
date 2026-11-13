@@ -30,7 +30,7 @@ except file and commit timestamps.
 | ~21:34 | Rewrote PLAN.md and README.md (Groq, Orchestrate pending access, real folder tree) and listed six Orchestrate details it could not verify. | `bob_docs_rewrite_summary_2026-11-07.md` |
 | ~21:42 | Installed the IBM watsonx Orchestrate ADK in `orchestrate/`; the trial's Bobcoins ran out mid-task. | `bob_orchestrate_install_and_trial_end_2026-11-07.md` |
 
-### 2026-11-08 and 2026-11-09: Claude Code (from git log)
+### 2026-11-08 to 2026-11-14: Claude Code and the owner (from git log)
 
 | Commit | Date | What changed |
 |---|---|---|
@@ -46,7 +46,11 @@ except file and commit timestamps.
 | `3a48a93` | 2026-11-09 17:00 | The owner added the MIT LICENSE. |
 | `f113bce` | 2026-11-09 17:09 | Docs stage: PLAN rewritten, BOB_STORY and the submission checklist added, `docs/bob/` evidence added. |
 | `c194084` | 2026-11-09 21:31 | Language-first welcome flow (splash, three language cards, "Language: …" chip, "Listening in: …", no-speech hint); the ಕ app mark from Noto Sans Kannada (OFL, credited in NOTICE); fix for duplicated words from Android Chrome's partial results; search on the final transcript; "not recognised" message with 10 skill chips; Hindi/Kannada spelling normalisation, variants and one-letter tolerance; per-IP rate limits and a public demo note; Dockerfile and FastAPI serving the built frontend. |
-| (uncommitted) | 2026-11-09 | Final docs pass: README, PLAN, BOB_STORY, the submission checklist and the frontend README brought in line with the code. |
+| `39d343e` | 2026-11-09 22:17 | Final docs pass: README, PLAN, BOB_STORY, the submission checklist and the frontend README brought in line with the code. |
+| `8e801ac`–`af911ff` | 2026-11-09 22:18–22:21 | The owner added the live demo link to the README. |
+| `922377d`–`7cec75c` | 2026-11-09 22:23–22:34 | The owner added the Bob panel screenshots and notes to BOB_STORY.md (and fixed a doubled `.png` extension). |
+| `fa478c5` | 2026-11-14 00:49 | Saved jobs shortlist kept in this browser only: swipe right, Save or the right-arrow key save the job (before, Save only raised a counter); a "Saved jobs (N)" button and list with a green trace, Remove and Back to Search; Delete my data also clears saved jobs. |
+| (uncommitted) | 2026-11-14 | Final docs update for submission: live URL, saved jobs, early user test, limitations and re-measured test counts. |
 
 On 2026-11-09 the owner verified the Orchestrate agent end to end: the console trace showed
 `extract_profile`, `find_matches` and `skill_gap` called in order for "I cook, 2 years, I live in
@@ -64,6 +68,15 @@ image locally (rules only, and with keys via `--env-file`), deployed it on Rende
 service from branch `main`, and that evening the live site showed the Orchestrate agent panel
 with the tools' text. Speech over the live https link and Kannada speech on a phone are
 UNVERIFIED.
+
+Before submission, three people in the owner's building who had not seen the app tried it for a
+few minutes (an informal test, not a study; date, device and browser not recorded): a watchman
+and a domestic worker who spoke Hindi, and a garbage collector. All three used the microphone.
+The two Hindi speakers were understood on the first try. The garbage collector first tried
+Marathi, which the app does not support; she was told so, switched to Hindi, and was then
+understood. Nothing else confused them, they found it easy, and they liked choosing the language
+first. What the Marathi attempt produced in the text box was not recorded. Marathi is the next
+language to add. Details and limits are in the README's impact section.
 
 ---
 

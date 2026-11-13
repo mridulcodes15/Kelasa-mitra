@@ -4,14 +4,16 @@
 
 **Entry:** IBM Bobathon: Build for Bengaluru · Student category · Theme: *More Opportunity, Greater Together* · Solo
 
-**Live demo:** https://kelasa-mitra.onrender.com/ 
-(free hosting, so the first load can take about a minute to wake up; sample data only, please do not enter personal details)
+**Live demo:** https://kelasa-mitra.onrender.com/ (free hosting, so the first load can take about a minute to wake up; sample data only, please do not enter personal details)
 
 *Kelasa Mitra* means "work friend" in Kannada. A blue-collar or gig worker in Bengaluru speaks or
 types one sentence about their work in Kannada, Hindi or English, and gets nearby jobs with a
-reason for each match, plus the one skill that would open the most new jobs near them. The
-prompts, match reasons and skill suggestions are in their own language; job titles and
-employer names stay in English. All jobs are synthetic sample data.
+reason for each match, plus the skills that would open the most new jobs near them. The
+prompts, match reasons and skill names are in their own language; learning steps, job titles and employer names stay in English. All jobs are synthetic sample data.
+
+### What happened when I asked people to try it
+
+I asked three people in my building, none of whom had seen the app, to try it: a watchman, a domestic worker and a garbage collector. They used the microphone and said it was easy to use, especially choosing the language first. One of them tried Marathi first; the app doesn't support it yet, so she switched to Hindi. That is the next language I want to add. Details and limits are in [the impact section](#4-the-impact).
 
 ## Why I built this
 
@@ -35,6 +37,13 @@ time and cost), and so does knowing which skill would open more and better-paid 
 ---
 
 ## 2. The prototype
+
+### IBM products used (required by the contest)
+
+| Product | What it did here | Verified | Not verified |
+|---|---|---|---|
+| **IBM Bob** | Planning and the first build (Phases 1–2, Groq swap, audit, first docs, Orchestrate ADK install) on 2026-11-07, until the 50 trial Bobcoins ran out. | Bob's outputs in `docs/bob/`, baseline commit `a8117a6`. | Bob's own statements in those files (e.g. test results) were not re-run at the time; see BOB_STORY.md for the ones later found wrong. |
+| **IBM watsonx Orchestrate** | The agent layer: `kelasa_mitra_agent` (`orchestrate/agents/kelasa_agent.yaml`) calls three Python tools, `extract_profile`, `find_matches` and `skill_gap` (`orchestrate/kelasa_tools/`). The app asks it through `POST /api/agent/chat`, which keeps the API key on the server. | 2026-11-09, by the owner: the console trace showed `extract_profile`, `find_matches` and `skill_gap` called in order for "I cook, 2 years, I live in Whitefield"; `agent_warmup.py` got HTTP 200 replies; the app's agent panel showed the tools' text, locally and on the live site that evening. The tool package was re-imported several times since and the agent kept answering. | Whether the console trace shows runs coming from the live site (UNVERIFIED); whether the agent's final wording always stays in the picker language; agent response time; the exact trial end date (about 2026-12-08, owner to confirm). |
 
 ### What works today
 
@@ -75,6 +84,17 @@ time and cost), and so does knowing which skill would open more and better-paid 
 - **Ranked job cards** with a match score, approximate distance (`~2.4 km`), pay, matched and
   missing skills, and a template-written reason in the worker's language. Swipe, buttons or
   arrow keys to skip or save.
+- **Saved jobs shortlist.** Swiping right, the Save button and the right-arrow key add the job to
+  a "Saved jobs" list kept in this browser only (localStorage); swiping left, Skip and the
+  left-arrow key never save, and the same job is never added twice. Only the fields shown on the
+  card (id, title, employer, area, pay range, distance text, matched skills, the sample-data flag)
+  and the picker language are stored: no profile text, no audio, nothing sent to a server. A
+  **"Saved jobs (N)"** button below the deck turns green under a mouse, a finger or keyboard focus
+  and opens the list: one rectangular card per job with **Remove**, a green highlight that follows
+  the mouse or finger across the cards, a line saying the list is saved only in this browser, and
+  **Back to Search**, which returns to the deck where the worker left it. If the browser blocks
+  storage, the list lasts for the visit and a note says so. Before this, Save only raised a
+  counter on the page and recorded no job.
 - **Skill gap**: up to 3 skills that would unlock the most nearby jobs, with the job count, the
   pay difference computed from the sample jobs, and a short learning path that can be ticked off.
 - **Numbers never come from an LLM.** Match reasons, skill-gap text and follow-up questions are
@@ -86,7 +106,8 @@ time and cost), and so does knowing which skill would open more and better-paid 
   text is not shown, so the rules' message is not contradicted.
 - **Read-aloud** of the follow-up question and the top match reason (browser speech synthesis,
   mute toggle), a **switch-language suggestion** when typed words are clearly in another
-  language (never automatic), **optional save on this device** with **Delete my data**, a
+  language (never automatic), **optional save on this device** with **Delete my data** (which
+  also clears saved jobs and the visit), a
   **public demo note** in en/kn/hi asking not to enter personal details, and a phone-width layout
   that respects `prefers-reduced-motion` with 48 px touch targets.
 
@@ -157,7 +178,9 @@ the value, or the quotes become part of it. The image runs as a non-root user (U
 
 ### Live demo
 
-- **URL:** UNVERIFIED (the owner has not added it here yet). TODO: owner to add the https address.
+- **URL:** https://kelasa-mitra.onrender.com/
+- **Which version:** whether the live site already runs the newest commit (saved jobs) depends on
+  Render's redeploy: UNVERIFIED until the owner confirms.
 - **What runs there:** the Docker image above on Render's free web service, built from branch
   `main`. `ORCHESTRATE_INSTANCE_URL`, `ORCHESTRATE_API_KEY` and `ORCHESTRATE_AGENT_ID` are set in
   Render's Environment settings (a separate key from the owner's laptop key, to be deleted after
@@ -218,10 +241,10 @@ npm run build
 npx oxlint src
 ```
 
-Measured on 2026-11-09 (many tests are parametrised, so these are tests run, not separate
-behaviours): **779 backend tests run, all passed** (17 test files); **272 frontend tests run,
-all passed** (25 test files); `tsc` exit 0; `oxlint` exit 0; build OK (JS 454.67 kB, 144.96 kB
-gzip; CSS 24.97 kB, 6.08 kB gzip). Use `-p tsconfig.app.json`: plain `tsc --noEmit` checks
+Measured on 2026-11-14 (many tests are parametrised, so these are tests run, not separate
+behaviours): **779 backend tests run, all passed** (17 test files); **300 frontend tests run,
+all passed** (26 test files); `tsc` exit 0; `oxlint` exit 0; build OK (JS 465.04 kB, 147.33 kB
+gzip; CSS 25.92 kB, 6.24 kB gzip). Use `-p tsconfig.app.json`: plain `tsc --noEmit` checks
 nothing here because the root `tsconfig.json` has `files: []`.
 
 ### Environment variables (`backend/.env`, see `.env.example`; names only, never commit values)
@@ -233,7 +256,7 @@ nothing here because the root `tsconfig.json` has `files: []`.
 | `ORCHESTRATE_INSTANCE_URL` | For the agent | Orchestrate instance URL; must be `https://`. |
 | `ORCHESTRATE_API_KEY` | For the agent | Kept on the server; never sent to the browser. |
 | `ORCHESTRATE_AGENT_ID` | For the agent | From `orchestrate agents list -k native`. |
-| `ORCHESTRATE_AUTH_TYPE` | No | `ibm_iam`, `mcsp`, `mcsp_v1`, `mcsp_v2`; empty = inferred like the ADK. |
+| `ORCHESTRATE_AUTH_TYPE` | No | `ibm_iam`, `mcsp`, `mcsp_v1`, `mcsp_v2`; empty = inferred like the Orchestrate ADK. |
 | `ORCHESTRATE_IAM_URL` | No | Token service base URL; must be `https://` if set. |
 | `CORS_ALLOWED_ORIGINS` | No | Extra origins allowed to call the API directly; `*` is ignored. |
 | `PORT` | No | Port the Docker image listens on (default 8000). |
@@ -256,8 +279,8 @@ The rest was built with **Claude Code**, a second AI coding tool: bug fixes, Pha
 Orchestrate tool package and agent, the evaluation, accessibility fixes, read-aloud, area chips,
 save-on-device, the design upgrade, language handling, 50 extra demo jobs, a security and
 reliability pass, rate limits, the language-first welcome flow and app mark, Android speech
-fixes, spelling normalisation, and the Docker deployment. The owner reviewed, tested and
-committed every change.
+fixes, spelling normalisation, the Docker deployment and the saved jobs shortlist. The owner
+reviewed, tested and committed every change.
 
 Full dated timeline, including Bob's mistakes and how they were caught: [BOB_STORY.md](BOB_STORY.md).
 
@@ -287,18 +310,11 @@ What that number does **not** show:
 The skill-gap pay differences (e.g. a Whitefield cook is told food-safety training could pay about
 ₹4,283 more a month) are computed from those sample jobs; they are not market data.
 
----
-
-## 5. IBM products
-
-| Product | What it did here | Verified | Not verified |
-|---|---|---|---|
-| **IBM Bob** | Planning and the first build (Phases 1–2, Groq swap, audit, first docs, Orchestrate ADK install) on 2026-11-07, until the 50 trial Bobcoins ran out. | Bob's outputs in `docs/bob/`, baseline commit `a8117a6`. | Bob's own statements in those files (e.g. test results) were not re-run at the time; see BOB_STORY.md for the ones later found wrong. |
-| **IBM watsonx Orchestrate** | The agent layer: `kelasa_mitra_agent` (`orchestrate/agents/kelasa_agent.yaml`) calls three Python tools, `extract_profile`, `find_matches` and `skill_gap` (`orchestrate/kelasa_tools/`). The app asks it through `POST /api/agent/chat`, which keeps the API key on the server. | 2026-11-09, by the owner: the console trace showed `extract_profile`, `find_matches` and `skill_gap` called in order for "I cook, 2 years, I live in Whitefield"; `agent_warmup.py` got HTTP 200 replies; the app's agent panel showed the tools' text, locally and on the live site that evening. The tool package was re-imported several times since and the agent kept answering. | Whether the console trace shows runs coming from the live site (UNVERIFIED); whether the agent's final wording always stays in the picker language; agent response time; the exact trial end date (about 2026-12-08, owner to confirm). |
+**Early user test (informal, not a study).** Three people in the owner's building who had not seen the app tried it for a few minutes: a watchman and a domestic worker who spoke Hindi, and a garbage collector. All three used the microphone. The two Hindi speakers were understood on the first try. The garbage collector first tried to speak Marathi, which the app does not support; she was told so, switched to Hindi, and was then understood. Nothing else confused them. They swiped cards left and right, said it was very easy to use, and liked choosing the language first when the app opens. The Marathi attempt is the clearest finding: a worker's first instinct is her own language, so Marathi is the next language to add. Limits: three people in one building (in Mumbai, so they picked a random Bengaluru area and saw sample jobs); what the Marathi attempt produced in the text box was not recorded; device and browser not recorded; no names, photos, audio or personal details recorded; not a measure of accuracy.
 
 ---
 
-## 6. Limitations
+## 5. Limitations
 
 - **The worker chooses the language first.** Speech recognition runs in the browser and must be
   told the language in advance; it cannot detect it, and the app does not try.
@@ -311,10 +327,14 @@ The skill-gap pay differences (e.g. a Whitefield cook is told food-safety traini
   Over the live https link, English, Hindi and Kannada speech and read-aloud are **NOT VERIFIED**.
   Kannada speech and read-aloud on a phone are not verified at all; voice availability depends
   on the device.
-- **Loanword spelling varies.** Speech engines spell English loanwords in Devanagari and Kannada
-  in different ways; matching normalises them and tolerates one letter, but spellings not yet
-  seen can still miss. The skill chips are the safety net.
+- **Spellings and verb forms can miss.** Speech engines spell English loanwords in Devanagari
+  and Kannada in different ways; matching normalises them and tolerates one letter, but
+  spellings not yet seen can still miss. Verb forms are not covered either: "मैं खाना बनाता हूँ"
+  (I cook) finds no skill because that form is not in the synonym list. The skill chips are the
+  safety net.
 - **Only 41 skills.** Other work is deliberately not recognised.
+- **Marathi is not supported** (only English, Hindi and Kannada). It is the natural next language
+  to add: the friend of the owner's uncle in the story above spoke Marathi and Hindi.
 - **Synthetic data only.** All 130 jobs and their employers are invented (`is_synthetic: true`,
   "Sample data" label on every card). 36 jobs were added on 2026-11-09 so that every area chip
   and the 8 most common skills in the sample inputs have a matching job within 5 km: demo
@@ -322,6 +342,10 @@ The skill-gap pay differences (e.g. a Whitefield cook is told food-safety traini
 - **No directions or contact.** There is no real workplace or employer to contact or navigate to.
 - **English in places.** Job titles, employer and area names, learning-path steps, and "years"
   and language names on the profile card stay in English in Kannada and Hindi.
+- **Saved jobs are per browser and not synced** to other devices, because there are no accounts
+  by design. A version with live jobs would need stable job ids and employer contact details.
+  The green trace on the saved list has not been tried with a real finger on a phone (NOT
+  VERIFIED).
 - **Kannada and Hindi text is not reviewed** by a native speaker
   ([docs/TEMPLATES_TO_REVIEW.md](docs/TEMPLATES_TO_REVIEW.md)).
 - **Skill suggestions are data-driven**, counting which skills unlock the most nearby sample
@@ -339,7 +363,7 @@ The skill-gap pay differences (e.g. a Whitefield cook is told food-safety traini
 
 ---
 
-## 7. Privacy and security
+## 6. Privacy and security
 
 - **No accounts, by design.** No login or sign-up: the users are workers who should not need an
   email or password, nothing about them is kept on the server, and the contest asks for no
@@ -348,7 +372,10 @@ The skill-gap pay differences (e.g. a Whitefield cook is told food-safety traini
   to our backend to find jobs; the backend does not write it anywhere.
 - **Optional save on this device.** Off by default. If ticked, only the profile (skills,
   experience, area, languages, with the worker's words blanked) is kept in this browser's
-  localStorage. **Delete my data** removes it and clears the visit.
+  localStorage. **Delete my data** removes it, the saved jobs and the visit state.
+- **Saved jobs stay in this browser.** Only the card fields and the picker language are kept in
+  localStorage; nothing about them is sent to our server (searching still sends the profile to
+  the backend to find jobs).
 - **No audio** reaches or is stored by our app (see Limitations). When `GROQ_API_KEY` is set,
   the typed or spoken text is sent to Groq for extraction; on the live demo it is not set.
 - **No personal data** is asked for: no phone number, ID, photo or exact address; areas are

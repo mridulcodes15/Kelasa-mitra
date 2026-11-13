@@ -2,7 +2,7 @@
 
 **IBM Bobathon: Build for Bengaluru** · Theme: *More Opportunity, Greater Together* · Solo student entry
 
-*Updated 2026-11-09 to match the code (final docs pass). The original plan by IBM Bob
+*Updated 2026-11-14 to match the code (final docs update, submission day). The original plan by IBM Bob
 (2026-11-07) is kept unedited in [docs/bob/bob_PLAN_baseline.md](docs/bob/bob_PLAN_baseline.md);
 how the project got from there to here is in [BOB_STORY.md](BOB_STORY.md).*
 
@@ -24,7 +24,8 @@ answers the same sentence by calling the same logic as tools.
 
 ```
 Phone browser (React 19 · Vite 8 · Tailwind 4 · Framer Motion 14 · Zustand 5)
-  Welcome (language cards) → Landing (mic / text) → Jobs (cards, skill gap)
+  Welcome (language cards) → Landing (mic / text) → Jobs (cards, skill gap, saved jobs list)
+  localStorage: optional saved profile, saved jobs, read-aloud mute (this browser only)
   Web Speech API (speech to text, en-IN / kn-IN / hi-IN) · speechSynthesis (read-aloud)
         │  /api/*  (dev: Vite proxy; Docker/Render: same FastAPI origin)
         ▼
@@ -58,7 +59,7 @@ FastAPI backend (Python 3.11)
 
 ---
 
-## 3. Folder structure (from `git ls-files`, 2026-11-09)
+## 3. Folder structure (from `git ls-files`, 2026-11-14)
 
 ```
 Dockerfile, .dockerignore       one image: Node build stage + Python runtime (non-root UID 1000)
@@ -86,14 +87,14 @@ frontend/
   src/pages/                 Welcome.tsx, Landing.tsx, Jobs.tsx
   src/components/            AgentPanel, BrandMark, DemoNote, DragFeedback, JobCard, LanguageNudge,
                              LanguagePicker, ListeningWave, MatchRing, MicButton, NoSpeechHint,
-                             ProfileCard, SaveBurst, SaveOnDevice, SkillGapSection,
-                             SkillGapStepper, SpeakToggle
+                             ProfileCard, SaveBurst, SaveOnDevice, SavedJobsList, SkillGapSection,
+                             SkillGapStepper, SpeakToggle, TraceButton
   src/hooks/                 useSpeech, useProfile, useReadAloud
   src/lib/                   agentSteps, api, areaChips, brand, deck, i18n (en/kn/hi), motion,
-                             savedProfile, scriptLanguage, skillChips, skills, speechText, tts,
-                             types, welcome
+                             savedJobs, savedProfile, scriptLanguage, skillChips, skills,
+                             speechText, trace, tts, types, welcome
   src/store/appStore.ts      Zustand state
-  src/test/                  vitest: 25 test files, plus fixtures and setup
+  src/test/                  vitest: 26 test files, plus fixtures and setup
 orchestrate/
   build_kelasa_tools.py      builds kelasa_tools/ from backend files + kelasa_tools_src/
   kelasa_tools_src/          kelasa_core.py, kelasa_mitra_tools.py (entry file), requirements.txt
@@ -187,7 +188,35 @@ score = 0.6 × (matched required skills / all required skills)
 
 ---
 
-## 7. Phases (real status)
+## 7. Saved jobs
+
+- **What it does.** Swiping right, the Save button and the right-arrow key add the top job to a
+  "Saved jobs" list; swiping left, Skip and the left-arrow key never save. A job already in the
+  list is not added again. Before this, Save only raised an in-page counter and recorded no job;
+  the header counter now always matches the list.
+- **Storage** (`frontend/src/lib/savedJobs.ts`): this browser's localStorage only, every call in
+  try/catch. Stored per job: id, title, employer, area, pay range, the distance text as shown,
+  matched skill ids, the sample-data flag, and the picker language. No profile text, no audio,
+  nothing sent to a server; entries are validated and extra fields dropped when read back. If
+  storage is blocked, the list lives in memory for the visit and a note says so.
+- **Screen** (`components/SavedJobsList.tsx`, `components/TraceButton.tsx`, `pages/Jobs.tsx`): a
+  full-width "Saved jobs (N)" button below the deck and its Skip/Save buttons (also after the
+  last card) opens the list inside the jobs screen (no router). One rectangular card per job with
+  Remove, a privacy line ("Saved only in this browser on this device, never on our server."), an
+  empty state, and "Back to Search", which shows the deck again exactly as it was (the deck state
+  stays in the page; profile, matches and the list are untouched).
+- **Green trace** (`frontend/src/lib/trace.ts`, shared with the language cards on the welcome
+  screen): the item under a mouse, or a finger pressing or dragging, turns teal-green with white
+  text (6:1) and a small lift; on the list a fill glides between cards (`layoutId`). Keyboard focus
+  gives the same state. The list keeps vertical scrolling (`touch-action: pan-y`), so a finger
+  drag that becomes a scroll ends the trace. Under reduced motion nothing moves; the green stays.
+- **Delete my data** clears the saved jobs, the saved profile and the visit state.
+- **Why per browser.** There are no accounts by design, so the list is not synced to other
+  devices. A live-jobs version would need stable job ids and employer contact details.
+
+---
+
+## 8. Phases (real status)
 
 | Phase | What | Status | Built by |
 |---|---|---|---|
@@ -196,18 +225,32 @@ score = 0.6 × (matched required skills / all required skills)
 | 3 | Skill gap and learning path | ✅ Done | Claude Code (Bob wrote the tool and router; the router was unwired) |
 | 4 | Replies in the worker's language, read-aloud | ✅ Built; read-aloud and Kannada speech **not verified on a phone** | Claude Code |
 | 5 | Employer job-post flow | ❌ Cut | — |
-| 6 | Orchestrate agent | ✅ Verified 2026-11-09 (see §8) | Claude Code; Orchestrate ADK installed by Bob |
+| 6 | Orchestrate agent | ✅ Verified 2026-11-09 (see §10) | Claude Code; Orchestrate ADK installed by Bob |
 | 6 | Evaluation | ✅ Done, synthetic, labels still DRAFT ([docs/eval_results.md](docs/eval_results.md)) | Claude Code |
 | 6 | Accessibility review, design upgrade, language suggestion, save-on-device | ✅ Done | Claude Code |
 | 6 | Language-first welcome flow, app mark, Android speech fixes, spelling variants | ✅ Done; partly checked on a real phone (see README Limitations) | Claude Code |
 | 6 | Security pass, rate limits, public demo note | ✅ Done | Claude Code |
-| 6 | Deployment (Docker, Render) | ✅ Image built and run locally by the owner; live on Render (URL: UNVERIFIED in this file) | Claude Code; deployed by the owner |
+| 6 | Saved jobs shortlist (browser only) | ✅ Done; real-finger trace on a phone NOT VERIFIED | Claude Code |
+| 6 | Deployment (Docker, Render) | ✅ Image built and run locally by the owner; live at https://kelasa-mitra.onrender.com/ (whether it runs the newest commit: UNVERIFIED until the owner confirms) | Claude Code; deployed by the owner |
 | 6 | PWA (manifest, service worker) | ❌ Not built (cut list) | — |
-| 6 | Demo video | ⏳ Owner (not made yet: UNVERIFIED) | — |
+| 6 | Demo video | ⏳ Owner; not linked yet | — |
 
 ---
 
-## 8. IBM watsonx Orchestrate, as built
+## 9. Validation
+
+- **Benchmark** (`backend/scripts/run_eval.py`, [docs/eval_results.md](docs/eval_results.md)):
+  15 synthetic inputs (5 each in en/kn/hi); 42 of 45 top-3 suggestions need a skill the worker
+  mentioned, skill recall 97%, median pipeline time 17.8 ms on one laptop (rules only). Limits:
+  inputs written by an AI tool, labels drafted by the same tool and still DRAFT, Kannada/Hindi
+  not reviewed by a native speaker, likely optimistic, not a field study.
+- **Guards in the tests**: 67 sentences in en/hi/kn that must match no skill; the 13 samples and
+  15 evaluation inputs give the same results as before the spelling changes.
+- **Early user test (informal, not a study).** Three people in the owner's building who had not seen the app tried it for a few minutes: a watchman and a domestic worker who spoke Hindi, and a garbage collector. All three used the microphone. The two Hindi speakers were understood on the first try. The garbage collector first tried to speak Marathi, which the app does not support; she was told so, switched to Hindi, and was then understood. Nothing else confused them. They swiped cards left and right, said it was very easy to use, and liked choosing the language first when the app opens. The Marathi attempt is the clearest finding: a worker's first instinct is her own language, so Marathi is the next language to add. Limits: three people in one building (in Mumbai, so they picked a random Bengaluru area and saw sample jobs); what the Marathi attempt produced in the text box was not recorded; device and browser not recorded; no names, photos, audio or personal details recorded; not a measure of accuracy.
+
+---
+
+## 10. IBM watsonx Orchestrate, as built
 
 - **Tool package** `orchestrate/kelasa_tools/`, generated by `orchestrate/build_kelasa_tools.py`.
   It copies the backend's models, rule-based tools and data byte for byte, adds
@@ -245,7 +288,7 @@ score = 0.6 × (matched required skills / all required skills)
 
 ---
 
-## 9. Deployment
+## 11. Deployment
 
 - **One container.** `Dockerfile`: `node:22-slim` builds the frontend; `python:3.11-slim` runs
   FastAPI, which serves `frontend/dist` and the API from one origin (no CORS needed). Non-root
@@ -256,7 +299,9 @@ score = 0.6 × (matched required skills / all required skills)
 - **Local.** `docker run --rm -p 8080:8000 kelasa-mitra`, open `http://localhost:8080`; add
   `--env-file backend\.env` for the agent (values without quotes). The owner built and ran it
   both ways.
-- **Render.** Free web service built from the Dockerfile on branch `main`. The agent is on via
+- **Render.** https://kelasa-mitra.onrender.com/, a free web service built from the Dockerfile on
+  branch `main`; whether it already runs the newest commit (saved jobs) is UNVERIFIED until the
+  owner confirms. The agent is on via
   host secrets set in Render's Environment settings (`ORCHESTRATE_INSTANCE_URL`,
   `ORCHESTRATE_API_KEY` — a separate key, to be deleted after the contest — and
   `ORCHESTRATE_AGENT_ID`); `GROQ_API_KEY` is not set. Without the variables the same image runs
@@ -264,7 +309,7 @@ score = 0.6 × (matched required skills / all required skills)
 
 ---
 
-## 10. Security notes
+## 12. Security notes
 
 - CORS: the local Vite dev server or `CORS_ALLOWED_ORIGINS`; `*` is ignored; GET/POST only.
 - Input: 2000-character cap on extract-profile and agent/chat; two experience regexes with
@@ -274,11 +319,13 @@ score = 0.6 × (matched required skills / all required skills)
 - Rate limits (in memory, per client IP, per process): 30/min extract-profile, 10/min
   agent/chat; 429 with `Retry-After` and a short message in en/kn/hi.
 - Public demo note in en/kn/hi: do not enter personal details.
+- Browser storage holds only what the worker chose to keep (the optional profile without their
+  words, and saved jobs as card fields); Delete my data removes both.
 - No keys in the repo; `.env` is git-ignored and excluded from the image.
 
 ---
 
-## 11. Decisions and why
+## 13. Decisions and why
 
 | Decision | Why |
 |---|---|
@@ -291,21 +338,33 @@ score = 0.6 × (matched required skills / all required skills)
 | `https` required for Orchestrate URLs, CORS restricted, input cap, rate limits | Keys never travel in clear text; no open cross-origin access; bounded work on untrusted input on a public demo. |
 | Synthetic data only, invented employers | Contest rules; a test rejects known real company names. |
 | Optional on-device save with Delete | Lets a worker come back without an account; nothing leaves the browser except what a search sends. |
+| Saved jobs in the browser, card fields only | A shortlist without an account; nothing to store or secure on the server. |
 | Never switch language automatically | A suggestion button only; nothing is translated. |
 
 ---
 
-## 12. Cut list
+## 14. Cut list
 
-Cut, in this order, if needed: **employer job-post view** (cut), **PWA** manifest and service
-worker (not built), **automatic language detection** (not built: browser speech recognition
-cannot do it and a detecting service would receive the worker's voice), card and skill-gap
-animations (already off under reduced motion), swipe gestures (buttons and arrow keys remain).
+Not built, with the reason:
+
+- **Employer job-post view**: cut for time; all jobs are synthetic.
+- **PWA** (manifest, service worker): not needed for the demo.
+- **Automatic language detection**: browser speech recognition cannot do it, and a detecting
+  service would have to receive the worker's voice.
+- **Accounts**: by design; workers should not need an email or password, and nothing about them
+  is stored on the server (so saved jobs are per browser).
+- **Marathi**: not supported yet; it is the natural next language (the person in the README's
+  story spoke Marathi and Hindi), but it needs its own synonyms, templates and native review.
+- **Live job feed**: needs real employers, stable job ids and contact details; the demo uses
+  synthetic jobs only.
+
+Cut next, in this order, if needed: card and skill-gap animations (already off under reduced
+motion), swipe gestures (buttons and arrow keys remain).
 **IBM watsonx Orchestrate is required by the contest and is not on the cut list.**
 
 ---
 
-## 13. Risks
+## 15. Risks
 
 | Risk | Mitigation |
 |---|---|
@@ -313,7 +372,9 @@ animations (already off under reduced motion), swipe gestures (buttons and arrow
 | Render free service sleeps (about 15 min idle; first request about a minute) | Open the site a few minutes before judging; the agent falls back to the rules after 20 s. |
 | Rate limit hit during a demo (30/min, 10/min for the agent) | Limits are per IP and reset each minute (and on restart). |
 | Free-tier limits (Render hours, Orchestrate trial usage) | UNVERIFIED; not measured. |
-| Unseen speech spellings of loanwords | Normalisation and one-letter tolerance; the skill chips are the safety net. |
+| Unseen speech spellings of loanwords, and verb forms (e.g. "मैं खाना बनाता हूँ" finds no skill) | Normalisation and one-letter tolerance; the skill chips are the safety net. |
+| Live site not yet on the newest commit | UNVERIFIED until the owner confirms Render redeployed `main`. |
+| Saved jobs lost when browser data is cleared or on another device | Stated on screen; no accounts by design. |
 | Speech recognition or Kannada/Hindi voices missing on a phone | Typing always works; text is always shown; Kannada speech and read-aloud on a phone UNVERIFIED. |
 | Kannada/Hindi wording wrong | All strings listed in docs/TEMPLATES_TO_REVIEW.md for a native speaker (not reviewed yet). |
 | Stale SQLite file after the seed changes | Seeding skips a filled table: delete `backend/db/kelasa_mitra.db` with the backend stopped. |
@@ -322,7 +383,7 @@ animations (already off under reduced motion), swipe gestures (buttons and arrow
 
 ---
 
-## 14. Dependencies (from requirements.txt and package.json)
+## 16. Dependencies (from requirements.txt and package.json)
 
 Backend (Python 3.11): fastapi 0.115.5, uvicorn[standard] 0.32.1, pydantic 2.10.3,
 sqlalchemy 2.1.8, langdetect 1.0.9, python-dotenv 1.0.1, httpx 0.27.2, groq ≥ 0.9.0,
