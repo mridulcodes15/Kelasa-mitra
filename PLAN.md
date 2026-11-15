@@ -232,8 +232,6 @@ score = 0.6 × (matched required skills / all required skills)
 | 6 | Security pass, rate limits, public demo note | ✅ Done | Claude Code |
 | 6 | Saved jobs shortlist (browser only) | ✅ Done; tested in a desktop browser (mouse, keyboard, simulated touch), not with a real finger on a phone | Claude Code |
 | 6 | Deployment (Docker, Render) | ✅ Image built and run locally by the owner; live at https://kelasa-mitra.onrender.com/ (checked 2026-11-15: serves the saved-jobs build) | Claude Code; deployed by the owner |
-| 6 | PWA (manifest, service worker) | ❌ Not built (cut list) | — |
-| 6 | Demo video | ⏳ Owner; not linked yet | — |
 
 ---
 
