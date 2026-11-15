@@ -30,7 +30,7 @@ except file and commit timestamps.
 | ~21:34 | Rewrote PLAN.md and README.md (Groq, Orchestrate pending access, real folder tree) and listed six Orchestrate details it could not verify. | `bob_docs_rewrite_summary_2026-11-07.md` |
 | ~21:42 | Installed the IBM watsonx Orchestrate ADK in `orchestrate/`; the trial's Bobcoins ran out mid-task. | `bob_orchestrate_install_and_trial_end_2026-11-07.md` |
 
-### 2026-11-08 to 2026-11-14: Claude Code and the owner (from git log)
+### 2026-11-08 to 2026-11-15: Claude Code and the owner (from git log)
 
 | Commit | Date | What changed |
 |---|---|---|
@@ -50,7 +50,8 @@ except file and commit timestamps.
 | `8e801ac`–`af911ff` | 2026-11-09 22:18–22:21 | The owner added the live demo link to the README. |
 | `922377d`–`7cec75c` | 2026-11-09 22:23–22:34 | The owner added the Bob panel screenshots and notes to BOB_STORY.md (and fixed a doubled `.png` extension). |
 | `fa478c5` | 2026-11-14 00:49 | Saved jobs shortlist kept in this browser only: swipe right, Save or the right-arrow key save the job (before, Save only raised a counter); a "Saved jobs (N)" button and list with a green trace, Remove and Back to Search; Delete my data also clears saved jobs. |
-| (uncommitted) | 2026-11-14 | Final docs update for submission: live URL, saved jobs, early user test, limitations and re-measured test counts. |
+| `f37e17b` | 2026-11-14 01:17 | Final docs for submission: live URL, saved jobs, early user test (corrected by the owner: the Marathi attempt, then Hindi), limitations and re-measured test counts. |
+| (uncommitted) | 2026-11-15 | Docs accuracy pass: exact versions and tech stack, the live site checked to serve the saved-jobs build, open items rewritten as plain statements. |
 
 On 2026-11-09 the owner verified the Orchestrate agent end to end: the console trace showed
 `extract_profile`, `find_matches` and `skill_gap` called in order for "I cook, 2 years, I live in
@@ -66,8 +67,8 @@ finger tracing across the language cards, the language chip and the switch-langu
 Hindi speech produce Devanagari text, and English speech work. The owner built and ran the Docker
 image locally (rules only, and with keys via `--env-file`), deployed it on Render's free web
 service from branch `main`, and that evening the live site showed the Orchestrate agent panel
-with the tools' text. Speech over the live https link and Kannada speech on a phone are
-UNVERIFIED.
+with the tools' text. Speech over the live https link and Kannada speech have not been tested
+on a phone by the owner.
 
 Before submission, three people in the owner's building who had not seen the app tried it for a
 few minutes (an informal test, not a study; date, device and browser not recorded): a watchman
@@ -97,7 +98,7 @@ language to add. Details and limits are in the README's impact section.
 
 ## Demo clip
 
-- TODO: *Screenshots*
+**Screenshots**
 
 **1. Bob's task list during Phase 3 work (photo of the screen, 7 Nov 2026).** Green items are finished; the rest were still pending when the credits ran out.
 
@@ -107,4 +108,4 @@ language to add. Details and limits are in the README's impact section.
 
 ![Bob panel showing files changed and the trial-ended message](docs/bob/screenshots/02-bob-trial-ended.png)
 
-- TODO: owner to add the demo video link (app + Orchestrate trace).
+A demo video (app and Orchestrate trace) has not been linked yet.

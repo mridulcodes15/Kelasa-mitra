@@ -43,7 +43,20 @@ time and cost), and so does knowing which skill would open more and better-paid 
 | Product | What it did here | Verified | Not verified |
 |---|---|---|---|
 | **IBM Bob** | Planning and the first build (Phases 1–2, Groq swap, audit, first docs, Orchestrate ADK install) on 2026-11-07, until the 50 trial Bobcoins ran out. | Bob's outputs in `docs/bob/`, baseline commit `a8117a6`. | Bob's own statements in those files (e.g. test results) were not re-run at the time; see BOB_STORY.md for the ones later found wrong. |
-| **IBM watsonx Orchestrate** | The agent layer: `kelasa_mitra_agent` (`orchestrate/agents/kelasa_agent.yaml`) calls three Python tools, `extract_profile`, `find_matches` and `skill_gap` (`orchestrate/kelasa_tools/`). The app asks it through `POST /api/agent/chat`, which keeps the API key on the server. | 2026-11-09, by the owner: the console trace showed `extract_profile`, `find_matches` and `skill_gap` called in order for "I cook, 2 years, I live in Whitefield"; `agent_warmup.py` got HTTP 200 replies; the app's agent panel showed the tools' text, locally and on the live site that evening. The tool package was re-imported several times since and the agent kept answering. | Whether the console trace shows runs coming from the live site (UNVERIFIED); whether the agent's final wording always stays in the picker language; agent response time; the exact trial end date (about 2026-12-08, owner to confirm). |
+| **IBM watsonx Orchestrate** | The agent layer: `kelasa_mitra_agent` (`orchestrate/agents/kelasa_agent.yaml`) calls three Python tools, `extract_profile`, `find_matches` and `skill_gap` (`orchestrate/kelasa_tools/`). The app asks it through `POST /api/agent/chat`, which keeps the API key on the server. | 2026-11-09, by the owner: the console trace showed `extract_profile`, `find_matches` and `skill_gap` called in order for "I cook, 2 years, I live in Whitefield"; `agent_warmup.py` got HTTP 200 replies; the app's agent panel showed the tools' text, locally and on the live site that evening. The tool package was re-imported several times since and the agent kept answering. | Not checked: whether the console trace shows runs coming from the live site, whether the agent's final wording always stays in the picker language, and the agent's response time. The trial ends around 2026-12-08; the exact date has not been confirmed. |
+
+### Tech stack
+
+| Part | What is used (installed versions, checked 2026-11-15) |
+|---|---|
+| Frontend | **React 19.3.1**, Vite 8.3.6, Tailwind CSS 4.3.5, Framer Motion 14.10.1, Zustand 5.1.0, TypeScript 7.0.2 |
+| In the browser | Web Speech API (speech to text, `en-IN` / `kn-IN` / `hi-IN`), speech synthesis (read-aloud), localStorage (optional saved profile and saved jobs) |
+| Backend | Python 3.11, FastAPI 0.115.5, uvicorn 0.32.1, Pydantic 2.10.3, SQLAlchemy 2.1.8 (Core) |
+| Database | SQLite, one table `jobs` with 130 synthetic jobs, seeded on start |
+| REST endpoints (5) | `GET /health`, `POST /api/profile/extract-profile`, `POST /api/matches`, `POST /api/skill-gap`, `POST /api/agent/chat` |
+| Data | 41 skills, 31 areas, 41 learning paths, 130 jobs (all synthetic) |
+| Agent | IBM watsonx Orchestrate agent with 3 Python tools; Groq optional (off on the live demo) |
+| Tests | 779 backend tests run (pytest), 300 frontend tests run (vitest), all passing |
 
 ### What works today
 
@@ -179,15 +192,15 @@ the value, or the quotes become part of it. The image runs as a non-root user (U
 ### Live demo
 
 - **URL:** https://kelasa-mitra.onrender.com/
-- **Which version:** whether the live site already runs the newest commit (saved jobs) depends on
-  Render's redeploy: UNVERIFIED until the owner confirms.
+- **Which version:** checked on 2026-11-15: the live site serves the build with the saved jobs
+  shortlist (its JavaScript contains the saved-jobs screen text), and `/health` answers `ok`.
 - **What runs there:** the Docker image above on Render's free web service, built from branch
   `main`. `ORCHESTRATE_INSTANCE_URL`, `ORCHESTRATE_API_KEY` and `ORCHESTRATE_AGENT_ID` are set in
   Render's Environment settings (a separate key from the owner's laptop key, to be deleted after
   the contest); `GROQ_API_KEY` is not set, so extraction is rules only. On the evening of
   2026-11-09 the live site showed the agent panel with the tools' text.
 - **Cold start:** the free service sleeps after about 15 minutes idle; the first request can take
-  about a minute. The agent's first call after a pause is slower too; after about 20 s the app
+  about a minute (on 2026-11-15 the first page load after idle took about 22 s). The agent's first call after a pause is slower too; after about 20 s the app
   shows the "agent offline" banner and answers with the rules.
 - **Banner meaning:** "agent offline" means the cards came from the built-in rules only; the
   cards are the same either way.
@@ -241,7 +254,7 @@ npm run build
 npx oxlint src
 ```
 
-Measured on 2026-11-14 (many tests are parametrised, so these are tests run, not separate
+Measured on 2026-11-15 (many tests are parametrised, so these are tests run, not separate
 behaviours): **779 backend tests run, all passed** (17 test files); **300 frontend tests run,
 all passed** (26 test files); `tsc` exit 0; `oxlint` exit 0; build OK (JS 465.04 kB, 147.33 kB
 gzip; CSS 25.92 kB, 6.24 kB gzip). Use `-p tsconfig.app.json`: plain `tsc --noEmit` checks
@@ -324,9 +337,10 @@ The skill-gap pay differences (e.g. a Whitefield cook is told food-safety traini
 - **Phone testing is partial.** On an Android phone in Chrome over http (with a Chrome flag), the
   owner saw the welcome screen, finger tracing across the cards, the language chip and the
   switch-language suggestion work, Hindi speech produce Devanagari text, and English speech work.
-  Over the live https link, English, Hindi and Kannada speech and read-aloud are **NOT VERIFIED**.
-  Kannada speech and read-aloud on a phone are not verified at all; voice availability depends
-  on the device.
+  The three people in the early user test used the microphone in Hindi, but their device,
+  browser and link were not recorded. Speech and read-aloud have not been tested by the owner on
+  a phone over the live https link, and Kannada speech and read-aloud have not been tested on a
+  phone at all; voice availability depends on the device.
 - **Spellings and verb forms can miss.** Speech engines spell English loanwords in Devanagari
   and Kannada in different ways; matching normalises them and tolerates one letter, but
   spellings not yet seen can still miss. Verb forms are not covered either: "मैं खाना बनाता हूँ"
@@ -344,8 +358,8 @@ The skill-gap pay differences (e.g. a Whitefield cook is told food-safety traini
   and language names on the profile card stay in English in Kannada and Hindi.
 - **Saved jobs are per browser and not synced** to other devices, because there are no accounts
   by design. A version with live jobs would need stable job ids and employer contact details.
-  The green trace on the saved list has not been tried with a real finger on a phone (NOT
-  VERIFIED).
+  The saved list was tested in a desktop browser with a mouse, the keyboard and simulated touch
+  events; its green trace has not been tried with a real finger on a phone.
 - **Kannada and Hindi text is not reviewed** by a native speaker
   ([docs/TEMPLATES_TO_REVIEW.md](docs/TEMPLATES_TO_REVIEW.md)).
 - **Skill suggestions are data-driven**, counting which skills unlock the most nearby sample
@@ -357,8 +371,8 @@ The skill-gap pay differences (e.g. a Whitefield cook is told food-safety traini
 - **Groq quality is unmeasured**: the provider comparison ran without a key, so it compares the
   rules with themselves ([docs/provider_comparison.md](docs/provider_comparison.md)).
 - **The app mark at 16 px** (browser tab) is only roughly legible.
-- **The live agent depends on the Orchestrate trial**, which ends around 2026-12-08 (owner to
-  confirm); after that the app answers with the rules and the banner.
+- **The live agent depends on the Orchestrate trial**, which ends around 2026-12-08 (the exact
+  date has not been confirmed); after that the app answers with the rules and the banner.
 - **Not a PWA**: there is no manifest or service worker. No employer view.
 
 ---

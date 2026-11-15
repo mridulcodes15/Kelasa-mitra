@@ -2,7 +2,7 @@
 
 **IBM Bobathon: Build for Bengaluru** · Theme: *More Opportunity, Greater Together* · Solo student entry
 
-*Updated 2026-11-14 to match the code (final docs update, submission day). The original plan by IBM Bob
+*Updated 2026-11-15 to match the code (versions, counts and live-site status checked that day). The original plan by IBM Bob
 (2026-11-07) is kept unedited in [docs/bob/bob_PLAN_baseline.md](docs/bob/bob_PLAN_baseline.md);
 how the project got from there to here is in [BOB_STORY.md](BOB_STORY.md).*
 
@@ -23,13 +23,13 @@ answers the same sentence by calling the same logic as tools.
 ## 2. Architecture
 
 ```
-Phone browser (React 19 · Vite 8 · Tailwind 4 · Framer Motion 14 · Zustand 5)
+Phone browser (React 19.3.1 · Vite 8.3.6 · Tailwind 4.3.5 · Framer Motion 14.10.1 · Zustand 5.1.0 · TypeScript 7.0.2)
   Welcome (language cards) → Landing (mic / text) → Jobs (cards, skill gap, saved jobs list)
   localStorage: optional saved profile, saved jobs, read-aloud mute (this browser only)
   Web Speech API (speech to text, en-IN / kn-IN / hi-IN) · speechSynthesis (read-aloud)
         │  /api/*  (dev: Vite proxy; Docker/Render: same FastAPI origin)
         ▼
-FastAPI backend (Python 3.11)
+FastAPI 0.115.5 backend (Python 3.11), 5 REST endpoints
   POST /api/profile/extract-profile ─ rules (tools/fallback.py), optional Groq (tools/provider.py)
                                       rate limit 30/min per IP, 2000-character cap
   POST /api/matches                 ─ tools/job_ranker.py + tools/follow_up.py
@@ -38,8 +38,8 @@ FastAPI backend (Python 3.11)
                                       rate limit 10/min per IP, 20 s budget    kelasa_mitra_agent
   GET  /health                                                                    │ calls 3 tools
   GET  /* (frontend/dist, only when built)                                        ▼
-  SQLite (SQLAlchemy Core): 130 synthetic jobs,       orchestrate/kelasa_tools/ (byte-for-byte
-  seeded on start                                     copies of the backend logic +
+  SQLite (SQLAlchemy 2.1.8 Core),                     orchestrate/kelasa_tools/ (byte-for-byte
+  table `jobs`, 130 synthetic jobs, seeded on start   copies of the backend logic +
                                                       jobs_snapshot.json, no database)
 ```
 
@@ -230,8 +230,8 @@ score = 0.6 × (matched required skills / all required skills)
 | 6 | Accessibility review, design upgrade, language suggestion, save-on-device | ✅ Done | Claude Code |
 | 6 | Language-first welcome flow, app mark, Android speech fixes, spelling variants | ✅ Done; partly checked on a real phone (see README Limitations) | Claude Code |
 | 6 | Security pass, rate limits, public demo note | ✅ Done | Claude Code |
-| 6 | Saved jobs shortlist (browser only) | ✅ Done; real-finger trace on a phone NOT VERIFIED | Claude Code |
-| 6 | Deployment (Docker, Render) | ✅ Image built and run locally by the owner; live at https://kelasa-mitra.onrender.com/ (whether it runs the newest commit: UNVERIFIED until the owner confirms) | Claude Code; deployed by the owner |
+| 6 | Saved jobs shortlist (browser only) | ✅ Done; tested in a desktop browser (mouse, keyboard, simulated touch), not with a real finger on a phone | Claude Code |
+| 6 | Deployment (Docker, Render) | ✅ Image built and run locally by the owner; live at https://kelasa-mitra.onrender.com/ (checked 2026-11-15: serves the saved-jobs build) | Claude Code; deployed by the owner |
 | 6 | PWA (manifest, service worker) | ❌ Not built (cut list) | — |
 | 6 | Demo video | ⏳ Owner; not linked yet | — |
 
@@ -282,7 +282,7 @@ score = 0.6 × (matched required skills / all required skills)
 - **Verified 2026-11-09 (owner)**: console trace of `extract_profile` → `find_matches` →
   `skill_gap` for "I cook, 2 years, I live in Whitefield"; warm-up got HTTP 200; the app's panel
   showed the tools' text, locally and on the live site that evening. The package was re-imported
-  several times since and the agent kept answering. **UNVERIFIED**: console runs coming from the
+  several times since and the agent kept answering. **Not checked**: console runs coming from the
   live site, that the agent's final wording always stays in the picker language, its response
   time, and the exact trial end date.
 
@@ -300,8 +300,8 @@ score = 0.6 × (matched required skills / all required skills)
   `--env-file backend\.env` for the agent (values without quotes). The owner built and ran it
   both ways.
 - **Render.** https://kelasa-mitra.onrender.com/, a free web service built from the Dockerfile on
-  branch `main`; whether it already runs the newest commit (saved jobs) is UNVERIFIED until the
-  owner confirms. The agent is on via
+  branch `main`; checked on 2026-11-15 to serve the saved-jobs build, with `/health` answering
+  `ok`. The agent is on via
   host secrets set in Render's Environment settings (`ORCHESTRATE_INSTANCE_URL`,
   `ORCHESTRATE_API_KEY` — a separate key, to be deleted after the contest — and
   `ORCHESTRATE_AGENT_ID`); `GROQ_API_KEY` is not set. Without the variables the same image runs
@@ -368,14 +368,14 @@ motion), swipe gestures (buttons and arrow keys remain).
 
 | Risk | Mitigation |
 |---|---|
-| Orchestrate trial ends (around 2026-12-08, owner to confirm) or the agent is slow during judging | Warm-up before the demo; the app keeps working on the rules with a visible banner. |
+| Orchestrate trial ends (around 2026-12-08; exact date not confirmed) or the agent is slow during judging | Warm-up before the demo; the app keeps working on the rules with a visible banner. |
 | Render free service sleeps (about 15 min idle; first request about a minute) | Open the site a few minutes before judging; the agent falls back to the rules after 20 s. |
 | Rate limit hit during a demo (30/min, 10/min for the agent) | Limits are per IP and reset each minute (and on restart). |
-| Free-tier limits (Render hours, Orchestrate trial usage) | UNVERIFIED; not measured. |
+| Free-tier limits (Render hours, Orchestrate trial usage) | Not measured; only the cold start was timed (about 22 s on 2026-11-15). |
 | Unseen speech spellings of loanwords, and verb forms (e.g. "मैं खाना बनाता हूँ" finds no skill) | Normalisation and one-letter tolerance; the skill chips are the safety net. |
-| Live site not yet on the newest commit | UNVERIFIED until the owner confirms Render redeployed `main`. |
+| Live site falls behind `main` | Checked on 2026-11-15 that it serves the saved-jobs build; check again after any later push. |
 | Saved jobs lost when browser data is cleared or on another device | Stated on screen; no accounts by design. |
-| Speech recognition or Kannada/Hindi voices missing on a phone | Typing always works; text is always shown; Kannada speech and read-aloud on a phone UNVERIFIED. |
+| Speech recognition or Kannada/Hindi voices missing on a phone | Typing always works; text is always shown; Kannada speech and read-aloud have not been tested on a phone. |
 | Kannada/Hindi wording wrong | All strings listed in docs/TEMPLATES_TO_REVIEW.md for a native speaker (not reviewed yet). |
 | Stale SQLite file after the seed changes | Seeding skips a filled table: delete `backend/db/kelasa_mitra.db` with the backend stopped. |
 | Tool package out of date after a backend change | Rebuild and re-import; a test fails until rebuilt. |
@@ -390,5 +390,8 @@ sqlalchemy 2.1.8, langdetect 1.0.9, python-dotenv 1.0.1, httpx 0.27.2, groq ≥ 
 pytest 8.3.4, pytest-asyncio 0.24.0. Orchestrate tools: ibm-watsonx-orchestrate 2.19.1,
 pydantic 2.14.3.
 
-Frontend: react ^19.3.1, vite ^8.3.6, tailwindcss ^4.3.5 (via `@tailwindcss/vite`, no config
-file), framer-motion ^14.10.1, zustand ^5.1.0, typescript ~7.0.2, vitest ^5.1.0, oxlint ^1.90.0.
+Frontend (installed versions, checked 2026-11-15; ranges in package.json): react 19.3.1, react-dom
+19.3.1, vite 8.3.6, tailwindcss 4.3.5 (via `@tailwindcss/vite`, no config file), framer-motion
+14.10.1, zustand 5.1.0, typescript 7.0.2, vitest ^5.1.0, oxlint ^1.90.0.
+
+Tests (2026-11-15): 779 backend tests run and 300 frontend tests run, all passing.

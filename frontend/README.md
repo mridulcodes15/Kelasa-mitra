@@ -1,6 +1,6 @@
 # Kelasa Mitra frontend
 
-React 19 + Vite 8 + Tailwind 4 app for Kelasa Mitra. What it does, how to run it (Windows and
+React 19.3.1 + Vite 8.3.6 + Tailwind CSS 4.3.5 app (TypeScript 7.0.2, Framer Motion 14.10.1, Zustand 5.1.0) for Kelasa Mitra. What it does, how to run it (Windows and
 Docker), the live demo and the test results are in the [project README](../README.md); the
 design is in [PLAN.md](../PLAN.md).
 
